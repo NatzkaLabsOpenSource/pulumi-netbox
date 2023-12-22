@@ -97,7 +97,7 @@ jobs:
               exit 1
           fi
           
-      - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
+      - if: ${{ matrix.language == 'nodejs' }}
         uses: JS-DevTools/npm-publish@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
