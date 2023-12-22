@@ -1,0 +1,1575 @@
+{
+    "auto-aliasing": {
+        "resources": {
+            "netbox_aggregate": {
+                "current": "netbox:ipam/aggregate:Aggregate",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_asn": {
+                "current": "netbox:ipam/asn:Asn",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_available_ip_address": {
+                "current": "netbox:ipam/availableIpAddress:AvailableIpAddress",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_available_prefix": {
+                "current": "netbox:ipam/availablePrefix:AvailablePrefix",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_cable": {
+                "current": "netbox:dcim/cable:Cable",
+                "fields": {
+                    "a_termination": {
+                        "maxItemsOne": false
+                    },
+                    "b_termination": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_circuit": {
+                "current": "netbox:circuit/circuit:Circuit"
+            },
+            "netbox_circuit_provider": {
+                "current": "netbox:circuit/circuitProvider:CircuitProvider"
+            },
+            "netbox_circuit_termination": {
+                "current": "netbox:circuit/circuitTermination:CircuitTermination",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_circuit_type": {
+                "current": "netbox:circuit/circuitType:CircuitType"
+            },
+            "netbox_cluster": {
+                "current": "netbox:virt/cluster:Cluster",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_cluster_group": {
+                "current": "netbox:virt/clusterGroup:ClusterGroup"
+            },
+            "netbox_cluster_type": {
+                "current": "netbox:virt/clusterType:ClusterType"
+            },
+            "netbox_contact": {
+                "current": "netbox:tenancy/contact:Contact",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_contact_assignment": {
+                "current": "netbox:tenancy/contactAssignment:ContactAssignment"
+            },
+            "netbox_contact_group": {
+                "current": "netbox:tenancy/contactGroup:ContactGroup"
+            },
+            "netbox_contact_role": {
+                "current": "netbox:tenancy/contactRole:ContactRole"
+            },
+            "netbox_custom_field": {
+                "current": "netbox:index/customField:CustomField",
+                "fields": {
+                    "content_types": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_custom_field_choice_set": {
+                "current": "netbox:index/customFieldChoiceSet:CustomFieldChoiceSet",
+                "fields": {
+                    "extra_choices": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "maxItemsOne": false
+                        }
+                    }
+                }
+            },
+            "netbox_device": {
+                "current": "netbox:dcim/device:Device",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_console_port": {
+                "current": "netbox:dcim/deviceConsolePort:DeviceConsolePort",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_console_server_port": {
+                "current": "netbox:dcim/deviceConsoleServerPort:DeviceConsoleServerPort",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_front_port": {
+                "current": "netbox:dcim/deviceFrontPort:DeviceFrontPort",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_interface": {
+                "current": "netbox:dcim/deviceInterface:DeviceInterface",
+                "fields": {
+                    "tagged_vlans": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_module_bay": {
+                "current": "netbox:dcim/deviceModuleBay:DeviceModuleBay",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_power_outlet": {
+                "current": "netbox:dcim/devicePowerOutlet:DevicePowerOutlet",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_power_port": {
+                "current": "netbox:dcim/devicePowerPort:DevicePowerPort",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_primary_ip": {
+                "current": "netbox:dcim/devicePrimaryIp:DevicePrimaryIp"
+            },
+            "netbox_device_rear_port": {
+                "current": "netbox:dcim/deviceRearPort:DeviceRearPort",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_role": {
+                "current": "netbox:dcim/deviceRole:DeviceRole",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_type": {
+                "current": "netbox:dcim/deviceType:DeviceType",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_interface": {
+                "current": "netbox:virt/interface:Interface",
+                "fields": {
+                    "tagged_vlans": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_inventory_item": {
+                "current": "netbox:dcim/inventoryItem:InventoryItem",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_inventory_item_role": {
+                "current": "netbox:dcim/inventoryItemRole:InventoryItemRole",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_ip_address": {
+                "current": "netbox:ipam/ipAddress:IpAddress",
+                "fields": {
+                    "nat_outside_addresses": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_ip_range": {
+                "current": "netbox:ipam/ipRange:IpRange",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_ipam_role": {
+                "current": "netbox:ipam/role:Role"
+            },
+            "netbox_location": {
+                "current": "netbox:dcim/location:Location",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_manufacturer": {
+                "current": "netbox:dcim/manufacturer:Manufacturer"
+            },
+            "netbox_module": {
+                "current": "netbox:dcim/module:Module",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_module_type": {
+                "current": "netbox:dcim/moduleType:ModuleType",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_permission": {
+                "current": "netbox:auth/permission:Permission",
+                "fields": {
+                    "actions": {
+                        "maxItemsOne": false
+                    },
+                    "groups": {
+                        "maxItemsOne": false
+                    },
+                    "object_types": {
+                        "maxItemsOne": false
+                    },
+                    "users": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_platform": {
+                "current": "netbox:dcim/platform:Platform"
+            },
+            "netbox_power_feed": {
+                "current": "netbox:dcim/powerFeed:PowerFeed",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_power_panel": {
+                "current": "netbox:dcim/powerPanel:PowerPanel",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_prefix": {
+                "current": "netbox:ipam/prefix:Prefix",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_primary_ip": {
+                "current": "netbox:virt/primaryIp:PrimaryIp"
+            },
+            "netbox_rack": {
+                "current": "netbox:dcim/rack:Rack",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_rack_reservation": {
+                "current": "netbox:dcim/rackReservation:RackReservation",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "units": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_rack_role": {
+                "current": "netbox:dcim/rackRole:RackRole",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_region": {
+                "current": "netbox:dcim/region:Region"
+            },
+            "netbox_rir": {
+                "current": "netbox:ipam/rir:Rir"
+            },
+            "netbox_route_target": {
+                "current": "netbox:ipam/routeTarget:RouteTarget",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_service": {
+                "current": "netbox:ipam/service:Service",
+                "fields": {
+                    "ports": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_site": {
+                "current": "netbox:dcim/site:Site",
+                "fields": {
+                    "asn_ids": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_site_group": {
+                "current": "netbox:dcim/siteGroup:SiteGroup"
+            },
+            "netbox_tag": {
+                "current": "netbox:index/tag:Tag",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_tenant": {
+                "current": "netbox:tenancy/tenant:Tenant",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_tenant_group": {
+                "current": "netbox:tenancy/tenantGroup:TenantGroup"
+            },
+            "netbox_token": {
+                "current": "netbox:auth/token:Token",
+                "fields": {
+                    "allowed_ips": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_user": {
+                "current": "netbox:auth/user:User"
+            },
+            "netbox_virtual_chassis": {
+                "current": "netbox:dcim/virtualChassis:VirtualChassis",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_virtual_machine": {
+                "current": "netbox:virt/virtualMachine:VirtualMachine",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_vlan": {
+                "current": "netbox:ipam/vlan:Vlan",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_vlan_group": {
+                "current": "netbox:ipam/vlanGroup:VlanGroup",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_vrf": {
+                "current": "netbox:ipam/vrf:Vrf",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_webhook": {
+                "current": "netbox:index/webhook:Webhook",
+                "fields": {
+                    "content_types": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        },
+        "datasources": {
+            "netbox_asn": {
+                "current": "netbox:ipam/getAsn:getAsn",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_asns": {
+                "current": "netbox:ipam/getAsns:getAsns",
+                "fields": {
+                    "asns": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tags": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "filter": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_available_prefix": {
+                "current": "netbox:ipam/getAvailablePrefix:getAvailablePrefix",
+                "fields": {
+                    "prefixes_available": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_cluster": {
+                "current": "netbox:virt/getCluster:getCluster",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_cluster_group": {
+                "current": "netbox:virt/getClusterGroup:getClusterGroup"
+            },
+            "netbox_cluster_type": {
+                "current": "netbox:virt/getClusterType:getClusterType"
+            },
+            "netbox_contact": {
+                "current": "netbox:tenancy/getContact:getContact"
+            },
+            "netbox_contact_group": {
+                "current": "netbox:tenancy/getContactGroup:getContactGroup"
+            },
+            "netbox_contact_role": {
+                "current": "netbox:tenancy/getContactRole:getContactRole"
+            },
+            "netbox_device_interfaces": {
+                "current": "netbox:dcim/getDeviceInterfaces:getDeviceInterfaces",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "interfaces": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tag_ids": {
+                                    "maxItemsOne": false
+                                },
+                                "tagged_vlans": {
+                                    "maxItemsOne": false
+                                },
+                                "untagged_vlan": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "netbox_device_role": {
+                "current": "netbox:dcim/getDeviceRole:getDeviceRole",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_device_type": {
+                "current": "netbox:dcim/getDeviceType:getDeviceType"
+            },
+            "netbox_devices": {
+                "current": "netbox:dcim/getDevices:getDevices",
+                "fields": {
+                    "devices": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tags": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    },
+                    "filter": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_interfaces": {
+                "current": "netbox:virt/getInterfaces:getInterfaces",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "interfaces": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tag_ids": {
+                                    "maxItemsOne": false
+                                },
+                                "tagged_vlans": {
+                                    "maxItemsOne": false
+                                },
+                                "untagged_vlan": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "netbox_ip_addresses": {
+                "current": "netbox:ipam/getIpAddresses:getIpAddresses",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "ip_addresses": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tags": {
+                                    "maxItemsOne": false
+                                },
+                                "tenant": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "netbox_ip_range": {
+                "current": "netbox:ipam/getIpRange:getIpRange"
+            },
+            "netbox_ipam_role": {
+                "current": "netbox:ipam/getRole:getRole"
+            },
+            "netbox_location": {
+                "current": "netbox:dcim/getLocation:getLocation"
+            },
+            "netbox_locations": {
+                "current": "netbox:dcim/getLocations:getLocations",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "locations": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_platform": {
+                "current": "netbox:dcim/getPlatform:getPlatform"
+            },
+            "netbox_prefix": {
+                "current": "netbox:ipam/getPrefix:getPrefix",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_prefixes": {
+                "current": "netbox:ipam/getPrefixes:getPrefixes",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "prefixes": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tags": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "netbox_rack_role": {
+                "current": "netbox:dcim/getRackRole:getRackRole",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_racks": {
+                "current": "netbox:dcim/getRacks:getRacks",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "racks": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tags": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "netbox_region": {
+                "current": "netbox:dcim/getRegion:getRegion",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_route_target": {
+                "current": "netbox:ipam/getRouteTarget:getRouteTarget",
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_site": {
+                "current": "netbox:dcim/getSite:getSite",
+                "fields": {
+                    "asn_ids": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_site_group": {
+                "current": "netbox:dcim/getSiteGroup:getSiteGroup"
+            },
+            "netbox_tag": {
+                "current": "netbox:index/getTag:getTag"
+            },
+            "netbox_tags": {
+                "current": "netbox:index/getTags:getTags",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_tenant": {
+                "current": "netbox:tenancy/getTenant:getTenant"
+            },
+            "netbox_tenant_group": {
+                "current": "netbox:tenancy/getTenantGroup:getTenantGroup"
+            },
+            "netbox_tenants": {
+                "current": "netbox:tenancy/getTenants:getTenants",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "tenants": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tenant_group": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "netbox_virtual_machines": {
+                "current": "netbox:virt/getVirtualMachines:getVirtualMachines",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "vms": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tag_ids": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "netbox_vlan": {
+                "current": "netbox:ipam/getVlan:getVlan"
+            },
+            "netbox_vlan_group": {
+                "current": "netbox:ipam/getVlanGroup:getVlanGroup"
+            },
+            "netbox_vlans": {
+                "current": "netbox:ipam/getVlans:getVlans",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "vlans": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_vrf": {
+                "current": "netbox:ipam/getVrf:getVrf"
+            },
+            "netbox_vrfs": {
+                "current": "netbox:ipam/getVrfs:getVrfs",
+                "fields": {
+                    "filter": {
+                        "maxItemsOne": false
+                    },
+                    "vrfs": {
+                        "maxItemsOne": false
+                    }
+                }
+            }
+        }
+    },
+    "auto-settings": {},
+    "renames": {
+        "resources": {
+            "netbox:auth/permission:Permission": "netbox_permission",
+            "netbox:auth/token:Token": "netbox_token",
+            "netbox:auth/user:User": "netbox_user",
+            "netbox:circuit/circuit:Circuit": "netbox_circuit",
+            "netbox:circuit/circuitProvider:CircuitProvider": "netbox_circuit_provider",
+            "netbox:circuit/circuitTermination:CircuitTermination": "netbox_circuit_termination",
+            "netbox:circuit/circuitType:CircuitType": "netbox_circuit_type",
+            "netbox:dcim/cable:Cable": "netbox_cable",
+            "netbox:dcim/device:Device": "netbox_device",
+            "netbox:dcim/deviceConsolePort:DeviceConsolePort": "netbox_device_console_port",
+            "netbox:dcim/deviceConsoleServerPort:DeviceConsoleServerPort": "netbox_device_console_server_port",
+            "netbox:dcim/deviceFrontPort:DeviceFrontPort": "netbox_device_front_port",
+            "netbox:dcim/deviceInterface:DeviceInterface": "netbox_device_interface",
+            "netbox:dcim/deviceModuleBay:DeviceModuleBay": "netbox_device_module_bay",
+            "netbox:dcim/devicePowerOutlet:DevicePowerOutlet": "netbox_device_power_outlet",
+            "netbox:dcim/devicePowerPort:DevicePowerPort": "netbox_device_power_port",
+            "netbox:dcim/devicePrimaryIp:DevicePrimaryIp": "netbox_device_primary_ip",
+            "netbox:dcim/deviceRearPort:DeviceRearPort": "netbox_device_rear_port",
+            "netbox:dcim/deviceRole:DeviceRole": "netbox_device_role",
+            "netbox:dcim/deviceType:DeviceType": "netbox_device_type",
+            "netbox:dcim/inventoryItem:InventoryItem": "netbox_inventory_item",
+            "netbox:dcim/inventoryItemRole:InventoryItemRole": "netbox_inventory_item_role",
+            "netbox:dcim/location:Location": "netbox_location",
+            "netbox:dcim/manufacturer:Manufacturer": "netbox_manufacturer",
+            "netbox:dcim/module:Module": "netbox_module",
+            "netbox:dcim/moduleType:ModuleType": "netbox_module_type",
+            "netbox:dcim/platform:Platform": "netbox_platform",
+            "netbox:dcim/powerFeed:PowerFeed": "netbox_power_feed",
+            "netbox:dcim/powerPanel:PowerPanel": "netbox_power_panel",
+            "netbox:dcim/rack:Rack": "netbox_rack",
+            "netbox:dcim/rackReservation:RackReservation": "netbox_rack_reservation",
+            "netbox:dcim/rackRole:RackRole": "netbox_rack_role",
+            "netbox:dcim/region:Region": "netbox_region",
+            "netbox:dcim/site:Site": "netbox_site",
+            "netbox:dcim/siteGroup:SiteGroup": "netbox_site_group",
+            "netbox:dcim/virtualChassis:VirtualChassis": "netbox_virtual_chassis",
+            "netbox:index/customField:CustomField": "netbox_custom_field",
+            "netbox:index/customFieldChoiceSet:CustomFieldChoiceSet": "netbox_custom_field_choice_set",
+            "netbox:index/tag:Tag": "netbox_tag",
+            "netbox:index/webhook:Webhook": "netbox_webhook",
+            "netbox:ipam/aggregate:Aggregate": "netbox_aggregate",
+            "netbox:ipam/asn:Asn": "netbox_asn",
+            "netbox:ipam/availableIpAddress:AvailableIpAddress": "netbox_available_ip_address",
+            "netbox:ipam/availablePrefix:AvailablePrefix": "netbox_available_prefix",
+            "netbox:ipam/ipAddress:IpAddress": "netbox_ip_address",
+            "netbox:ipam/ipRange:IpRange": "netbox_ip_range",
+            "netbox:ipam/prefix:Prefix": "netbox_prefix",
+            "netbox:ipam/rir:Rir": "netbox_rir",
+            "netbox:ipam/role:Role": "netbox_ipam_role",
+            "netbox:ipam/routeTarget:RouteTarget": "netbox_route_target",
+            "netbox:ipam/service:Service": "netbox_service",
+            "netbox:ipam/vlan:Vlan": "netbox_vlan",
+            "netbox:ipam/vlanGroup:VlanGroup": "netbox_vlan_group",
+            "netbox:ipam/vrf:Vrf": "netbox_vrf",
+            "netbox:tenancy/contact:Contact": "netbox_contact",
+            "netbox:tenancy/contactAssignment:ContactAssignment": "netbox_contact_assignment",
+            "netbox:tenancy/contactGroup:ContactGroup": "netbox_contact_group",
+            "netbox:tenancy/contactRole:ContactRole": "netbox_contact_role",
+            "netbox:tenancy/tenant:Tenant": "netbox_tenant",
+            "netbox:tenancy/tenantGroup:TenantGroup": "netbox_tenant_group",
+            "netbox:virt/cluster:Cluster": "netbox_cluster",
+            "netbox:virt/clusterGroup:ClusterGroup": "netbox_cluster_group",
+            "netbox:virt/clusterType:ClusterType": "netbox_cluster_type",
+            "netbox:virt/interface:Interface": "netbox_interface",
+            "netbox:virt/primaryIp:PrimaryIp": "netbox_primary_ip",
+            "netbox:virt/virtualMachine:VirtualMachine": "netbox_virtual_machine"
+        },
+        "functions": {
+            "netbox:dcim/getDeviceInterfaces:getDeviceInterfaces": "netbox_device_interfaces",
+            "netbox:dcim/getDeviceRole:getDeviceRole": "netbox_device_role",
+            "netbox:dcim/getDeviceType:getDeviceType": "netbox_device_type",
+            "netbox:dcim/getDevices:getDevices": "netbox_devices",
+            "netbox:dcim/getLocation:getLocation": "netbox_location",
+            "netbox:dcim/getLocations:getLocations": "netbox_locations",
+            "netbox:dcim/getPlatform:getPlatform": "netbox_platform",
+            "netbox:dcim/getRackRole:getRackRole": "netbox_rack_role",
+            "netbox:dcim/getRacks:getRacks": "netbox_racks",
+            "netbox:dcim/getRegion:getRegion": "netbox_region",
+            "netbox:dcim/getSite:getSite": "netbox_site",
+            "netbox:dcim/getSiteGroup:getSiteGroup": "netbox_site_group",
+            "netbox:index/getTag:getTag": "netbox_tag",
+            "netbox:index/getTags:getTags": "netbox_tags",
+            "netbox:ipam/getAsn:getAsn": "netbox_asn",
+            "netbox:ipam/getAsns:getAsns": "netbox_asns",
+            "netbox:ipam/getAvailablePrefix:getAvailablePrefix": "netbox_available_prefix",
+            "netbox:ipam/getIpAddresses:getIpAddresses": "netbox_ip_addresses",
+            "netbox:ipam/getIpRange:getIpRange": "netbox_ip_range",
+            "netbox:ipam/getPrefix:getPrefix": "netbox_prefix",
+            "netbox:ipam/getPrefixes:getPrefixes": "netbox_prefixes",
+            "netbox:ipam/getRole:getRole": "netbox_ipam_role",
+            "netbox:ipam/getRouteTarget:getRouteTarget": "netbox_route_target",
+            "netbox:ipam/getVlan:getVlan": "netbox_vlan",
+            "netbox:ipam/getVlanGroup:getVlanGroup": "netbox_vlan_group",
+            "netbox:ipam/getVlans:getVlans": "netbox_vlans",
+            "netbox:ipam/getVrf:getVrf": "netbox_vrf",
+            "netbox:ipam/getVrfs:getVrfs": "netbox_vrfs",
+            "netbox:tenancy/getContact:getContact": "netbox_contact",
+            "netbox:tenancy/getContactGroup:getContactGroup": "netbox_contact_group",
+            "netbox:tenancy/getContactRole:getContactRole": "netbox_contact_role",
+            "netbox:tenancy/getTenant:getTenant": "netbox_tenant",
+            "netbox:tenancy/getTenantGroup:getTenantGroup": "netbox_tenant_group",
+            "netbox:tenancy/getTenants:getTenants": "netbox_tenants",
+            "netbox:virt/getCluster:getCluster": "netbox_cluster",
+            "netbox:virt/getClusterGroup:getClusterGroup": "netbox_cluster_group",
+            "netbox:virt/getClusterType:getClusterType": "netbox_cluster_type",
+            "netbox:virt/getInterfaces:getInterfaces": "netbox_interfaces",
+            "netbox:virt/getVirtualMachines:getVirtualMachines": "netbox_virtual_machines"
+        },
+        "renamedProperties": {
+            "netbox:auth/permission:Permission": {
+                "objectTypes": "object_types"
+            },
+            "netbox:auth/token:Token": {
+                "allowedIps": "allowed_ips",
+                "lastUsed": "last_used",
+                "userId": "user_id",
+                "writeEnabled": "write_enabled"
+            },
+            "netbox:circuit/circuit:Circuit": {
+                "providerId": "provider_id",
+                "tenantId": "tenant_id",
+                "typeId": "type_id"
+            },
+            "netbox:circuit/circuitTermination:CircuitTermination": {
+                "circuitId": "circuit_id",
+                "customFields": "custom_fields",
+                "portSpeed": "port_speed",
+                "siteId": "site_id",
+                "termSide": "term_side",
+                "upstreamSpeed": "upstream_speed"
+            },
+            "netbox:dcim/CableATermination:CableATermination": {
+                "objectId": "object_id",
+                "objectType": "object_type"
+            },
+            "netbox:dcim/CableBTermination:CableBTermination": {
+                "objectId": "object_id",
+                "objectType": "object_type"
+            },
+            "netbox:dcim/cable:Cable": {
+                "aTerminations": "a_termination",
+                "bTerminations": "b_termination",
+                "colorHex": "color_hex",
+                "customFields": "custom_fields",
+                "lengthUnit": "length_unit",
+                "tenantId": "tenant_id"
+            },
+            "netbox:dcim/device:Device": {
+                "assetTag": "asset_tag",
+                "clusterId": "cluster_id",
+                "customFields": "custom_fields",
+                "deviceTypeId": "device_type_id",
+                "localContextData": "local_context_data",
+                "locationId": "location_id",
+                "platformId": "platform_id",
+                "primaryIpv4": "primary_ipv4",
+                "primaryIpv6": "primary_ipv6",
+                "rackFace": "rack_face",
+                "rackId": "rack_id",
+                "rackPosition": "rack_position",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id",
+                "virtualChassisId": "virtual_chassis_id",
+                "virtualChassisMaster": "virtual_chassis_master",
+                "virtualChassisPosition": "virtual_chassis_position",
+                "virtualChassisPriority": "virtual_chassis_priority"
+            },
+            "netbox:dcim/deviceConsolePort:DeviceConsolePort": {
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "markConnected": "mark_connected",
+                "moduleId": "module_id"
+            },
+            "netbox:dcim/deviceConsoleServerPort:DeviceConsoleServerPort": {
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "markConnected": "mark_connected",
+                "moduleId": "module_id"
+            },
+            "netbox:dcim/deviceFrontPort:DeviceFrontPort": {
+                "colorHex": "color_hex",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "markConnected": "mark_connected",
+                "moduleId": "module_id",
+                "rearPortId": "rear_port_id",
+                "rearPortPosition": "rear_port_position"
+            },
+            "netbox:dcim/deviceInterface:DeviceInterface": {
+                "deviceId": "device_id",
+                "lagDeviceInterfaceId": "lag_device_interface_id",
+                "macAddress": "mac_address",
+                "parentDeviceInterfaceId": "parent_device_interface_id",
+                "taggedVlans": "tagged_vlans",
+                "untaggedVlan": "untagged_vlan"
+            },
+            "netbox:dcim/deviceModuleBay:DeviceModuleBay": {
+                "customFields": "custom_fields",
+                "deviceId": "device_id"
+            },
+            "netbox:dcim/devicePowerOutlet:DevicePowerOutlet": {
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "feedLeg": "feed_leg",
+                "markConnected": "mark_connected",
+                "moduleId": "module_id",
+                "powerPortId": "power_port_id"
+            },
+            "netbox:dcim/devicePowerPort:DevicePowerPort": {
+                "allocatedDraw": "allocated_draw",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "markConnected": "mark_connected",
+                "maximumDraw": "maximum_draw",
+                "moduleId": "module_id"
+            },
+            "netbox:dcim/devicePrimaryIp:DevicePrimaryIp": {
+                "deviceId": "device_id",
+                "ipAddressId": "ip_address_id",
+                "ipAddressVersion": "ip_address_version"
+            },
+            "netbox:dcim/deviceRearPort:DeviceRearPort": {
+                "colorHex": "color_hex",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "markConnected": "mark_connected",
+                "moduleId": "module_id"
+            },
+            "netbox:dcim/deviceRole:DeviceRole": {
+                "colorHex": "color_hex",
+                "vmRole": "vm_role"
+            },
+            "netbox:dcim/deviceType:DeviceType": {
+                "manufacturerId": "manufacturer_id",
+                "partNumber": "part_number",
+                "uHeight": "u_height"
+            },
+            "netbox:dcim/getDeviceInterfaces:getDeviceInterfaces": {
+                "filters": "filter",
+                "nameRegex": "name_regex"
+            },
+            "netbox:dcim/getDeviceInterfacesInterface:getDeviceInterfacesInterface": {
+                "deviceId": "device_id",
+                "macAddress": "mac_address",
+                "tagIds": "tag_ids",
+                "taggedVlans": "tagged_vlans",
+                "untaggedVlans": "untagged_vlan"
+            },
+            "netbox:dcim/getDeviceRole:getDeviceRole": {
+                "colorHex": "color_hex"
+            },
+            "netbox:dcim/getDeviceType:getDeviceType": {
+                "isFullDepth": "is_full_depth",
+                "manufacturerId": "manufacturer_id",
+                "partNumber": "part_number",
+                "uHeight": "u_height"
+            },
+            "netbox:dcim/getDevices:getDevices": {
+                "filters": "filter",
+                "nameRegex": "name_regex"
+            },
+            "netbox:dcim/getDevicesDevice:getDevicesDevice": {
+                "assetTag": "asset_tag",
+                "clusterId": "cluster_id",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "deviceTypeId": "device_type_id",
+                "locationId": "location_id",
+                "manufacturerId": "manufacturer_id",
+                "platformId": "platform_id",
+                "primaryIpv4": "primary_ipv4",
+                "primaryIpv6": "primary_ipv6",
+                "rackFace": "rack_face",
+                "rackId": "rack_id",
+                "rackPosition": "rack_position",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id"
+            },
+            "netbox:dcim/getLocation:getLocation": {
+                "siteId": "site_id",
+                "tenantId": "tenant_id"
+            },
+            "netbox:dcim/getLocations:getLocations": {
+                "filters": "filter"
+            },
+            "netbox:dcim/getLocationsLocation:getLocationsLocation": {
+                "siteId": "site_id",
+                "tenantId": "tenant_id"
+            },
+            "netbox:dcim/getRackRole:getRackRole": {
+                "colorHex": "color_hex"
+            },
+            "netbox:dcim/getRacks:getRacks": {
+                "filters": "filter"
+            },
+            "netbox:dcim/getRacksRack:getRacksRack": {
+                "assetTag": "asset_tag",
+                "customFields": "custom_fields",
+                "descUnits": "desc_units",
+                "facilityId": "facility_id",
+                "locationId": "location_id",
+                "maxWeight": "max_weight",
+                "mountingDepth": "mounting_depth",
+                "outerDepth": "outer_depth",
+                "outerUnit": "outer_unit",
+                "outerWidth": "outer_width",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id",
+                "uHeight": "u_height",
+                "weightUnit": "weight_unit"
+            },
+            "netbox:dcim/getRegion:getRegion": {
+                "filters": "filter",
+                "parentRegionId": "parent_region_id"
+            },
+            "netbox:dcim/getSite:getSite": {
+                "asnIds": "asn_ids",
+                "groupId": "group_id",
+                "regionId": "region_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id",
+                "timeZone": "time_zone"
+            },
+            "netbox:dcim/inventoryItem:InventoryItem": {
+                "assetTag": "asset_tag",
+                "componentId": "component_id",
+                "componentType": "component_type",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "manufacturerId": "manufacturer_id",
+                "parentId": "parent_id",
+                "partId": "part_id",
+                "roleId": "role_id"
+            },
+            "netbox:dcim/inventoryItemRole:InventoryItemRole": {
+                "colorHex": "color_hex",
+                "customFields": "custom_fields"
+            },
+            "netbox:dcim/location:Location": {
+                "customFields": "custom_fields",
+                "siteId": "site_id",
+                "tenantId": "tenant_id"
+            },
+            "netbox:dcim/module:Module": {
+                "assetTag": "asset_tag",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "moduleBayId": "module_bay_id",
+                "moduleTypeId": "module_type_id"
+            },
+            "netbox:dcim/moduleType:ModuleType": {
+                "customFields": "custom_fields",
+                "manufacturerId": "manufacturer_id",
+                "partNumber": "part_number",
+                "weightUnit": "weight_unit"
+            },
+            "netbox:dcim/powerFeed:PowerFeed": {
+                "customFields": "custom_fields",
+                "markConnected": "mark_connected",
+                "maxPercentUtilization": "max_percent_utilization",
+                "powerPanelId": "power_panel_id",
+                "rackId": "rack_id"
+            },
+            "netbox:dcim/powerPanel:PowerPanel": {
+                "customFields": "custom_fields",
+                "locationId": "location_id",
+                "siteId": "site_id"
+            },
+            "netbox:dcim/rack:Rack": {
+                "assetTag": "asset_tag",
+                "customFields": "custom_fields",
+                "descUnits": "desc_units",
+                "facilityId": "facility_id",
+                "locationId": "location_id",
+                "maxWeight": "max_weight",
+                "mountingDepth": "mounting_depth",
+                "outerDepth": "outer_depth",
+                "outerUnit": "outer_unit",
+                "outerWidth": "outer_width",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id",
+                "uHeight": "u_height",
+                "weightUnit": "weight_unit"
+            },
+            "netbox:dcim/rackReservation:RackReservation": {
+                "rackId": "rack_id",
+                "tenantId": "tenant_id",
+                "userId": "user_id"
+            },
+            "netbox:dcim/rackRole:RackRole": {
+                "colorHex": "color_hex"
+            },
+            "netbox:dcim/region:Region": {
+                "parentRegionId": "parent_region_id"
+            },
+            "netbox:dcim/site:Site": {
+                "asnIds": "asn_ids",
+                "customFields": "custom_fields",
+                "groupId": "group_id",
+                "physicalAddress": "physical_address",
+                "regionId": "region_id",
+                "shippingAddress": "shipping_address",
+                "tenantId": "tenant_id"
+            },
+            "netbox:dcim/siteGroup:SiteGroup": {
+                "parentId": "parent_id"
+            },
+            "netbox:dcim/virtualChassis:VirtualChassis": {
+                "customFields": "custom_fields"
+            },
+            "netbox:index/customField:CustomField": {
+                "choiceSetId": "choice_set_id",
+                "contentTypes": "content_types",
+                "groupName": "group_name",
+                "validationMaximum": "validation_maximum",
+                "validationMinimum": "validation_minimum",
+                "validationRegex": "validation_regex"
+            },
+            "netbox:index/customFieldChoiceSet:CustomFieldChoiceSet": {
+                "baseChoices": "base_choices",
+                "customFields": "custom_fields",
+                "extraChoices": "extra_choices",
+                "orderAlphabetically": "order_alphabetically"
+            },
+            "netbox:index/getTags:getTags": {
+                "filters": "filter"
+            },
+            "netbox:index/getTagsTag:getTagsTag": {
+                "tagId": "tag_id"
+            },
+            "netbox:index/tag:Tag": {
+                "colorHex": "color_hex"
+            },
+            "netbox:index/webhook:Webhook": {
+                "bodyTemplate": "body_template",
+                "contentTypes": "content_types",
+                "httpContentType": "http_content_type",
+                "httpMethod": "http_method",
+                "payloadUrl": "payload_url",
+                "triggerOnCreate": "trigger_on_create",
+                "triggerOnDelete": "trigger_on_delete",
+                "triggerOnUpdate": "trigger_on_update"
+            },
+            "netbox:index:Provider": {
+                "allowInsecureHttps": "allow_insecure_https",
+                "apiToken": "api_token",
+                "requestTimeout": "request_timeout",
+                "serverUrl": "server_url",
+                "skipVersionCheck": "skip_version_check",
+                "stripTrailingSlashesFromUrl": "strip_trailing_slashes_from_url"
+            },
+            "netbox:ipam/IpAddressNatOutsideAddress:IpAddressNatOutsideAddress": {
+                "addressFamily": "address_family",
+                "ipAddress": "ip_address"
+            },
+            "netbox:ipam/aggregate:Aggregate": {
+                "rirId": "rir_id",
+                "tenantId": "tenant_id"
+            },
+            "netbox:ipam/asn:Asn": {
+                "rirId": "rir_id"
+            },
+            "netbox:ipam/availableIpAddress:AvailableIpAddress": {
+                "deviceInterfaceId": "device_interface_id",
+                "dnsName": "dns_name",
+                "interfaceId": "interface_id",
+                "ipAddress": "ip_address",
+                "ipRangeId": "ip_range_id",
+                "objectType": "object_type",
+                "prefixId": "prefix_id",
+                "tenantId": "tenant_id",
+                "virtualMachineInterfaceId": "virtual_machine_interface_id",
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/availablePrefix:AvailablePrefix": {
+                "isPool": "is_pool",
+                "markUtilized": "mark_utilized",
+                "parentPrefixId": "parent_prefix_id",
+                "prefixLength": "prefix_length",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id",
+                "vlanId": "vlan_id",
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/getAsn:getAsn": {
+                "tagN": "tag__n"
+            },
+            "netbox:ipam/getAsns:getAsns": {
+                "filters": "filter"
+            },
+            "netbox:ipam/getAsnsAsn:getAsnsAsn": {
+                "rirId": "rir_id"
+            },
+            "netbox:ipam/getAvailablePrefix:getAvailablePrefix": {
+                "prefixId": "prefix_id",
+                "prefixesAvailables": "prefixes_available"
+            },
+            "netbox:ipam/getAvailablePrefixPrefixesAvailable:getAvailablePrefixPrefixesAvailable": {
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/getIpAddresses:getIpAddresses": {
+                "filters": "filter",
+                "ipAddresses": "ip_addresses"
+            },
+            "netbox:ipam/getIpAddressesIpAddress:getIpAddressesIpAddress": {
+                "addressFamily": "address_family",
+                "customFields": "custom_fields",
+                "dnsName": "dns_name",
+                "ipAddress": "ip_address",
+                "lastUpdated": "last_updated",
+                "tenants": "tenant"
+            },
+            "netbox:ipam/getPrefix:getPrefix": {
+                "siteId": "site_id",
+                "tagN": "tag__n",
+                "vlanId": "vlan_id",
+                "vlanVid": "vlan_vid",
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/getPrefixes:getPrefixes": {
+                "filters": "filter"
+            },
+            "netbox:ipam/getPrefixesPrefix:getPrefixesPrefix": {
+                "vlanId": "vlan_id",
+                "vlanVid": "vlan_vid",
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/getRouteTarget:getRouteTarget": {
+                "tenantId": "tenant_id"
+            },
+            "netbox:ipam/getVlan:getVlan": {
+                "groupId": "group_id"
+            },
+            "netbox:ipam/getVlanGroup:getVlanGroup": {
+                "maxVid": "max_vid",
+                "minVid": "min_vid",
+                "scopeId": "scope_id",
+                "scopeType": "scope_type",
+                "vlanCount": "vlan_count"
+            },
+            "netbox:ipam/getVlans:getVlans": {
+                "filters": "filter"
+            },
+            "netbox:ipam/getVlansVlan:getVlansVlan": {
+                "groupId": "group_id"
+            },
+            "netbox:ipam/getVrf:getVrf": {
+                "tenantId": "tenant_id"
+            },
+            "netbox:ipam/getVrfs:getVrfs": {
+                "filters": "filter"
+            },
+            "netbox:ipam/ipAddress:IpAddress": {
+                "deviceInterfaceId": "device_interface_id",
+                "dnsName": "dns_name",
+                "interfaceId": "interface_id",
+                "ipAddress": "ip_address",
+                "natInsideAddressId": "nat_inside_address_id",
+                "natOutsideAddresses": "nat_outside_addresses",
+                "objectType": "object_type",
+                "tenantId": "tenant_id",
+                "virtualMachineInterfaceId": "virtual_machine_interface_id",
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/ipRange:IpRange": {
+                "endAddress": "end_address",
+                "roleId": "role_id",
+                "startAddress": "start_address",
+                "tenantId": "tenant_id",
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/prefix:Prefix": {
+                "isPool": "is_pool",
+                "markUtilized": "mark_utilized",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id",
+                "vlanId": "vlan_id",
+                "vrfId": "vrf_id"
+            },
+            "netbox:ipam/routeTarget:RouteTarget": {
+                "tenantId": "tenant_id"
+            },
+            "netbox:ipam/service:Service": {
+                "customFields": "custom_fields",
+                "virtualMachineId": "virtual_machine_id"
+            },
+            "netbox:ipam/vlan:Vlan": {
+                "groupId": "group_id",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id"
+            },
+            "netbox:ipam/vlanGroup:VlanGroup": {
+                "maxVid": "max_vid",
+                "minVid": "min_vid",
+                "scopeId": "scope_id",
+                "scopeType": "scope_type"
+            },
+            "netbox:ipam/vrf:Vrf": {
+                "tenantId": "tenant_id"
+            },
+            "netbox:tenancy/contact:Contact": {
+                "groupId": "group_id"
+            },
+            "netbox:tenancy/contactAssignment:ContactAssignment": {
+                "contactId": "contact_id",
+                "contentType": "content_type",
+                "objectId": "object_id",
+                "roleId": "role_id"
+            },
+            "netbox:tenancy/contactGroup:ContactGroup": {
+                "parentId": "parent_id"
+            },
+            "netbox:tenancy/getContact:getContact": {
+                "groupId": "group_id"
+            },
+            "netbox:tenancy/getContactGroup:getContactGroup": {
+                "parentId": "parent_id"
+            },
+            "netbox:tenancy/getTenant:getTenant": {
+                "groupId": "group_id"
+            },
+            "netbox:tenancy/getTenantGroup:getTenantGroup": {
+                "parentId": "parent_id"
+            },
+            "netbox:tenancy/getTenants:getTenants": {
+                "filters": "filter"
+            },
+            "netbox:tenancy/getTenantsTenant:getTenantsTenant": {
+                "circuitCount": "circuit_count",
+                "clusterCount": "cluster_count",
+                "customFields": "custom_fields",
+                "deviceCount": "device_count",
+                "ipAddressCount": "ip_address_count",
+                "lastUpdated": "last_updated",
+                "prefixCount": "prefix_count",
+                "rackCount": "rack_count",
+                "siteCount": "site_count",
+                "tenantGroups": "tenant_group",
+                "vlanCount": "vlan_count",
+                "vmCount": "vm_count",
+                "vrfCount": "vrf_count"
+            },
+            "netbox:tenancy/getTenantsTenantTenantGroup:getTenantsTenantTenantGroup": {
+                "tenantCount": "tenant_count"
+            },
+            "netbox:tenancy/tenant:Tenant": {
+                "groupId": "group_id"
+            },
+            "netbox:tenancy/tenantGroup:TenantGroup": {
+                "parentId": "parent_id"
+            },
+            "netbox:virt/cluster:Cluster": {
+                "clusterGroupId": "cluster_group_id",
+                "clusterTypeId": "cluster_type_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id"
+            },
+            "netbox:virt/getCluster:getCluster": {
+                "clusterGroupId": "cluster_group_id",
+                "clusterId": "cluster_id",
+                "clusterTypeId": "cluster_type_id",
+                "customFields": "custom_fields",
+                "siteId": "site_id"
+            },
+            "netbox:virt/getClusterGroup:getClusterGroup": {
+                "clusterGroupId": "cluster_group_id"
+            },
+            "netbox:virt/getClusterType:getClusterType": {
+                "clusterTypeId": "cluster_type_id"
+            },
+            "netbox:virt/getInterfaces:getInterfaces": {
+                "filters": "filter",
+                "nameRegex": "name_regex"
+            },
+            "netbox:virt/getInterfacesInterface:getInterfacesInterface": {
+                "macAddress": "mac_address",
+                "tagIds": "tag_ids",
+                "taggedVlans": "tagged_vlans",
+                "untaggedVlans": "untagged_vlan",
+                "vmId": "vm_id"
+            },
+            "netbox:virt/getVirtualMachines:getVirtualMachines": {
+                "filters": "filter",
+                "nameRegex": "name_regex"
+            },
+            "netbox:virt/getVirtualMachinesVm:getVirtualMachinesVm": {
+                "clusterId": "cluster_id",
+                "configContext": "config_context",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "deviceName": "device_name",
+                "diskSizeGb": "disk_size_gb",
+                "localContextData": "local_context_data",
+                "memoryMb": "memory_mb",
+                "platformId": "platform_id",
+                "primaryIp": "primary_ip",
+                "primaryIp4": "primary_ip4",
+                "primaryIp6": "primary_ip6",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tagIds": "tag_ids",
+                "tenantId": "tenant_id",
+                "vmId": "vm_id"
+            },
+            "netbox:virt/interface:Interface": {
+                "macAddress": "mac_address",
+                "taggedVlans": "tagged_vlans",
+                "untaggedVlan": "untagged_vlan",
+                "virtualMachineId": "virtual_machine_id"
+            },
+            "netbox:virt/primaryIp:PrimaryIp": {
+                "ipAddressId": "ip_address_id",
+                "ipAddressVersion": "ip_address_version",
+                "virtualMachineId": "virtual_machine_id"
+            },
+            "netbox:virt/virtualMachine:VirtualMachine": {
+                "clusterId": "cluster_id",
+                "customFields": "custom_fields",
+                "deviceId": "device_id",
+                "diskSizeGb": "disk_size_gb",
+                "localContextData": "local_context_data",
+                "memoryMb": "memory_mb",
+                "platformId": "platform_id",
+                "primaryIpv4": "primary_ipv4",
+                "primaryIpv6": "primary_ipv6",
+                "roleId": "role_id",
+                "siteId": "site_id",
+                "tenantId": "tenant_id"
+            }
+        },
+        "renamedConfigProperties": {
+            "allowInsecureHttps": "allow_insecure_https",
+            "apiToken": "api_token",
+            "requestTimeout": "request_timeout",
+            "serverUrl": "server_url",
+            "skipVersionCheck": "skip_version_check",
+            "stripTrailingSlashesFromUrl": "strip_trailing_slashes_from_url"
+        }
+    }
+}

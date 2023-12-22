@@ -1,8 +1,8 @@
-PROJECT_NAME := xyz Package
+PROJECT_NAME := netbox Package
 
 SHELL            := /bin/bash
-PACK             := xyz
-ORG              := pulumi
+PACK             := netbox
+ORG              := NatzkaLabsOpenSource
 PROJECT          := github.com/${ORG}/pulumi-${PACK}
 NODE_MODULE_NAME := @pulumi/${PACK}
 TF_NAME          := ${PACK}
@@ -29,13 +29,13 @@ prepare::
 	mv "provider/cmd/pulumi-resource-x${EMPTY_TO_AVOID_SED}yz" provider/cmd/pulumi-resource-${NAME}
 
 	if [[ "${OS}" != "Darwin" ]]; then \
-		sed -i 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
+		sed -i 's,github.com/pulumi/pulumi-netbox,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
 	# In MacOS the -i parameter needs an empty string to execute in place.
 	if [[ "${OS}" == "Darwin" ]]; then \
-		sed -i '' 's,github.com/pulumi/pulumi-xyz,${REPOSITORY},g' provider/go.mod; \
+		sed -i '' 's,github.com/pulumi/pulumi-netbox,${REPOSITORY},g' provider/go.mod; \
 		find ./ ! -path './.git/*' -type f -exec sed -i '' 's/[x]yz/${NAME}/g' {} \; &> /dev/null; \
 	fi
 
@@ -63,7 +63,6 @@ build_nodejs:: install_plugins tfgen # build the node sdk
 	cd sdk/nodejs/ && \
         yarn install && \
         yarn run tsc && \
-		cp -R scripts/ bin && \
         cp ../../README.md ../../LICENSE package.json yarn.lock ./bin/ && \
 		sed -i.bak -e "s/\$${VERSION}/$(VERSION)/g" ./bin/package.json
 
@@ -106,7 +105,6 @@ clean::
 
 install_plugins::
 	[ -x $(shell which pulumi) ] || curl -fsSL https://get.pulumi.com | sh
-	pulumi plugin install resource random 4.3.1
 
 install_dotnet_sdk::
 	mkdir -p $(WORKING_DIR)/nuget
