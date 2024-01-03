@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Note that some terraform code is not included in the example for brevity
  * const testDevice = new netbox.dcim.Device("testDevice", {

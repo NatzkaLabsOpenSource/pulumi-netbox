@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const testSite = new netbox.dcim.Site("testSite", {status: "active"});
  * const testCircuitProvider = new netbox.circuit.CircuitProvider("testCircuitProvider", {});

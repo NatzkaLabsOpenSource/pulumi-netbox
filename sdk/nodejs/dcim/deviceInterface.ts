@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assumes a device with ID 123 exists
  * const test = new netbox.dcim.DeviceInterface("test", {

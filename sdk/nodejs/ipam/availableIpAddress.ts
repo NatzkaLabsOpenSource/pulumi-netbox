@@ -23,7 +23,7 @@ import * as utilities from "../utilities";
  * ### Creating an IP in a prefix
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  * import * as netbox from "@pulumi/netbox";
  *
  * const testPrefix = netbox.ipam.getPrefix({

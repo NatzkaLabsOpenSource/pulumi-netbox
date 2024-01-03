@@ -400,7 +400,7 @@ func Provider() tfbridge.ProviderInfo {
 			},
 		},
 		JavaScript: &tfbridge.JavaScriptInfo{
-			PackageName: "@natzkalabsopensource/pulumi-netbox",
+			PackageName: "@natzka-oss/pulumi-netbox",
 			Dependencies: map[string]string{
 				"@pulumi/pulumi": "^3.0.0",
 			},

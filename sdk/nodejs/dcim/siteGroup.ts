@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const parent = new netbox.dcim.SiteGroup("parent", {description: "sample description"});
  * const child = new netbox.dcim.SiteGroup("child", {

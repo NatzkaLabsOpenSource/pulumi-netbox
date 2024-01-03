@@ -22,7 +22,7 @@ import * as utilities from "../utilities";
  * With `virtualMachineInterfaceId`:
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a virtual machine with the id `123` exists
  * const thisInterface = new netbox.virt.Interface("thisInterface", {virtualMachineId: 123});
@@ -36,7 +36,7 @@ import * as utilities from "../utilities";
  * With `objectType` and `interfaceId`:
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a virtual machine with the id `123` exists
  * const thisInterface = new netbox.virt.Interface("thisInterface", {virtualMachineId: 123});
@@ -55,7 +55,7 @@ import * as utilities from "../utilities";
  * With `deviceInterfaceId`:
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a device with the id `123` exists
  * const thisDeviceInterface = new netbox.dcim.DeviceInterface("thisDeviceInterface", {
@@ -72,7 +72,7 @@ import * as utilities from "../utilities";
  * With `objectType` and `interfaceId`:
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a device with the id `123` exists
  * const thisDeviceInterface = new netbox.dcim.DeviceInterface("thisDeviceInterface", {
@@ -92,7 +92,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const _this = new netbox.ipam.IpAddress("this", {
  *     ipAddress: "10.0.0.50/24",

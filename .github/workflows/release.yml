@@ -11,9 +11,9 @@ permissions:
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NPM_REGISTRY_URL: https://npm.pkg.github.com
+  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  NPM_REGISTRY_URL: https://registry.npmjs.org
 
 jobs:
 
@@ -100,7 +100,7 @@ jobs:
       - if: ${{ matrix.language == 'nodejs' }}
         uses: JS-DevTools/npm-publish@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.NPM_TOKEN }}
           registry: ${{ env.NPM_REGISTRY_URL }}
           access: "public"
           package: ${{github.workspace}}/sdk/nodejs/bin/package.json

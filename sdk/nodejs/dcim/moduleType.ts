@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const testManufacturer = new netbox.dcim.Manufacturer("testManufacturer", {});
  * const testModuleType = new netbox.dcim.ModuleType("testModuleType", {

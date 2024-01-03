@@ -1,5 +1,5 @@
 {
-    "name": "@natzkalabsopensource/pulumi-netbox",
+    "name": "@natzka-oss/pulumi-netbox",
     "version": "${VERSION}",
     "description": "A Pulumi package for creating and managing Netbox cloud resources.",
     "keywords": [

@@ -13,7 +13,7 @@ import * as utilities from "../utilities";
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
- * import * as netbox from "@natzkalabsopensource/pulumi-netbox";
+ * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const testTenant = new netbox.tenancy.Tenant("testTenant", {});
  * const testRouteTarget = new netbox.ipam.RouteTarget("testRouteTarget", {
