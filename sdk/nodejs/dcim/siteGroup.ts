@@ -17,8 +17,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const parent = new netbox.dcim.SiteGroup("parent", {description: "sample description"});
+ * const parent = new netbox.dcim.SiteGroup("parent", {
+ *     name: "parent",
+ *     description: "sample description",
+ * });
  * const child = new netbox.dcim.SiteGroup("child", {
+ *     name: "child",
  *     description: "sample description",
  *     parentId: parent.id,
  * });

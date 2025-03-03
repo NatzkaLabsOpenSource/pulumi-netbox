@@ -15,7 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const dcWest = new netbox.virt.ClusterGroup("dcWest", {description: "West Datacenter Cluster"});
+ * const dcWest = new netbox.virt.ClusterGroup("dc_west", {
+ *     description: "West Datacenter Cluster",
+ *     name: "dc-west",
+ * });
  * ```
  */
 export class ClusterGroup extends pulumi.CustomResource {

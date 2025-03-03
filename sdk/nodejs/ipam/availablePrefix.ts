@@ -12,11 +12,11 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  * import * as netbox from "@pulumi/netbox";
  *
- * const testPrefix = netbox.ipam.getPrefix({
+ * const test = netbox.ipam.getPrefix({
  *     cidr: "10.0.0.0/24",
  * });
- * const testAvailablePrefix = new netbox.ipam.AvailablePrefix("testAvailablePrefix", {
- *     parentPrefixId: testPrefix.then(testPrefix => testPrefix.id),
+ * const testAvailablePrefix = new netbox.ipam.AvailablePrefix("test", {
+ *     parentPrefixId: test.then(test => test.id),
  *     prefixLength: 25,
  *     status: "active",
  * });

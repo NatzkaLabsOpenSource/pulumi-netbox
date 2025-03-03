@@ -31,7 +31,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tenancy.NewTenantGroup(ctx, "test", nil)
+//			_, err := tenancy.NewTenantGroup(ctx, "test", &tenancy.TenantGroupArgs{
+//				Name: pulumi.String("test-tenant-group"),
+//			})
 //			if err != nil {
 //				return err
 //			}

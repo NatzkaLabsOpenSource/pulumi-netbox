@@ -30,8 +30,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := dcim.NewDeviceRole(ctx, "coreSw", &dcim.DeviceRoleArgs{
+//			_, err := dcim.NewDeviceRole(ctx, "core_sw", &dcim.DeviceRoleArgs{
 //				ColorHex: pulumi.String("FF00FF"),
+//				Name:     pulumi.String("core-sw"),
 //			})
 //			if err != nil {
 //				return err

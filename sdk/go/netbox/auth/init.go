@@ -21,6 +21,8 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "netbox:auth/group:Group":
+		r = &Group{}
 	case "netbox:auth/permission:Permission":
 		r = &Permission{}
 	case "netbox:auth/token:Token":
@@ -40,6 +42,11 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"netbox",
+		"auth/group",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"netbox",
 		"auth/permission",

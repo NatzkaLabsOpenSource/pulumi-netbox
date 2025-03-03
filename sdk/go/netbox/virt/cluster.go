@@ -32,19 +32,23 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Assumes the 'dc-west' cluster group already exists
 //			dcWest, err := virt.LookupClusterGroup(ctx, &virt.LookupClusterGroupArgs{
 //				Name: "dc-west",
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			vmwVsphere, err := virt.NewClusterType(ctx, "vmwVsphere", nil)
+//			vmwVsphere, err := virt.NewClusterType(ctx, "vmw_vsphere", &virt.ClusterTypeArgs{
+//				Name: pulumi.String("VMware vSphere 6"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = virt.NewCluster(ctx, "vmwCluster01", &virt.ClusterArgs{
+//			_, err = virt.NewCluster(ctx, "vmw_cluster_01", &virt.ClusterArgs{
 //				ClusterTypeId:  vmwVsphere.ID(),
-//				ClusterGroupId: *pulumi.String(dcWest.Id),
+//				Name:           pulumi.String("vmw-cluster-01"),
+//				ClusterGroupId: pulumi.String(dcWest.Id),
 //			})
 //			if err != nil {
 //				return err

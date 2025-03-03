@@ -45,7 +45,7 @@ export class VirtualMachine extends pulumi.CustomResource {
     public readonly customFields!: pulumi.Output<{[key: string]: string} | undefined>;
     public readonly description!: pulumi.Output<string | undefined>;
     public readonly deviceId!: pulumi.Output<number | undefined>;
-    public readonly diskSizeGb!: pulumi.Output<number | undefined>;
+    public readonly diskSizeMb!: pulumi.Output<number>;
     /**
      * This is best managed through the use of `jsonencode` and a map of settings.
      */
@@ -86,7 +86,7 @@ export class VirtualMachine extends pulumi.CustomResource {
             resourceInputs["customFields"] = state ? state.customFields : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["deviceId"] = state ? state.deviceId : undefined;
-            resourceInputs["diskSizeGb"] = state ? state.diskSizeGb : undefined;
+            resourceInputs["diskSizeMb"] = state ? state.diskSizeMb : undefined;
             resourceInputs["localContextData"] = state ? state.localContextData : undefined;
             resourceInputs["memoryMb"] = state ? state.memoryMb : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
@@ -106,7 +106,7 @@ export class VirtualMachine extends pulumi.CustomResource {
             resourceInputs["customFields"] = args ? args.customFields : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["deviceId"] = args ? args.deviceId : undefined;
-            resourceInputs["diskSizeGb"] = args ? args.diskSizeGb : undefined;
+            resourceInputs["diskSizeMb"] = args ? args.diskSizeMb : undefined;
             resourceInputs["localContextData"] = args ? args.localContextData : undefined;
             resourceInputs["memoryMb"] = args ? args.memoryMb : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
@@ -137,7 +137,7 @@ export interface VirtualMachineState {
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     deviceId?: pulumi.Input<number>;
-    diskSizeGb?: pulumi.Input<number>;
+    diskSizeMb?: pulumi.Input<number>;
     /**
      * This is best managed through the use of `jsonencode` and a map of settings.
      */
@@ -173,7 +173,7 @@ export interface VirtualMachineArgs {
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     deviceId?: pulumi.Input<number>;
-    diskSizeGb?: pulumi.Input<number>;
+    diskSizeMb?: pulumi.Input<number>;
     /**
      * This is best managed through the use of `jsonencode` and a map of settings.
      */

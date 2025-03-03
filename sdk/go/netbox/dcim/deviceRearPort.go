@@ -30,16 +30,19 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testDevice, err := dcim.NewDevice(ctx, "testDevice", &dcim.DeviceArgs{
-//				DeviceTypeId: pulumi.Any(netbox_device_type.Test.Id),
-//				RoleId:       pulumi.Any(netbox_device_role.Test.Id),
-//				SiteId:       pulumi.Any(netbox_site.Test.Id),
+//			// Note that some terraform code is not included in the example for brevity
+//			test, err := dcim.NewDevice(ctx, "test", &dcim.DeviceArgs{
+//				Name:         pulumi.String("%[1]s"),
+//				DeviceTypeId: pulumi.Any(testNetboxDeviceType.Id),
+//				RoleId:       pulumi.Any(testNetboxDeviceRole.Id),
+//				SiteId:       pulumi.Any(testNetboxSite.Id),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewDeviceRearPort(ctx, "testDeviceRearPort", &dcim.DeviceRearPortArgs{
-//				DeviceId:      testDevice.ID(),
+//			_, err = dcim.NewDeviceRearPort(ctx, "test", &dcim.DeviceRearPortArgs{
+//				DeviceId:      test.ID(),
+//				Name:          pulumi.String("rear port 1"),
 //				Type:          pulumi.String("8p8c"),
 //				Positions:     pulumi.Int(2),
 //				MarkConnected: pulumi.Bool(true),

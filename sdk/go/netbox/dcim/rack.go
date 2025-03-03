@@ -34,14 +34,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testSite, err := dcim.NewSite(ctx, "testSite", &dcim.SiteArgs{
+//			test, err := dcim.NewSite(ctx, "test", &dcim.SiteArgs{
+//				Name:   pulumi.String("test"),
 //				Status: pulumi.String("active"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewRack(ctx, "testRack", &dcim.RackArgs{
-//				SiteId:  testSite.ID(),
+//			_, err = dcim.NewRack(ctx, "test", &dcim.RackArgs{
+//				Name:    pulumi.String("test"),
+//				SiteId:  test.ID(),
 //				Status:  pulumi.String("reserved"),
 //				Width:   pulumi.Int(19),
 //				UHeight: pulumi.Int(48),
@@ -61,9 +63,11 @@ type Rack struct {
 	Comments     pulumi.StringPtrOutput `pulumi:"comments"`
 	CustomFields pulumi.StringMapOutput `pulumi:"customFields"`
 	// If rack units are descending. Defaults to `false`.
-	DescUnits     pulumi.BoolPtrOutput   `pulumi:"descUnits"`
-	Description   pulumi.StringPtrOutput `pulumi:"description"`
-	FacilityId    pulumi.StringPtrOutput `pulumi:"facilityId"`
+	DescUnits   pulumi.BoolPtrOutput   `pulumi:"descUnits"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
+	FacilityId  pulumi.StringPtrOutput `pulumi:"facilityId"`
+	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+	FormFactor    pulumi.StringPtrOutput `pulumi:"formFactor"`
 	LocationId    pulumi.IntPtrOutput    `pulumi:"locationId"`
 	MaxWeight     pulumi.IntPtrOutput    `pulumi:"maxWeight"`
 	MountingDepth pulumi.IntPtrOutput    `pulumi:"mountingDepth"`
@@ -79,14 +83,12 @@ type Rack struct {
 	Status   pulumi.StringOutput      `pulumi:"status"`
 	Tags     pulumi.StringArrayOutput `pulumi:"tags"`
 	TenantId pulumi.IntPtrOutput      `pulumi:"tenantId"`
-	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-	Type    pulumi.StringPtrOutput  `pulumi:"type"`
-	UHeight pulumi.IntOutput        `pulumi:"uHeight"`
-	Weight  pulumi.Float64PtrOutput `pulumi:"weight"`
+	UHeight  pulumi.IntPtrOutput      `pulumi:"uHeight"`
+	Weight   pulumi.Float64PtrOutput  `pulumi:"weight"`
 	// Valid values are `kg`, `g`, `lb` and `oz`. Required when `weight` and `maxWeight` is set.
 	WeightUnit pulumi.StringPtrOutput `pulumi:"weightUnit"`
 	// Valid values are `10`, `19`, `21` and `23`.
-	Width pulumi.IntOutput `pulumi:"width"`
+	Width pulumi.IntPtrOutput `pulumi:"width"`
 }
 
 // NewRack registers a new resource with the given unique name, arguments, and options.
@@ -101,12 +103,6 @@ func NewRack(ctx *pulumi.Context,
 	}
 	if args.Status == nil {
 		return nil, errors.New("invalid value for required argument 'Status'")
-	}
-	if args.UHeight == nil {
-		return nil, errors.New("invalid value for required argument 'UHeight'")
-	}
-	if args.Width == nil {
-		return nil, errors.New("invalid value for required argument 'Width'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Rack
@@ -135,9 +131,11 @@ type rackState struct {
 	Comments     *string           `pulumi:"comments"`
 	CustomFields map[string]string `pulumi:"customFields"`
 	// If rack units are descending. Defaults to `false`.
-	DescUnits     *bool   `pulumi:"descUnits"`
-	Description   *string `pulumi:"description"`
-	FacilityId    *string `pulumi:"facilityId"`
+	DescUnits   *bool   `pulumi:"descUnits"`
+	Description *string `pulumi:"description"`
+	FacilityId  *string `pulumi:"facilityId"`
+	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+	FormFactor    *string `pulumi:"formFactor"`
 	LocationId    *int    `pulumi:"locationId"`
 	MaxWeight     *int    `pulumi:"maxWeight"`
 	MountingDepth *int    `pulumi:"mountingDepth"`
@@ -153,10 +151,8 @@ type rackState struct {
 	Status   *string  `pulumi:"status"`
 	Tags     []string `pulumi:"tags"`
 	TenantId *int     `pulumi:"tenantId"`
-	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-	Type    *string  `pulumi:"type"`
-	UHeight *int     `pulumi:"uHeight"`
-	Weight  *float64 `pulumi:"weight"`
+	UHeight  *int     `pulumi:"uHeight"`
+	Weight   *float64 `pulumi:"weight"`
 	// Valid values are `kg`, `g`, `lb` and `oz`. Required when `weight` and `maxWeight` is set.
 	WeightUnit *string `pulumi:"weightUnit"`
 	// Valid values are `10`, `19`, `21` and `23`.
@@ -168,9 +164,11 @@ type RackState struct {
 	Comments     pulumi.StringPtrInput
 	CustomFields pulumi.StringMapInput
 	// If rack units are descending. Defaults to `false`.
-	DescUnits     pulumi.BoolPtrInput
-	Description   pulumi.StringPtrInput
-	FacilityId    pulumi.StringPtrInput
+	DescUnits   pulumi.BoolPtrInput
+	Description pulumi.StringPtrInput
+	FacilityId  pulumi.StringPtrInput
+	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+	FormFactor    pulumi.StringPtrInput
 	LocationId    pulumi.IntPtrInput
 	MaxWeight     pulumi.IntPtrInput
 	MountingDepth pulumi.IntPtrInput
@@ -186,10 +184,8 @@ type RackState struct {
 	Status   pulumi.StringPtrInput
 	Tags     pulumi.StringArrayInput
 	TenantId pulumi.IntPtrInput
-	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-	Type    pulumi.StringPtrInput
-	UHeight pulumi.IntPtrInput
-	Weight  pulumi.Float64PtrInput
+	UHeight  pulumi.IntPtrInput
+	Weight   pulumi.Float64PtrInput
 	// Valid values are `kg`, `g`, `lb` and `oz`. Required when `weight` and `maxWeight` is set.
 	WeightUnit pulumi.StringPtrInput
 	// Valid values are `10`, `19`, `21` and `23`.
@@ -205,9 +201,11 @@ type rackArgs struct {
 	Comments     *string           `pulumi:"comments"`
 	CustomFields map[string]string `pulumi:"customFields"`
 	// If rack units are descending. Defaults to `false`.
-	DescUnits     *bool   `pulumi:"descUnits"`
-	Description   *string `pulumi:"description"`
-	FacilityId    *string `pulumi:"facilityId"`
+	DescUnits   *bool   `pulumi:"descUnits"`
+	Description *string `pulumi:"description"`
+	FacilityId  *string `pulumi:"facilityId"`
+	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+	FormFactor    *string `pulumi:"formFactor"`
 	LocationId    *int    `pulumi:"locationId"`
 	MaxWeight     *int    `pulumi:"maxWeight"`
 	MountingDepth *int    `pulumi:"mountingDepth"`
@@ -223,14 +221,12 @@ type rackArgs struct {
 	Status   string   `pulumi:"status"`
 	Tags     []string `pulumi:"tags"`
 	TenantId *int     `pulumi:"tenantId"`
-	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-	Type    *string  `pulumi:"type"`
-	UHeight int      `pulumi:"uHeight"`
-	Weight  *float64 `pulumi:"weight"`
+	UHeight  *int     `pulumi:"uHeight"`
+	Weight   *float64 `pulumi:"weight"`
 	// Valid values are `kg`, `g`, `lb` and `oz`. Required when `weight` and `maxWeight` is set.
 	WeightUnit *string `pulumi:"weightUnit"`
 	// Valid values are `10`, `19`, `21` and `23`.
-	Width int `pulumi:"width"`
+	Width *int `pulumi:"width"`
 }
 
 // The set of arguments for constructing a Rack resource.
@@ -239,9 +235,11 @@ type RackArgs struct {
 	Comments     pulumi.StringPtrInput
 	CustomFields pulumi.StringMapInput
 	// If rack units are descending. Defaults to `false`.
-	DescUnits     pulumi.BoolPtrInput
-	Description   pulumi.StringPtrInput
-	FacilityId    pulumi.StringPtrInput
+	DescUnits   pulumi.BoolPtrInput
+	Description pulumi.StringPtrInput
+	FacilityId  pulumi.StringPtrInput
+	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+	FormFactor    pulumi.StringPtrInput
 	LocationId    pulumi.IntPtrInput
 	MaxWeight     pulumi.IntPtrInput
 	MountingDepth pulumi.IntPtrInput
@@ -257,14 +255,12 @@ type RackArgs struct {
 	Status   pulumi.StringInput
 	Tags     pulumi.StringArrayInput
 	TenantId pulumi.IntPtrInput
-	// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-	Type    pulumi.StringPtrInput
-	UHeight pulumi.IntInput
-	Weight  pulumi.Float64PtrInput
+	UHeight  pulumi.IntPtrInput
+	Weight   pulumi.Float64PtrInput
 	// Valid values are `kg`, `g`, `lb` and `oz`. Required when `weight` and `maxWeight` is set.
 	WeightUnit pulumi.StringPtrInput
 	// Valid values are `10`, `19`, `21` and `23`.
-	Width pulumi.IntInput
+	Width pulumi.IntPtrInput
 }
 
 func (RackArgs) ElementType() reflect.Type {
@@ -379,6 +375,11 @@ func (o RackOutput) FacilityId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Rack) pulumi.StringPtrOutput { return v.FacilityId }).(pulumi.StringPtrOutput)
 }
 
+// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+func (o RackOutput) FormFactor() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Rack) pulumi.StringPtrOutput { return v.FormFactor }).(pulumi.StringPtrOutput)
+}
+
 func (o RackOutput) LocationId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Rack) pulumi.IntPtrOutput { return v.LocationId }).(pulumi.IntPtrOutput)
 }
@@ -433,13 +434,8 @@ func (o RackOutput) TenantId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Rack) pulumi.IntPtrOutput { return v.TenantId }).(pulumi.IntPtrOutput)
 }
 
-// Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-func (o RackOutput) Type() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v *Rack) pulumi.StringPtrOutput { return v.Type }).(pulumi.StringPtrOutput)
-}
-
-func (o RackOutput) UHeight() pulumi.IntOutput {
-	return o.ApplyT(func(v *Rack) pulumi.IntOutput { return v.UHeight }).(pulumi.IntOutput)
+func (o RackOutput) UHeight() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Rack) pulumi.IntPtrOutput { return v.UHeight }).(pulumi.IntPtrOutput)
 }
 
 func (o RackOutput) Weight() pulumi.Float64PtrOutput {
@@ -452,8 +448,8 @@ func (o RackOutput) WeightUnit() pulumi.StringPtrOutput {
 }
 
 // Valid values are `10`, `19`, `21` and `23`.
-func (o RackOutput) Width() pulumi.IntOutput {
-	return o.ApplyT(func(v *Rack) pulumi.IntOutput { return v.Width }).(pulumi.IntOutput)
+func (o RackOutput) Width() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Rack) pulumi.IntPtrOutput { return v.Width }).(pulumi.IntPtrOutput)
 }
 
 type RackArrayOutput struct{ *pulumi.OutputState }

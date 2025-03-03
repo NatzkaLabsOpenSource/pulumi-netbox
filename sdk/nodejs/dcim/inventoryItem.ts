@@ -16,21 +16,27 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Note that some terraform code is not included in the example for brevity
- * const testDevice = new netbox.dcim.Device("testDevice", {
- *     deviceTypeId: netbox_device_type.test.id,
- *     tenantId: netbox_tenant.test.id,
- *     roleId: netbox_device_role.test.id,
- *     siteId: netbox_site.test.id,
+ * const test = new netbox.dcim.Device("test", {
+ *     name: "%[1]s",
+ *     deviceTypeId: testNetboxDeviceType.id,
+ *     tenantId: testNetboxTenant.id,
+ *     roleId: testNetboxDeviceRole.id,
+ *     siteId: testNetboxSite.id,
  * });
- * const testDeviceRearPort = new netbox.dcim.DeviceRearPort("testDeviceRearPort", {
- *     deviceId: testDevice.id,
+ * const testDeviceRearPort = new netbox.dcim.DeviceRearPort("test", {
+ *     deviceId: test.id,
+ *     name: "rear port",
  *     type: "8p8c",
  *     positions: 1,
  *     markConnected: true,
  * });
- * const parent = new netbox.dcim.InventoryItem("parent", {deviceId: testDevice.id});
- * const testInventoryItem = new netbox.dcim.InventoryItem("testInventoryItem", {
- *     deviceId: testDevice.id,
+ * const parent = new netbox.dcim.InventoryItem("parent", {
+ *     deviceId: test.id,
+ *     name: "Parent Item",
+ * });
+ * const testInventoryItem = new netbox.dcim.InventoryItem("test", {
+ *     deviceId: test.id,
+ *     name: "Child Item",
  *     parentId: parent.id,
  *     componentType: "dcim.rearport",
  *     componentId: testDeviceRearPort.id,

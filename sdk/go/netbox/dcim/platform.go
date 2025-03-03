@@ -29,7 +29,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := dcim.NewPlatform(ctx, "pANOS", nil)
+//			// Resource for PanOS (e.g. Panorama from Palo Alto)
+//			_, err := dcim.NewPlatform(ctx, "PANOS", &dcim.PlatformArgs{
+//				Name: pulumi.String("PANOS"),
+//			})
 //			if err != nil {
 //				return err
 //			}
@@ -41,8 +44,9 @@ import (
 type Platform struct {
 	pulumi.CustomResourceState
 
-	Name pulumi.StringOutput `pulumi:"name"`
-	Slug pulumi.StringOutput `pulumi:"slug"`
+	ManufacturerId pulumi.IntPtrOutput `pulumi:"manufacturerId"`
+	Name           pulumi.StringOutput `pulumi:"name"`
+	Slug           pulumi.StringOutput `pulumi:"slug"`
 }
 
 // NewPlatform registers a new resource with the given unique name, arguments, and options.
@@ -75,13 +79,15 @@ func GetPlatform(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Platform resources.
 type platformState struct {
-	Name *string `pulumi:"name"`
-	Slug *string `pulumi:"slug"`
+	ManufacturerId *int    `pulumi:"manufacturerId"`
+	Name           *string `pulumi:"name"`
+	Slug           *string `pulumi:"slug"`
 }
 
 type PlatformState struct {
-	Name pulumi.StringPtrInput
-	Slug pulumi.StringPtrInput
+	ManufacturerId pulumi.IntPtrInput
+	Name           pulumi.StringPtrInput
+	Slug           pulumi.StringPtrInput
 }
 
 func (PlatformState) ElementType() reflect.Type {
@@ -89,14 +95,16 @@ func (PlatformState) ElementType() reflect.Type {
 }
 
 type platformArgs struct {
-	Name *string `pulumi:"name"`
-	Slug *string `pulumi:"slug"`
+	ManufacturerId *int    `pulumi:"manufacturerId"`
+	Name           *string `pulumi:"name"`
+	Slug           *string `pulumi:"slug"`
 }
 
 // The set of arguments for constructing a Platform resource.
 type PlatformArgs struct {
-	Name pulumi.StringPtrInput
-	Slug pulumi.StringPtrInput
+	ManufacturerId pulumi.IntPtrInput
+	Name           pulumi.StringPtrInput
+	Slug           pulumi.StringPtrInput
 }
 
 func (PlatformArgs) ElementType() reflect.Type {
@@ -184,6 +192,10 @@ func (o PlatformOutput) ToPlatformOutput() PlatformOutput {
 
 func (o PlatformOutput) ToPlatformOutputWithContext(ctx context.Context) PlatformOutput {
 	return o
+}
+
+func (o PlatformOutput) ManufacturerId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Platform) pulumi.IntPtrOutput { return v.ManufacturerId }).(pulumi.IntPtrOutput)
 }
 
 func (o PlatformOutput) Name() pulumi.StringOutput {

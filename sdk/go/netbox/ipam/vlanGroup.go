@@ -28,23 +28,33 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Basic VLAN Group example
 //			_, err := ipam.NewVlanGroup(ctx, "example1", &ipam.VlanGroupArgs{
-//				Slug:   pulumi.String("example1"),
-//				MinVid: pulumi.Int(1),
-//				MaxVid: pulumi.Int(4094),
+//				Name: pulumi.String("example1"),
+//				Slug: pulumi.String("example1"),
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			// Full VLAN Group example
 //			_, err = ipam.NewVlanGroup(ctx, "example2", &ipam.VlanGroupArgs{
+//				Name:        pulumi.String("Second Example"),
 //				Slug:        pulumi.String("example2"),
-//				MinVid:      pulumi.Int(1),
-//				MaxVid:      pulumi.Int(4094),
 //				ScopeType:   pulumi.String("dcim.site"),
-//				ScopeId:     pulumi.Any(netbox_site.Example.Id),
+//				ScopeId:     pulumi.Any(example.Id),
 //				Description: pulumi.String("Second Example VLAN Group"),
 //				Tags: pulumi.StringArray{
-//					netbox_tag.Example.Id,
+//					exampleNetboxTag.Id,
+//				},
+//				VidRanges: pulumi.IntArrayArray{
+//					pulumi.IntArray{
+//						pulumi.Int(1),
+//						pulumi.Int(2),
+//					},
+//					pulumi.IntArray{
+//						pulumi.Int(3),
+//						pulumi.Int(4),
+//					},
 //				},
 //			})
 //			if err != nil {
@@ -60,15 +70,14 @@ type VlanGroup struct {
 
 	// Defaults to `""`.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	MaxVid      pulumi.IntOutput       `pulumi:"maxVid"`
-	MinVid      pulumi.IntOutput       `pulumi:"minVid"`
 	Name        pulumi.StringOutput    `pulumi:"name"`
 	// Required when `scopeType` is set.
 	ScopeId pulumi.IntPtrOutput `pulumi:"scopeId"`
-	// Valid values are `active`, `container`, `reserved` and `deprecated`.
-	ScopeType pulumi.StringPtrOutput   `pulumi:"scopeType"`
-	Slug      pulumi.StringOutput      `pulumi:"slug"`
-	Tags      pulumi.StringArrayOutput `pulumi:"tags"`
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+	ScopeType pulumi.StringPtrOutput     `pulumi:"scopeType"`
+	Slug      pulumi.StringOutput        `pulumi:"slug"`
+	Tags      pulumi.StringArrayOutput   `pulumi:"tags"`
+	VidRanges pulumi.IntArrayArrayOutput `pulumi:"vidRanges"`
 }
 
 // NewVlanGroup registers a new resource with the given unique name, arguments, and options.
@@ -78,14 +87,11 @@ func NewVlanGroup(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.MaxVid == nil {
-		return nil, errors.New("invalid value for required argument 'MaxVid'")
-	}
-	if args.MinVid == nil {
-		return nil, errors.New("invalid value for required argument 'MinVid'")
-	}
 	if args.Slug == nil {
 		return nil, errors.New("invalid value for required argument 'Slug'")
+	}
+	if args.VidRanges == nil {
+		return nil, errors.New("invalid value for required argument 'VidRanges'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource VlanGroup
@@ -112,29 +118,27 @@ func GetVlanGroup(ctx *pulumi.Context,
 type vlanGroupState struct {
 	// Defaults to `""`.
 	Description *string `pulumi:"description"`
-	MaxVid      *int    `pulumi:"maxVid"`
-	MinVid      *int    `pulumi:"minVid"`
 	Name        *string `pulumi:"name"`
 	// Required when `scopeType` is set.
 	ScopeId *int `pulumi:"scopeId"`
-	// Valid values are `active`, `container`, `reserved` and `deprecated`.
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
 	ScopeType *string  `pulumi:"scopeType"`
 	Slug      *string  `pulumi:"slug"`
 	Tags      []string `pulumi:"tags"`
+	VidRanges [][]int  `pulumi:"vidRanges"`
 }
 
 type VlanGroupState struct {
 	// Defaults to `""`.
 	Description pulumi.StringPtrInput
-	MaxVid      pulumi.IntPtrInput
-	MinVid      pulumi.IntPtrInput
 	Name        pulumi.StringPtrInput
 	// Required when `scopeType` is set.
 	ScopeId pulumi.IntPtrInput
-	// Valid values are `active`, `container`, `reserved` and `deprecated`.
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
 	ScopeType pulumi.StringPtrInput
 	Slug      pulumi.StringPtrInput
 	Tags      pulumi.StringArrayInput
+	VidRanges pulumi.IntArrayArrayInput
 }
 
 func (VlanGroupState) ElementType() reflect.Type {
@@ -144,30 +148,28 @@ func (VlanGroupState) ElementType() reflect.Type {
 type vlanGroupArgs struct {
 	// Defaults to `""`.
 	Description *string `pulumi:"description"`
-	MaxVid      int     `pulumi:"maxVid"`
-	MinVid      int     `pulumi:"minVid"`
 	Name        *string `pulumi:"name"`
 	// Required when `scopeType` is set.
 	ScopeId *int `pulumi:"scopeId"`
-	// Valid values are `active`, `container`, `reserved` and `deprecated`.
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
 	ScopeType *string  `pulumi:"scopeType"`
 	Slug      string   `pulumi:"slug"`
 	Tags      []string `pulumi:"tags"`
+	VidRanges [][]int  `pulumi:"vidRanges"`
 }
 
 // The set of arguments for constructing a VlanGroup resource.
 type VlanGroupArgs struct {
 	// Defaults to `""`.
 	Description pulumi.StringPtrInput
-	MaxVid      pulumi.IntInput
-	MinVid      pulumi.IntInput
 	Name        pulumi.StringPtrInput
 	// Required when `scopeType` is set.
 	ScopeId pulumi.IntPtrInput
-	// Valid values are `active`, `container`, `reserved` and `deprecated`.
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
 	ScopeType pulumi.StringPtrInput
 	Slug      pulumi.StringInput
 	Tags      pulumi.StringArrayInput
+	VidRanges pulumi.IntArrayArrayInput
 }
 
 func (VlanGroupArgs) ElementType() reflect.Type {
@@ -262,14 +264,6 @@ func (o VlanGroupOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *VlanGroup) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
-func (o VlanGroupOutput) MaxVid() pulumi.IntOutput {
-	return o.ApplyT(func(v *VlanGroup) pulumi.IntOutput { return v.MaxVid }).(pulumi.IntOutput)
-}
-
-func (o VlanGroupOutput) MinVid() pulumi.IntOutput {
-	return o.ApplyT(func(v *VlanGroup) pulumi.IntOutput { return v.MinVid }).(pulumi.IntOutput)
-}
-
 func (o VlanGroupOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *VlanGroup) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
@@ -279,7 +273,7 @@ func (o VlanGroupOutput) ScopeId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *VlanGroup) pulumi.IntPtrOutput { return v.ScopeId }).(pulumi.IntPtrOutput)
 }
 
-// Valid values are `active`, `container`, `reserved` and `deprecated`.
+// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
 func (o VlanGroupOutput) ScopeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *VlanGroup) pulumi.StringPtrOutput { return v.ScopeType }).(pulumi.StringPtrOutput)
 }
@@ -290,6 +284,10 @@ func (o VlanGroupOutput) Slug() pulumi.StringOutput {
 
 func (o VlanGroupOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *VlanGroup) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o VlanGroupOutput) VidRanges() pulumi.IntArrayArrayOutput {
+	return o.ApplyT(func(v *VlanGroup) pulumi.IntArrayArrayOutput { return v.VidRanges }).(pulumi.IntArrayArrayOutput)
 }
 
 type VlanGroupArrayOutput struct{ *pulumi.OutputState }

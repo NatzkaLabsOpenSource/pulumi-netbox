@@ -30,13 +30,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testTenant, err := tenancy.NewTenant(ctx, "testTenant", nil)
+//			test, err := tenancy.NewTenant(ctx, "test", &tenancy.TenantArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewRouteTarget(ctx, "testRouteTarget", &ipam.RouteTargetArgs{
+//			_, err = ipam.NewRouteTarget(ctx, "test", &ipam.RouteTargetArgs{
+//				Name:        pulumi.String("test"),
 //				Description: pulumi.String("my description"),
-//				TenantId:    testTenant.ID(),
+//				TenantId:    test.ID(),
 //			})
 //			if err != nil {
 //				return err

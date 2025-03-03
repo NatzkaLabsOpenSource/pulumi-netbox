@@ -29,7 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := circuit.NewCircuitType(ctx, "test", nil)
+//			_, err := circuit.NewCircuitType(ctx, "test", &circuit.CircuitTypeArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}

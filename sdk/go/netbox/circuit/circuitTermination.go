@@ -33,21 +33,26 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testSite, err := dcim.NewSite(ctx, "testSite", &dcim.SiteArgs{
+//			test, err := dcim.NewSite(ctx, "test", &dcim.SiteArgs{
+//				Name:   pulumi.String("%[1]s"),
 //				Status: pulumi.String("active"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			testCircuitProvider, err := circuit.NewCircuitProvider(ctx, "testCircuitProvider", nil)
+//			testCircuitProvider, err := circuit.NewCircuitProvider(ctx, "test", &circuit.CircuitProviderArgs{
+//				Name: pulumi.String("%[1]s"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testCircuitType, err := circuit.NewCircuitType(ctx, "testCircuitType", nil)
+//			testCircuitType, err := circuit.NewCircuitType(ctx, "test", &circuit.CircuitTypeArgs{
+//				Name: pulumi.String("%[1]s"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testCircuit, err := circuit.NewCircuit(ctx, "testCircuit", &circuit.CircuitArgs{
+//			testCircuit, err := circuit.NewCircuit(ctx, "test", &circuit.CircuitArgs{
 //				Cid:        pulumi.String("%[1]s"),
 //				Status:     pulumi.String("active"),
 //				ProviderId: testCircuitProvider.ID(),
@@ -56,10 +61,10 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = circuit.NewCircuitTermination(ctx, "testCircuitTermination", &circuit.CircuitTerminationArgs{
+//			_, err = circuit.NewCircuitTermination(ctx, "test", &circuit.CircuitTerminationArgs{
 //				CircuitId:     testCircuit.ID(),
 //				TermSide:      pulumi.String("A"),
-//				SiteId:        testSite.ID(),
+//				SiteId:        test.ID(),
 //				PortSpeed:     pulumi.Int(100000),
 //				UpstreamSpeed: pulumi.Int(50000),
 //			})

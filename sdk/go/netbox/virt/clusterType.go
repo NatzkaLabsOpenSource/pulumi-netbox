@@ -29,7 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := virt.NewClusterType(ctx, "vmwVsphere", nil)
+//			_, err := virt.NewClusterType(ctx, "vmw_vsphere", &virt.ClusterTypeArgs{
+//				Name: pulumi.String("VMware vSphere 6"),
+//			})
 //			if err != nil {
 //				return err
 //			}

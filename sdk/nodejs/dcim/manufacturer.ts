@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const test = new netbox.dcim.Manufacturer("test", {});
+ * const test = new netbox.dcim.Manufacturer("test", {name: "testmanufacturer"});
  * ```
  */
 export class Manufacturer extends pulumi.CustomResource {

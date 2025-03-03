@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getVlans(args?: GetVlansArgs, opts?: pulumi.InvokeOptions): Promise<GetVlansResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getVlans:getVlans", {
         "filters": args.filters,
@@ -42,8 +41,13 @@ export interface GetVlansResult {
     readonly limit?: number;
     readonly vlans: outputs.ipam.GetVlansVlan[];
 }
-export function getVlansOutput(args?: GetVlansOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVlansResult> {
-    return pulumi.output(args).apply((a: any) => getVlans(a, opts))
+export function getVlansOutput(args?: GetVlansOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVlansResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getVlans:getVlans", {
+        "filters": args.filters,
+        "limit": args.limit,
+    }, opts);
 }
 
 /**

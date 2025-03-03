@@ -17,7 +17,6 @@ import * as utilities from "../utilities";
  * ```
  */
 export function getClusterGroup(args: GetClusterGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterGroupResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:virt/getClusterGroup:getClusterGroup", {
         "name": args.name,
@@ -54,8 +53,11 @@ export interface GetClusterGroupResult {
  * });
  * ```
  */
-export function getClusterGroupOutput(args: GetClusterGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterGroupResult> {
-    return pulumi.output(args).apply((a: any) => getClusterGroup(a, opts))
+export function getClusterGroupOutput(args: GetClusterGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterGroupResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:virt/getClusterGroup:getClusterGroup", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

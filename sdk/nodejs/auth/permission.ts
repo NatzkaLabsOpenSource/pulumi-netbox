@@ -16,13 +16,14 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testUser = new netbox.auth.User("testUser", {
+ * const test = new netbox.auth.User("test", {
  *     username: "johndoe",
- *     password: "abcdefghijkl",
+ *     password: "Abcdefghijkl1",
  *     active: true,
  *     staff: true,
  * });
- * const testPermission = new netbox.auth.Permission("testPermission", {
+ * const testPermission = new netbox.auth.Permission("test", {
+ *     name: "test",
  *     description: "my description",
  *     enabled: true,
  *     objectTypes: ["ipam.prefix"],
@@ -30,7 +31,7 @@ import * as utilities from "../utilities";
  *         "add",
  *         "change",
  *     ],
- *     users: [testUser.id],
+ *     users: [test.id],
  *     constraints: JSON.stringify([{
  *         status: "active",
  *     }]),

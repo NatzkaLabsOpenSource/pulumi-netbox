@@ -16,18 +16,20 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const example1 = new netbox.ipam.Vlan("example1", {
+ *     name: "VLAN 1",
  *     vid: 1777,
  *     tags: [],
  * });
  * // Assume netbox_tenant, netbox_site, and netbox_tag resources exist
  * const example2 = new netbox.ipam.Vlan("example2", {
+ *     name: "VLAN 2",
  *     vid: 1778,
  *     status: "reserved",
  *     description: "Reserved example VLAN",
- *     tenantId: netbox_tenant.ex.id,
- *     siteId: netbox_site.ex.id,
- *     groupId: netbox_vlan_group.ex.id,
- *     tags: [netbox_tag.ex.name],
+ *     tenantId: exNetboxTenant.id,
+ *     siteId: exNetboxSite.id,
+ *     groupId: ex.id,
+ *     tags: [exNetboxTag.name],
  * });
  * ```
  */

@@ -30,14 +30,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testSite, err := dcim.NewSite(ctx, "testSite", &dcim.SiteArgs{
+//			test, err := dcim.NewSite(ctx, "test", &dcim.SiteArgs{
+//				Name:   pulumi.String("test"),
 //				Status: pulumi.String("active"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			testRack, err := dcim.NewRack(ctx, "testRack", &dcim.RackArgs{
-//				SiteId:  testSite.ID(),
+//			testRack, err := dcim.NewRack(ctx, "test", &dcim.RackArgs{
+//				Name:    pulumi.String("test"),
+//				SiteId:  test.ID(),
 //				Status:  pulumi.String("active"),
 //				Width:   pulumi.Int(10),
 //				UHeight: pulumi.Int(40),
@@ -45,7 +47,7 @@ import (
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewRackReservation(ctx, "testRackReservation", &dcim.RackReservationArgs{
+//			_, err = dcim.NewRackReservation(ctx, "test", &dcim.RackReservationArgs{
 //				RackId: testRack.ID(),
 //				Units: pulumi.IntArray{
 //					pulumi.Int(1),

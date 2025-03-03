@@ -31,7 +31,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := circuit.NewCircuitProvider(ctx, "test", nil)
+//			_, err := circuit.NewCircuitProvider(ctx, "test", &circuit.CircuitProviderArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}

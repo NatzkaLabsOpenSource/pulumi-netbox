@@ -18,12 +18,14 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Assumes the 'dc-west' cluster group already exists
  * const dcWest = netbox.virt.getClusterGroup({
  *     name: "dc-west",
  * });
- * const vmwVsphere = new netbox.virt.ClusterType("vmwVsphere", {});
- * const vmwCluster01 = new netbox.virt.Cluster("vmwCluster01", {
+ * const vmwVsphere = new netbox.virt.ClusterType("vmw_vsphere", {name: "VMware vSphere 6"});
+ * const vmwCluster01 = new netbox.virt.Cluster("vmw_cluster_01", {
  *     clusterTypeId: vmwVsphere.id,
+ *     name: "vmw-cluster-01",
  *     clusterGroupId: dcWest.then(dcWest => dcWest.id),
  * });
  * ```

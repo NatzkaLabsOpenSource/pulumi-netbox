@@ -29,7 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := dcim.NewManufacturer(ctx, "test", nil)
+//			_, err := dcim.NewManufacturer(ctx, "test", &dcim.ManufacturerArgs{
+//				Name: pulumi.String("testmanufacturer"),
+//			})
 //			if err != nil {
 //				return err
 //			}

@@ -30,16 +30,19 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testDevice, err := dcim.NewDevice(ctx, "testDevice", &dcim.DeviceArgs{
-//				DeviceTypeId: pulumi.Any(netbox_device_type.Test.Id),
-//				TenantId:     pulumi.Any(netbox_tenant.Test.Id),
-//				RoleId:       pulumi.Any(netbox_device_role.Test.Id),
-//				SiteId:       pulumi.Any(netbox_site.Test.Id),
+//			// Note that some terraform code is not included in the example for brevity
+//			test, err := dcim.NewDevice(ctx, "test", &dcim.DeviceArgs{
+//				Name:         pulumi.String("%[1]s"),
+//				DeviceTypeId: pulumi.Any(testNetboxDeviceType.Id),
+//				TenantId:     pulumi.Any(testNetboxTenant.Id),
+//				RoleId:       pulumi.Any(testNetboxDeviceRole.Id),
+//				SiteId:       pulumi.Any(testNetboxSite.Id),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			testInventoryItemRole, err := dcim.NewInventoryItemRole(ctx, "testInventoryItemRole", &dcim.InventoryItemRoleArgs{
+//			testInventoryItemRole, err := dcim.NewInventoryItemRole(ctx, "test", &dcim.InventoryItemRoleArgs{
+//				Name:     pulumi.String("Role 1"),
 //				Slug:     pulumi.String("role-1-slug"),
 //				ColorHex: pulumi.String("123456"),
 //			})
@@ -47,7 +50,8 @@ import (
 //				return err
 //			}
 //			_, err = dcim.NewInventoryItem(ctx, "parent", &dcim.InventoryItemArgs{
-//				DeviceId: testDevice.ID(),
+//				DeviceId: test.ID(),
+//				Name:     pulumi.String("Inventory Item 1"),
 //				RoleId:   testInventoryItemRole.ID(),
 //			})
 //			if err != nil {

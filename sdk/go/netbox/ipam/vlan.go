@@ -31,21 +31,24 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ipam.NewVlan(ctx, "example1", &ipam.VlanArgs{
+//				Name: pulumi.String("VLAN 1"),
 //				Vid:  pulumi.Int(1777),
 //				Tags: pulumi.StringArray{},
 //			})
 //			if err != nil {
 //				return err
 //			}
+//			// Assume netbox_tenant, netbox_site, and netbox_tag resources exist
 //			_, err = ipam.NewVlan(ctx, "example2", &ipam.VlanArgs{
+//				Name:        pulumi.String("VLAN 2"),
 //				Vid:         pulumi.Int(1778),
 //				Status:      pulumi.String("reserved"),
 //				Description: pulumi.String("Reserved example VLAN"),
-//				TenantId:    pulumi.Any(netbox_tenant.Ex.Id),
-//				SiteId:      pulumi.Any(netbox_site.Ex.Id),
-//				GroupId:     pulumi.Any(netbox_vlan_group.Ex.Id),
+//				TenantId:    pulumi.Any(exNetboxTenant.Id),
+//				SiteId:      pulumi.Any(exNetboxSite.Id),
+//				GroupId:     pulumi.Any(ex.Id),
 //				Tags: pulumi.StringArray{
-//					netbox_tag.Ex.Name,
+//					exNetboxTag.Name,
 //				},
 //			})
 //			if err != nil {

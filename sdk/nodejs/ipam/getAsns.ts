@@ -29,7 +29,6 @@ import * as utilities from "../utilities";
  */
 export function getAsns(args?: GetAsnsArgs, opts?: pulumi.InvokeOptions): Promise<GetAsnsResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getAsns:getAsns", {
         "filters": args.filters,
@@ -84,8 +83,13 @@ export interface GetAsnsResult {
  * });
  * ```
  */
-export function getAsnsOutput(args?: GetAsnsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAsnsResult> {
-    return pulumi.output(args).apply((a: any) => getAsns(a, opts))
+export function getAsnsOutput(args?: GetAsnsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAsnsResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getAsns:getAsns", {
+        "filters": args.filters,
+        "limit": args.limit,
+    }, opts);
 }
 
 /**

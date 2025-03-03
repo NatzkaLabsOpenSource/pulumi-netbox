@@ -15,10 +15,17 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testSite = new netbox.dcim.Site("testSite", {status: "active"});
- * const testLocation = new netbox.dcim.Location("testLocation", {siteId: testSite.id});
- * const testPowerPanel = new netbox.dcim.PowerPanel("testPowerPanel", {
- *     siteId: testSite.id,
+ * const test = new netbox.dcim.Site("test", {
+ *     name: "Site 1",
+ *     status: "active",
+ * });
+ * const testLocation = new netbox.dcim.Location("test", {
+ *     name: "Location 1",
+ *     siteId: test.id,
+ * });
+ * const testPowerPanel = new netbox.dcim.PowerPanel("test", {
+ *     name: "Power Panel 1",
+ *     siteId: test.id,
  *     locationId: testLocation.id,
  * });
  * ```

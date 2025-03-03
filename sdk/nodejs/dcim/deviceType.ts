@@ -15,11 +15,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testManufacturer = new netbox.dcim.Manufacturer("testManufacturer", {});
- * const testDeviceType = new netbox.dcim.DeviceType("testDeviceType", {
+ * const test = new netbox.dcim.Manufacturer("test", {name: "test"});
+ * const testDeviceType = new netbox.dcim.DeviceType("test", {
  *     model: "test",
  *     partNumber: "123",
- *     manufacturerId: testManufacturer.id,
+ *     manufacturerId: test.id,
  * });
  * ```
  */
@@ -51,6 +51,7 @@ export class DeviceType extends pulumi.CustomResource {
         return obj['__pulumiType'] === DeviceType.__pulumiType;
     }
 
+    public readonly isFullDepth!: pulumi.Output<boolean | undefined>;
     public readonly manufacturerId!: pulumi.Output<number>;
     public readonly model!: pulumi.Output<string>;
     public readonly partNumber!: pulumi.Output<string | undefined>;
@@ -74,6 +75,7 @@ export class DeviceType extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as DeviceTypeState | undefined;
+            resourceInputs["isFullDepth"] = state ? state.isFullDepth : undefined;
             resourceInputs["manufacturerId"] = state ? state.manufacturerId : undefined;
             resourceInputs["model"] = state ? state.model : undefined;
             resourceInputs["partNumber"] = state ? state.partNumber : undefined;
@@ -88,6 +90,7 @@ export class DeviceType extends pulumi.CustomResource {
             if ((!args || args.model === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'model'");
             }
+            resourceInputs["isFullDepth"] = args ? args.isFullDepth : undefined;
             resourceInputs["manufacturerId"] = args ? args.manufacturerId : undefined;
             resourceInputs["model"] = args ? args.model : undefined;
             resourceInputs["partNumber"] = args ? args.partNumber : undefined;
@@ -104,6 +107,7 @@ export class DeviceType extends pulumi.CustomResource {
  * Input properties used for looking up and filtering DeviceType resources.
  */
 export interface DeviceTypeState {
+    isFullDepth?: pulumi.Input<boolean>;
     manufacturerId?: pulumi.Input<number>;
     model?: pulumi.Input<string>;
     partNumber?: pulumi.Input<string>;
@@ -119,6 +123,7 @@ export interface DeviceTypeState {
  * The set of arguments for constructing a DeviceType resource.
  */
 export interface DeviceTypeArgs {
+    isFullDepth?: pulumi.Input<boolean>;
     manufacturerId: pulumi.Input<number>;
     model: pulumi.Input<string>;
     partNumber?: pulumi.Input<string>;

@@ -17,11 +17,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testSite = new netbox.dcim.Site("testSite", {});
- * const testTenant = new netbox.tenancy.Tenant("testTenant", {});
- * const testLocation = new netbox.dcim.Location("testLocation", {
+ * const test = new netbox.dcim.Site("test", {name: "test"});
+ * const testTenant = new netbox.tenancy.Tenant("test", {name: "test"});
+ * const testLocation = new netbox.dcim.Location("test", {
+ *     name: "test",
  *     description: "my description",
- *     siteId: testSite.id,
+ *     siteId: test.id,
  *     tenantId: testTenant.id,
  * });
  * ```
@@ -57,6 +58,7 @@ export class Location extends pulumi.CustomResource {
     public readonly customFields!: pulumi.Output<{[key: string]: string} | undefined>;
     public readonly description!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
+    public readonly parentId!: pulumi.Output<number | undefined>;
     public readonly siteId!: pulumi.Output<number | undefined>;
     public readonly slug!: pulumi.Output<string>;
     public readonly tags!: pulumi.Output<string[] | undefined>;
@@ -78,6 +80,7 @@ export class Location extends pulumi.CustomResource {
             resourceInputs["customFields"] = state ? state.customFields : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["parentId"] = state ? state.parentId : undefined;
             resourceInputs["siteId"] = state ? state.siteId : undefined;
             resourceInputs["slug"] = state ? state.slug : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
@@ -87,6 +90,7 @@ export class Location extends pulumi.CustomResource {
             resourceInputs["customFields"] = args ? args.customFields : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["parentId"] = args ? args.parentId : undefined;
             resourceInputs["siteId"] = args ? args.siteId : undefined;
             resourceInputs["slug"] = args ? args.slug : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
@@ -104,6 +108,7 @@ export interface LocationState {
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    parentId?: pulumi.Input<number>;
     siteId?: pulumi.Input<number>;
     slug?: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
@@ -117,6 +122,7 @@ export interface LocationArgs {
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    parentId?: pulumi.Input<number>;
     siteId?: pulumi.Input<number>;
     slug?: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;

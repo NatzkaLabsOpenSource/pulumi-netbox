@@ -25,6 +25,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Assumes vmw-cluster-01 exists as a cluster in Netbox
 //			vmwCluster01, err := virt.LookupCluster(ctx, &virt.LookupClusterArgs{
 //				Name: pulumi.StringRef("vmw-cluster-01"),
 //			}, nil)
@@ -76,15 +77,11 @@ type GetVirtualMachinesResult struct {
 }
 
 func GetVirtualMachinesOutput(ctx *pulumi.Context, args GetVirtualMachinesOutputArgs, opts ...pulumi.InvokeOption) GetVirtualMachinesResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetVirtualMachinesResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetVirtualMachinesResultOutput, error) {
 			args := v.(GetVirtualMachinesArgs)
-			r, err := GetVirtualMachines(ctx, &args, opts...)
-			var s GetVirtualMachinesResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:virt/getVirtualMachines:getVirtualMachines", args, GetVirtualMachinesResultOutput{}, options).(GetVirtualMachinesResultOutput), nil
 		}).(GetVirtualMachinesResultOutput)
 }
 

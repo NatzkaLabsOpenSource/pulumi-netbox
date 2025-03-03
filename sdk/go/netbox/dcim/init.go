@@ -47,6 +47,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &DeviceRole{}
 	case "netbox:dcim/deviceType:DeviceType":
 		r = &DeviceType{}
+	case "netbox:dcim/interfaceTemplate:InterfaceTemplate":
+		r = &InterfaceTemplate{}
 	case "netbox:dcim/inventoryItem:InventoryItem":
 		r = &InventoryItem{}
 	case "netbox:dcim/inventoryItemRole:InventoryItemRole":
@@ -71,6 +73,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &RackReservation{}
 	case "netbox:dcim/rackRole:RackRole":
 		r = &RackRole{}
+	case "netbox:dcim/rackType:RackType":
+		r = &RackType{}
 	case "netbox:dcim/region:Region":
 		r = &Region{}
 	case "netbox:dcim/site:Site":
@@ -159,6 +163,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"netbox",
+		"dcim/interfaceTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"netbox",
 		"dcim/inventoryItem",
 		&module{version},
 	)
@@ -215,6 +224,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"netbox",
 		"dcim/rackRole",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"netbox",
+		"dcim/rackType",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

@@ -18,12 +18,17 @@ import * as utilities from "./utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const test = new netbox.CustomFieldChoiceSet("test", {
+ *     name: "my-custom-field-set",
  *     description: "Description",
  *     extraChoices: [
- *         "choice1",
- *         "label1",
- *         "choice2",
- *         "choice2",
+ *         [
+ *             "choice1",
+ *             "label1",
+ *         ],
+ *         [
+ *             "choice2",
+ *             "choice2",
+ *         ],
  *     ],
  * });
  * ```

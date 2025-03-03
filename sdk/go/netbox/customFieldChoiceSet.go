@@ -32,12 +32,17 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := netbox.NewCustomFieldChoiceSet(ctx, "test", &netbox.CustomFieldChoiceSetArgs{
+//				Name:        pulumi.String("my-custom-field-set"),
 //				Description: pulumi.String("Description"),
 //				ExtraChoices: pulumi.StringArrayArray{
-//					pulumi.StringArray("choice1"),
-//					pulumi.StringArray("label1"),
-//					pulumi.StringArray("choice2"),
-//					pulumi.StringArray("choice2"),
+//					pulumi.StringArray{
+//						pulumi.String("choice1"),
+//						pulumi.String("label1"),
+//					},
+//					pulumi.StringArray{
+//						pulumi.String("choice2"),
+//						pulumi.String("choice2"),
+//					},
 //				},
 //			})
 //			if err != nil {

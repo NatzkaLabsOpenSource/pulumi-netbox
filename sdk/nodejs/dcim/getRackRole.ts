@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getRackRole(args: GetRackRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetRackRoleResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getRackRole:getRackRole", {
         "name": args.name,
@@ -33,8 +32,11 @@ export interface GetRackRoleResult {
     readonly slug: string;
     readonly tags: string[];
 }
-export function getRackRoleOutput(args: GetRackRoleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRackRoleResult> {
-    return pulumi.output(args).apply((a: any) => getRackRole(a, opts))
+export function getRackRoleOutput(args: GetRackRoleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRackRoleResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getRackRole:getRackRole", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

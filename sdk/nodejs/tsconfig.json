@@ -13,6 +13,7 @@
         "strict": true
     },
     "files": [
+        "auth/group.ts",
         "auth/index.ts",
         "auth/permission.ts",
         "auth/token.ts",
@@ -24,6 +25,8 @@
         "circuit/index.ts",
         "config/index.ts",
         "config/vars.ts",
+        "configContext.ts",
+        "configTemplate.ts",
         "customField.ts",
         "customFieldChoiceSet.ts",
         "dcim/cable.ts",
@@ -52,6 +55,7 @@
         "dcim/getSite.ts",
         "dcim/getSiteGroup.ts",
         "dcim/index.ts",
+        "dcim/interfaceTemplate.ts",
         "dcim/inventoryItem.ts",
         "dcim/inventoryItemRole.ts",
         "dcim/location.ts",
@@ -64,10 +68,13 @@
         "dcim/rack.ts",
         "dcim/rackReservation.ts",
         "dcim/rackRole.ts",
+        "dcim/rackType.ts",
         "dcim/region.ts",
         "dcim/site.ts",
         "dcim/siteGroup.ts",
         "dcim/virtualChassis.ts",
+        "eventRule.ts",
+        "getConfigContext.ts",
         "getTag.ts",
         "getTags.ts",
         "index.ts",
@@ -130,7 +137,12 @@
         "virt/index.ts",
         "virt/interface.ts",
         "virt/primaryIp.ts",
+        "virt/virtualDisk.ts",
         "virt/virtualMachine.ts",
+        "vpn/index.ts",
+        "vpn/vpnTunnel.ts",
+        "vpn/vpnTunnelGroup.ts",
+        "vpn/vpnTunnelTermination.ts",
         "webhook.ts"
     ]
 }

@@ -32,6 +32,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := tenancy.NewContact(ctx, "test", &tenancy.ContactArgs{
+//				Name:  pulumi.String("John Doe"),
 //				Email: pulumi.String("test@example.com"),
 //				Phone: pulumi.String("123-123123"),
 //			})

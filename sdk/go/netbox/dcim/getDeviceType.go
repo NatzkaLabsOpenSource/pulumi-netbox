@@ -25,18 +25,21 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Get device type by model name
 //			_, err := dcim.LookupDeviceType(ctx, &dcim.LookupDeviceTypeArgs{
 //				Model: pulumi.StringRef("7210 SAS-Sx 10/100GE"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+//			// Get device type by slug
 //			_, err = dcim.LookupDeviceType(ctx, &dcim.LookupDeviceTypeArgs{
 //				Slug: pulumi.StringRef("7210-sas-sx-10-100GE"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+//			// Get device type by manufacturer and part number information
 //			_, err = dcim.LookupDeviceType(ctx, &dcim.LookupDeviceTypeArgs{
 //				Manufacturer: pulumi.StringRef("Nokia"),
 //				PartNumber:   pulumi.StringRef("3HE11597AARB01"),
@@ -81,15 +84,11 @@ type LookupDeviceTypeResult struct {
 }
 
 func LookupDeviceTypeOutput(ctx *pulumi.Context, args LookupDeviceTypeOutputArgs, opts ...pulumi.InvokeOption) LookupDeviceTypeResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupDeviceTypeResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupDeviceTypeResultOutput, error) {
 			args := v.(LookupDeviceTypeArgs)
-			r, err := LookupDeviceType(ctx, &args, opts...)
-			var s LookupDeviceTypeResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getDeviceType:getDeviceType", args, LookupDeviceTypeResultOutput{}, options).(LookupDeviceTypeResultOutput), nil
 		}).(LookupDeviceTypeResultOutput)
 }
 

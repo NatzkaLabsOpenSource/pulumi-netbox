@@ -15,7 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const test = new netbox.dcim.RackRole("test", {colorHex: "111111"});
+ * const test = new netbox.dcim.RackRole("test", {
+ *     name: "test",
+ *     colorHex: "111111",
+ * });
  * ```
  */
 export class RackRole extends pulumi.CustomResource {

@@ -17,10 +17,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const myPrefix = new netbox.ipam.Prefix("myPrefix", {
- *     description: "test prefix",
+ * const myPrefix = new netbox.ipam.Prefix("my_prefix", {
  *     prefix: "10.0.0.0/24",
  *     status: "active",
+ *     description: "test prefix",
  * });
  * ```
  */
@@ -52,6 +52,7 @@ export class Prefix extends pulumi.CustomResource {
         return obj['__pulumiType'] === Prefix.__pulumiType;
     }
 
+    public readonly customFields!: pulumi.Output<{[key: string]: string} | undefined>;
     public readonly description!: pulumi.Output<string | undefined>;
     public readonly isPool!: pulumi.Output<boolean | undefined>;
     public readonly markUtilized!: pulumi.Output<boolean | undefined>;
@@ -80,6 +81,7 @@ export class Prefix extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PrefixState | undefined;
+            resourceInputs["customFields"] = state ? state.customFields : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["isPool"] = state ? state.isPool : undefined;
             resourceInputs["markUtilized"] = state ? state.markUtilized : undefined;
@@ -99,6 +101,7 @@ export class Prefix extends pulumi.CustomResource {
             if ((!args || args.status === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'status'");
             }
+            resourceInputs["customFields"] = args ? args.customFields : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["isPool"] = args ? args.isPool : undefined;
             resourceInputs["markUtilized"] = args ? args.markUtilized : undefined;
@@ -120,6 +123,7 @@ export class Prefix extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Prefix resources.
  */
 export interface PrefixState {
+    customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     isPool?: pulumi.Input<boolean>;
     markUtilized?: pulumi.Input<boolean>;
@@ -140,6 +144,7 @@ export interface PrefixState {
  * The set of arguments for constructing a Prefix resource.
  */
 export interface PrefixArgs {
+    customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     isPool?: pulumi.Input<boolean>;
     markUtilized?: pulumi.Input<boolean>;

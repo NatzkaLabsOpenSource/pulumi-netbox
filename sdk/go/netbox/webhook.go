@@ -31,13 +31,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := netbox.NewWebhook(ctx, "test", &netbox.WebhookArgs{
+//				Name:         pulumi.String("test"),
+//				PayloadUrl:   pulumi.String("https://example.com/webhook"),
 //				Bodytemplate: pulumi.String("Sample body"),
-//				ContentTypes: pulumi.StringArray{
-//					pulumi.String("dcim.site"),
-//				},
-//				Enabled:         pulumi.Bool(true),
-//				PayloadUrl:      pulumi.String("https://example.com/webhook"),
-//				TriggerOnCreate: pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -50,18 +46,14 @@ import (
 type Webhook struct {
 	pulumi.CustomResourceState
 
-	BodyTemplate pulumi.StringPtrOutput   `pulumi:"bodyTemplate"`
-	ContentTypes pulumi.StringArrayOutput `pulumi:"contentTypes"`
-	Enabled      pulumi.BoolPtrOutput     `pulumi:"enabled"`
+	AdditionalHeaders pulumi.StringPtrOutput `pulumi:"additionalHeaders"`
+	BodyTemplate      pulumi.StringPtrOutput `pulumi:"bodyTemplate"`
 	// The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
 	HttpContentType pulumi.StringPtrOutput `pulumi:"httpContentType"`
 	// Valid values are `GET`, `POST`, `PUT`, `PATCH` and `DELETE`. Defaults to `POST`.
-	HttpMethod      pulumi.StringPtrOutput `pulumi:"httpMethod"`
-	Name            pulumi.StringOutput    `pulumi:"name"`
-	PayloadUrl      pulumi.StringOutput    `pulumi:"payloadUrl"`
-	TriggerOnCreate pulumi.BoolPtrOutput   `pulumi:"triggerOnCreate"`
-	TriggerOnDelete pulumi.BoolPtrOutput   `pulumi:"triggerOnDelete"`
-	TriggerOnUpdate pulumi.BoolPtrOutput   `pulumi:"triggerOnUpdate"`
+	HttpMethod pulumi.StringPtrOutput `pulumi:"httpMethod"`
+	Name       pulumi.StringOutput    `pulumi:"name"`
+	PayloadUrl pulumi.StringOutput    `pulumi:"payloadUrl"`
 }
 
 // NewWebhook registers a new resource with the given unique name, arguments, and options.
@@ -71,9 +63,6 @@ func NewWebhook(ctx *pulumi.Context,
 		return nil, errors.New("missing one or more required arguments")
 	}
 
-	if args.ContentTypes == nil {
-		return nil, errors.New("invalid value for required argument 'ContentTypes'")
-	}
 	if args.PayloadUrl == nil {
 		return nil, errors.New("invalid value for required argument 'PayloadUrl'")
 	}
@@ -100,33 +89,25 @@ func GetWebhook(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Webhook resources.
 type webhookState struct {
-	BodyTemplate *string  `pulumi:"bodyTemplate"`
-	ContentTypes []string `pulumi:"contentTypes"`
-	Enabled      *bool    `pulumi:"enabled"`
+	AdditionalHeaders *string `pulumi:"additionalHeaders"`
+	BodyTemplate      *string `pulumi:"bodyTemplate"`
 	// The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
 	HttpContentType *string `pulumi:"httpContentType"`
 	// Valid values are `GET`, `POST`, `PUT`, `PATCH` and `DELETE`. Defaults to `POST`.
-	HttpMethod      *string `pulumi:"httpMethod"`
-	Name            *string `pulumi:"name"`
-	PayloadUrl      *string `pulumi:"payloadUrl"`
-	TriggerOnCreate *bool   `pulumi:"triggerOnCreate"`
-	TriggerOnDelete *bool   `pulumi:"triggerOnDelete"`
-	TriggerOnUpdate *bool   `pulumi:"triggerOnUpdate"`
+	HttpMethod *string `pulumi:"httpMethod"`
+	Name       *string `pulumi:"name"`
+	PayloadUrl *string `pulumi:"payloadUrl"`
 }
 
 type WebhookState struct {
-	BodyTemplate pulumi.StringPtrInput
-	ContentTypes pulumi.StringArrayInput
-	Enabled      pulumi.BoolPtrInput
+	AdditionalHeaders pulumi.StringPtrInput
+	BodyTemplate      pulumi.StringPtrInput
 	// The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
 	HttpContentType pulumi.StringPtrInput
 	// Valid values are `GET`, `POST`, `PUT`, `PATCH` and `DELETE`. Defaults to `POST`.
-	HttpMethod      pulumi.StringPtrInput
-	Name            pulumi.StringPtrInput
-	PayloadUrl      pulumi.StringPtrInput
-	TriggerOnCreate pulumi.BoolPtrInput
-	TriggerOnDelete pulumi.BoolPtrInput
-	TriggerOnUpdate pulumi.BoolPtrInput
+	HttpMethod pulumi.StringPtrInput
+	Name       pulumi.StringPtrInput
+	PayloadUrl pulumi.StringPtrInput
 }
 
 func (WebhookState) ElementType() reflect.Type {
@@ -134,34 +115,26 @@ func (WebhookState) ElementType() reflect.Type {
 }
 
 type webhookArgs struct {
-	BodyTemplate *string  `pulumi:"bodyTemplate"`
-	ContentTypes []string `pulumi:"contentTypes"`
-	Enabled      *bool    `pulumi:"enabled"`
+	AdditionalHeaders *string `pulumi:"additionalHeaders"`
+	BodyTemplate      *string `pulumi:"bodyTemplate"`
 	// The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
 	HttpContentType *string `pulumi:"httpContentType"`
 	// Valid values are `GET`, `POST`, `PUT`, `PATCH` and `DELETE`. Defaults to `POST`.
-	HttpMethod      *string `pulumi:"httpMethod"`
-	Name            *string `pulumi:"name"`
-	PayloadUrl      string  `pulumi:"payloadUrl"`
-	TriggerOnCreate *bool   `pulumi:"triggerOnCreate"`
-	TriggerOnDelete *bool   `pulumi:"triggerOnDelete"`
-	TriggerOnUpdate *bool   `pulumi:"triggerOnUpdate"`
+	HttpMethod *string `pulumi:"httpMethod"`
+	Name       *string `pulumi:"name"`
+	PayloadUrl string  `pulumi:"payloadUrl"`
 }
 
 // The set of arguments for constructing a Webhook resource.
 type WebhookArgs struct {
-	BodyTemplate pulumi.StringPtrInput
-	ContentTypes pulumi.StringArrayInput
-	Enabled      pulumi.BoolPtrInput
+	AdditionalHeaders pulumi.StringPtrInput
+	BodyTemplate      pulumi.StringPtrInput
 	// The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
 	HttpContentType pulumi.StringPtrInput
 	// Valid values are `GET`, `POST`, `PUT`, `PATCH` and `DELETE`. Defaults to `POST`.
-	HttpMethod      pulumi.StringPtrInput
-	Name            pulumi.StringPtrInput
-	PayloadUrl      pulumi.StringInput
-	TriggerOnCreate pulumi.BoolPtrInput
-	TriggerOnDelete pulumi.BoolPtrInput
-	TriggerOnUpdate pulumi.BoolPtrInput
+	HttpMethod pulumi.StringPtrInput
+	Name       pulumi.StringPtrInput
+	PayloadUrl pulumi.StringInput
 }
 
 func (WebhookArgs) ElementType() reflect.Type {
@@ -251,16 +224,12 @@ func (o WebhookOutput) ToWebhookOutputWithContext(ctx context.Context) WebhookOu
 	return o
 }
 
+func (o WebhookOutput) AdditionalHeaders() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Webhook) pulumi.StringPtrOutput { return v.AdditionalHeaders }).(pulumi.StringPtrOutput)
+}
+
 func (o WebhookOutput) BodyTemplate() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Webhook) pulumi.StringPtrOutput { return v.BodyTemplate }).(pulumi.StringPtrOutput)
-}
-
-func (o WebhookOutput) ContentTypes() pulumi.StringArrayOutput {
-	return o.ApplyT(func(v *Webhook) pulumi.StringArrayOutput { return v.ContentTypes }).(pulumi.StringArrayOutput)
-}
-
-func (o WebhookOutput) Enabled() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Webhook) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
 }
 
 // The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
@@ -279,18 +248,6 @@ func (o WebhookOutput) Name() pulumi.StringOutput {
 
 func (o WebhookOutput) PayloadUrl() pulumi.StringOutput {
 	return o.ApplyT(func(v *Webhook) pulumi.StringOutput { return v.PayloadUrl }).(pulumi.StringOutput)
-}
-
-func (o WebhookOutput) TriggerOnCreate() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Webhook) pulumi.BoolPtrOutput { return v.TriggerOnCreate }).(pulumi.BoolPtrOutput)
-}
-
-func (o WebhookOutput) TriggerOnDelete() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Webhook) pulumi.BoolPtrOutput { return v.TriggerOnDelete }).(pulumi.BoolPtrOutput)
-}
-
-func (o WebhookOutput) TriggerOnUpdate() pulumi.BoolPtrOutput {
-	return o.ApplyT(func(v *Webhook) pulumi.BoolPtrOutput { return v.TriggerOnUpdate }).(pulumi.BoolPtrOutput)
 }
 
 type WebhookArrayOutput struct{ *pulumi.OutputState }

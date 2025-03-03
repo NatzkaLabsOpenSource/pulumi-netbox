@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getLocations(args?: GetLocationsArgs, opts?: pulumi.InvokeOptions): Promise<GetLocationsResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getLocations:getLocations", {
         "filters": args.filters,
@@ -57,8 +56,14 @@ export interface GetLocationsResult {
      */
     readonly tags?: string[];
 }
-export function getLocationsOutput(args?: GetLocationsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLocationsResult> {
-    return pulumi.output(args).apply((a: any) => getLocations(a, opts))
+export function getLocationsOutput(args?: GetLocationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLocationsResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getLocations:getLocations", {
+        "filters": args.filters,
+        "limit": args.limit,
+        "tags": args.tags,
+    }, opts);
 }
 
 /**

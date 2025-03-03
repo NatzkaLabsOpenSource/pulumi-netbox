@@ -21,10 +21,8 @@ import * as utilities from "../utilities";
  */
 export function getSite(args?: GetSiteArgs, opts?: pulumi.InvokeOptions): Promise<GetSiteResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getSite:getSite", {
-        "asnIds": args.asnIds,
         "facility": args.facility,
         "id": args.id,
         "name": args.name,
@@ -36,7 +34,6 @@ export function getSite(args?: GetSiteArgs, opts?: pulumi.InvokeOptions): Promis
  * A collection of arguments for invoking getSite.
  */
 export interface GetSiteArgs {
-    asnIds?: number[];
     facility?: string;
     /**
      * The ID of this resource.
@@ -50,7 +47,7 @@ export interface GetSiteArgs {
  * A collection of values returned by getSite.
  */
 export interface GetSiteResult {
-    readonly asnIds?: number[];
+    readonly asnIds: number[];
     readonly comments: string;
     readonly description: string;
     readonly facility: string;
@@ -59,10 +56,10 @@ export interface GetSiteResult {
      * The ID of this resource.
      */
     readonly id: string;
-    readonly name?: string;
+    readonly name: string;
     readonly regionId: number;
     readonly siteId: number;
-    readonly slug?: string;
+    readonly slug: string;
     readonly status: string;
     readonly tenantId: number;
     readonly timeZone: string;
@@ -82,15 +79,21 @@ export interface GetSiteResult {
  * });
  * ```
  */
-export function getSiteOutput(args?: GetSiteOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSiteResult> {
-    return pulumi.output(args).apply((a: any) => getSite(a, opts))
+export function getSiteOutput(args?: GetSiteOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSiteResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getSite:getSite", {
+        "facility": args.facility,
+        "id": args.id,
+        "name": args.name,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**
  * A collection of arguments for invoking getSite.
  */
 export interface GetSiteOutputArgs {
-    asnIds?: pulumi.Input<pulumi.Input<number>[]>;
     facility?: pulumi.Input<string>;
     /**
      * The ID of this resource.

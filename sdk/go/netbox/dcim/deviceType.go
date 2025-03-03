@@ -30,14 +30,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testManufacturer, err := dcim.NewManufacturer(ctx, "testManufacturer", nil)
+//			test, err := dcim.NewManufacturer(ctx, "test", &dcim.ManufacturerArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewDeviceType(ctx, "testDeviceType", &dcim.DeviceTypeArgs{
+//			_, err = dcim.NewDeviceType(ctx, "test", &dcim.DeviceTypeArgs{
 //				Model:          pulumi.String("test"),
 //				PartNumber:     pulumi.String("123"),
-//				ManufacturerId: testManufacturer.ID(),
+//				ManufacturerId: test.ID(),
 //			})
 //			if err != nil {
 //				return err
@@ -50,6 +52,7 @@ import (
 type DeviceType struct {
 	pulumi.CustomResourceState
 
+	IsFullDepth    pulumi.BoolPtrOutput     `pulumi:"isFullDepth"`
 	ManufacturerId pulumi.IntOutput         `pulumi:"manufacturerId"`
 	Model          pulumi.StringOutput      `pulumi:"model"`
 	PartNumber     pulumi.StringPtrOutput   `pulumi:"partNumber"`
@@ -95,6 +98,7 @@ func GetDeviceType(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering DeviceType resources.
 type deviceTypeState struct {
+	IsFullDepth    *bool    `pulumi:"isFullDepth"`
 	ManufacturerId *int     `pulumi:"manufacturerId"`
 	Model          *string  `pulumi:"model"`
 	PartNumber     *string  `pulumi:"partNumber"`
@@ -105,6 +109,7 @@ type deviceTypeState struct {
 }
 
 type DeviceTypeState struct {
+	IsFullDepth    pulumi.BoolPtrInput
 	ManufacturerId pulumi.IntPtrInput
 	Model          pulumi.StringPtrInput
 	PartNumber     pulumi.StringPtrInput
@@ -119,6 +124,7 @@ func (DeviceTypeState) ElementType() reflect.Type {
 }
 
 type deviceTypeArgs struct {
+	IsFullDepth    *bool    `pulumi:"isFullDepth"`
 	ManufacturerId int      `pulumi:"manufacturerId"`
 	Model          string   `pulumi:"model"`
 	PartNumber     *string  `pulumi:"partNumber"`
@@ -130,6 +136,7 @@ type deviceTypeArgs struct {
 
 // The set of arguments for constructing a DeviceType resource.
 type DeviceTypeArgs struct {
+	IsFullDepth    pulumi.BoolPtrInput
 	ManufacturerId pulumi.IntInput
 	Model          pulumi.StringInput
 	PartNumber     pulumi.StringPtrInput
@@ -224,6 +231,10 @@ func (o DeviceTypeOutput) ToDeviceTypeOutput() DeviceTypeOutput {
 
 func (o DeviceTypeOutput) ToDeviceTypeOutputWithContext(ctx context.Context) DeviceTypeOutput {
 	return o
+}
+
+func (o DeviceTypeOutput) IsFullDepth() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *DeviceType) pulumi.BoolPtrOutput { return v.IsFullDepth }).(pulumi.BoolPtrOutput)
 }
 
 func (o DeviceTypeOutput) ManufacturerId() pulumi.IntOutput {

@@ -33,19 +33,25 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tenancy.NewTenant(ctx, "testTenant", nil)
+//			_, err := tenancy.NewTenant(ctx, "test", &tenancy.TenantArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testCircuitProvider, err := circuit.NewCircuitProvider(ctx, "testCircuitProvider", nil)
+//			testCircuitProvider, err := circuit.NewCircuitProvider(ctx, "test", &circuit.CircuitProviderArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testCircuitType, err := circuit.NewCircuitType(ctx, "testCircuitType", nil)
+//			testCircuitType, err := circuit.NewCircuitType(ctx, "test", &circuit.CircuitTypeArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = circuit.NewCircuit(ctx, "testCircuit", &circuit.CircuitArgs{
+//			_, err = circuit.NewCircuit(ctx, "test", &circuit.CircuitArgs{
 //				Cid:        pulumi.String("test"),
 //				Status:     pulumi.String("active"),
 //				ProviderId: testCircuitProvider.ID(),

@@ -59,15 +59,11 @@ type LookupIpRangeResult struct {
 }
 
 func LookupIpRangeOutput(ctx *pulumi.Context, args LookupIpRangeOutputArgs, opts ...pulumi.InvokeOption) LookupIpRangeResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupIpRangeResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupIpRangeResultOutput, error) {
 			args := v.(LookupIpRangeArgs)
-			r, err := LookupIpRange(ctx, &args, opts...)
-			var s LookupIpRangeResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getIpRange:getIpRange", args, LookupIpRangeResultOutput{}, options).(LookupIpRangeResultOutput), nil
 		}).(LookupIpRangeResultOutput)
 }
 

@@ -30,7 +30,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Assumes a device with ID 123 exists
 //			_, err := dcim.NewDeviceInterface(ctx, "test", &dcim.DeviceInterfaceArgs{
+//				Name:     pulumi.String("testinterface"),
 //				DeviceId: pulumi.Int(123),
 //				Type:     pulumi.String("1000base-t"),
 //			})
@@ -48,7 +50,8 @@ type DeviceInterface struct {
 	Description pulumi.StringPtrOutput `pulumi:"description"`
 	DeviceId    pulumi.IntOutput       `pulumi:"deviceId"`
 	// Defaults to `true`.
-	Enabled pulumi.BoolPtrOutput `pulumi:"enabled"`
+	Enabled pulumi.BoolPtrOutput   `pulumi:"enabled"`
+	Label   pulumi.StringPtrOutput `pulumi:"label"`
 	// If this device is a member of a LAG group, you can reference the LAG interface here.
 	LagDeviceInterfaceId pulumi.IntPtrOutput    `pulumi:"lagDeviceInterfaceId"`
 	MacAddress           pulumi.StringPtrOutput `pulumi:"macAddress"`
@@ -105,7 +108,8 @@ type deviceInterfaceState struct {
 	Description *string `pulumi:"description"`
 	DeviceId    *int    `pulumi:"deviceId"`
 	// Defaults to `true`.
-	Enabled *bool `pulumi:"enabled"`
+	Enabled *bool   `pulumi:"enabled"`
+	Label   *string `pulumi:"label"`
 	// If this device is a member of a LAG group, you can reference the LAG interface here.
 	LagDeviceInterfaceId *int    `pulumi:"lagDeviceInterfaceId"`
 	MacAddress           *string `pulumi:"macAddress"`
@@ -128,6 +132,7 @@ type DeviceInterfaceState struct {
 	DeviceId    pulumi.IntPtrInput
 	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
+	Label   pulumi.StringPtrInput
 	// If this device is a member of a LAG group, you can reference the LAG interface here.
 	LagDeviceInterfaceId pulumi.IntPtrInput
 	MacAddress           pulumi.StringPtrInput
@@ -153,7 +158,8 @@ type deviceInterfaceArgs struct {
 	Description *string `pulumi:"description"`
 	DeviceId    int     `pulumi:"deviceId"`
 	// Defaults to `true`.
-	Enabled *bool `pulumi:"enabled"`
+	Enabled *bool   `pulumi:"enabled"`
+	Label   *string `pulumi:"label"`
 	// If this device is a member of a LAG group, you can reference the LAG interface here.
 	LagDeviceInterfaceId *int    `pulumi:"lagDeviceInterfaceId"`
 	MacAddress           *string `pulumi:"macAddress"`
@@ -177,6 +183,7 @@ type DeviceInterfaceArgs struct {
 	DeviceId    pulumi.IntInput
 	// Defaults to `true`.
 	Enabled pulumi.BoolPtrInput
+	Label   pulumi.StringPtrInput
 	// If this device is a member of a LAG group, you can reference the LAG interface here.
 	LagDeviceInterfaceId pulumi.IntPtrInput
 	MacAddress           pulumi.StringPtrInput
@@ -292,6 +299,10 @@ func (o DeviceInterfaceOutput) DeviceId() pulumi.IntOutput {
 // Defaults to `true`.
 func (o DeviceInterfaceOutput) Enabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *DeviceInterface) pulumi.BoolPtrOutput { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
+func (o DeviceInterfaceOutput) Label() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeviceInterface) pulumi.StringPtrOutput { return v.Label }).(pulumi.StringPtrOutput)
 }
 
 // If this device is a member of a LAG group, you can reference the LAG interface here.

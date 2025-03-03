@@ -18,7 +18,6 @@ import * as utilities from "../utilities";
  */
 export function getTenant(args?: GetTenantArgs, opts?: pulumi.InvokeOptions): Promise<GetTenantResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:tenancy/getTenant:getTenant", {
         "description": args.description,
@@ -73,8 +72,14 @@ export interface GetTenantResult {
  * });
  * ```
  */
-export function getTenantOutput(args?: GetTenantOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTenantResult> {
-    return pulumi.output(args).apply((a: any) => getTenant(a, opts))
+export function getTenantOutput(args?: GetTenantOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTenantResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:tenancy/getTenant:getTenant", {
+        "description": args.description,
+        "name": args.name,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**

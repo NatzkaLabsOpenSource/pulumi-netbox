@@ -25,6 +25,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Assumes the corresponding site groups exist
 //			_, err := dcim.LookupSiteGroup(ctx, &dcim.LookupSiteGroupArgs{
 //				Name: pulumi.StringRef("example-sitegroup-1"),
 //			}, nil)
@@ -72,15 +73,11 @@ type LookupSiteGroupResult struct {
 }
 
 func LookupSiteGroupOutput(ctx *pulumi.Context, args LookupSiteGroupOutputArgs, opts ...pulumi.InvokeOption) LookupSiteGroupResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupSiteGroupResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupSiteGroupResultOutput, error) {
 			args := v.(LookupSiteGroupArgs)
-			r, err := LookupSiteGroup(ctx, &args, opts...)
-			var s LookupSiteGroupResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getSiteGroup:getSiteGroup", args, LookupSiteGroupResultOutput{}, options).(LookupSiteGroupResultOutput), nil
 		}).(LookupSiteGroupResultOutput)
 }
 

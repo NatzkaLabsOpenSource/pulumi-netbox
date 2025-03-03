@@ -5,6 +5,11 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 // Export members:
+export { GroupArgs, GroupState } from "./group";
+export type Group = import("./group").Group;
+export const Group: typeof import("./group").Group = null as any;
+utilities.lazyLoad(exports, ["Group"], () => require("./group"));
+
 export { PermissionArgs, PermissionState } from "./permission";
 export type Permission = import("./permission").Permission;
 export const Permission: typeof import("./permission").Permission = null as any;
@@ -25,6 +30,8 @@ const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "netbox:auth/group:Group":
+                return new Group(name, <any>undefined, { urn })
             case "netbox:auth/permission:Permission":
                 return new Permission(name, <any>undefined, { urn })
             case "netbox:auth/token:Token":
@@ -36,6 +43,7 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("netbox", "auth/group", _module)
 pulumi.runtime.registerResourceModule("netbox", "auth/permission", _module)
 pulumi.runtime.registerResourceModule("netbox", "auth/token", _module)
 pulumi.runtime.registerResourceModule("netbox", "auth/user", _module)

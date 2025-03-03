@@ -18,9 +18,9 @@ import * as utilities from "../utilities";
  */
 export function getCluster(args?: GetClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:virt/getCluster:getCluster", {
+        "clusterGroupId": args.clusterGroupId,
         "id": args.id,
         "name": args.name,
         "siteId": args.siteId,
@@ -31,6 +31,7 @@ export function getCluster(args?: GetClusterArgs, opts?: pulumi.InvokeOptions): 
  * A collection of arguments for invoking getCluster.
  */
 export interface GetClusterArgs {
+    clusterGroupId?: number;
     /**
      * At least one of `name`, `siteId` or `id` must be given.
      */
@@ -53,7 +54,7 @@ export interface GetClusterResult {
     readonly clusterId: number;
     readonly clusterTypeId: number;
     readonly comments: string;
-    readonly customFields: {[key: string]: any};
+    readonly customFields: {[key: string]: string};
     readonly description: string;
     /**
      * At least one of `name`, `siteId` or `id` must be given.
@@ -81,14 +82,22 @@ export interface GetClusterResult {
  * });
  * ```
  */
-export function getClusterOutput(args?: GetClusterOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterResult> {
-    return pulumi.output(args).apply((a: any) => getCluster(a, opts))
+export function getClusterOutput(args?: GetClusterOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:virt/getCluster:getCluster", {
+        "clusterGroupId": args.clusterGroupId,
+        "id": args.id,
+        "name": args.name,
+        "siteId": args.siteId,
+    }, opts);
 }
 
 /**
  * A collection of arguments for invoking getCluster.
  */
 export interface GetClusterOutputArgs {
+    clusterGroupId?: pulumi.Input<number>;
     /**
      * At least one of `name`, `siteId` or `id` must be given.
      */

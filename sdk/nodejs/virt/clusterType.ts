@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const vmwVsphere = new netbox.virt.ClusterType("vmwVsphere", {});
+ * const vmwVsphere = new netbox.virt.ClusterType("vmw_vsphere", {name: "VMware vSphere 6"});
  * ```
  */
 export class ClusterType extends pulumi.CustomResource {

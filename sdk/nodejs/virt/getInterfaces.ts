@@ -6,12 +6,15 @@ import * as inputs from "../types/input";
 import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
+/**
+ * ## Example Usage
+ */
 export function getInterfaces(args?: GetInterfacesArgs, opts?: pulumi.InvokeOptions): Promise<GetInterfacesResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:virt/getInterfaces:getInterfaces", {
         "filters": args.filters,
+        "limit": args.limit,
         "nameRegex": args.nameRegex,
     }, opts);
 }
@@ -21,6 +24,10 @@ export function getInterfaces(args?: GetInterfacesArgs, opts?: pulumi.InvokeOpti
  */
 export interface GetInterfacesArgs {
     filters?: inputs.virt.GetInterfacesFilter[];
+    /**
+     * The limit of objects to return from the API lookup. Defaults to `0`.
+     */
+    limit?: number;
     nameRegex?: string;
 }
 
@@ -34,10 +41,23 @@ export interface GetInterfacesResult {
      */
     readonly id: string;
     readonly interfaces: outputs.virt.GetInterfacesInterface[];
+    /**
+     * The limit of objects to return from the API lookup. Defaults to `0`.
+     */
+    readonly limit?: number;
     readonly nameRegex?: string;
 }
-export function getInterfacesOutput(args?: GetInterfacesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetInterfacesResult> {
-    return pulumi.output(args).apply((a: any) => getInterfaces(a, opts))
+/**
+ * ## Example Usage
+ */
+export function getInterfacesOutput(args?: GetInterfacesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInterfacesResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:virt/getInterfaces:getInterfaces", {
+        "filters": args.filters,
+        "limit": args.limit,
+        "nameRegex": args.nameRegex,
+    }, opts);
 }
 
 /**
@@ -45,5 +65,9 @@ export function getInterfacesOutput(args?: GetInterfacesOutputArgs, opts?: pulum
  */
 export interface GetInterfacesOutputArgs {
     filters?: pulumi.Input<pulumi.Input<inputs.virt.GetInterfacesFilterArgs>[]>;
+    /**
+     * The limit of objects to return from the API lookup. Defaults to `0`.
+     */
+    limit?: pulumi.Input<number>;
     nameRegex?: pulumi.Input<string>;
 }

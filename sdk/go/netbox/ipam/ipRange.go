@@ -30,9 +30,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := ipam.NewIpRange(ctx, "custAProd", &ipam.IpRangeArgs{
-//				EndAddress:   pulumi.String("10.0.0.50/24"),
+//			_, err := ipam.NewIpRange(ctx, "cust_a_prod", &ipam.IpRangeArgs{
 //				StartAddress: pulumi.String("10.0.0.1/24"),
+//				EndAddress:   pulumi.String("10.0.0.50/24"),
 //				Tags: pulumi.StringArray{
 //					pulumi.String("customer-a"),
 //					pulumi.String("prod"),

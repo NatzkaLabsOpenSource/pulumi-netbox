@@ -682,29 +682,31 @@ func (o GetDeviceInterfacesInterfaceUntaggedVlanArrayOutput) Index(i pulumi.IntI
 }
 
 type GetDevicesDevice struct {
-	AssetTag       string                 `pulumi:"assetTag"`
-	ClusterId      int                    `pulumi:"clusterId"`
-	Comments       string                 `pulumi:"comments"`
-	CustomFields   map[string]interface{} `pulumi:"customFields"`
-	Description    string                 `pulumi:"description"`
-	DeviceId       int                    `pulumi:"deviceId"`
-	DeviceTypeId   int                    `pulumi:"deviceTypeId"`
-	LocationId     int                    `pulumi:"locationId"`
-	ManufacturerId int                    `pulumi:"manufacturerId"`
-	Model          string                 `pulumi:"model"`
-	Name           string                 `pulumi:"name"`
-	PlatformId     int                    `pulumi:"platformId"`
-	PrimaryIpv4    string                 `pulumi:"primaryIpv4"`
-	PrimaryIpv6    string                 `pulumi:"primaryIpv6"`
-	RackFace       string                 `pulumi:"rackFace"`
-	RackId         int                    `pulumi:"rackId"`
-	RackPosition   float64                `pulumi:"rackPosition"`
-	RoleId         int                    `pulumi:"roleId"`
-	Serial         string                 `pulumi:"serial"`
-	SiteId         int                    `pulumi:"siteId"`
-	Status         string                 `pulumi:"status"`
-	Tags           []string               `pulumi:"tags"`
-	TenantId       int                    `pulumi:"tenantId"`
+	AssetTag         string            `pulumi:"assetTag"`
+	ClusterId        int               `pulumi:"clusterId"`
+	Comments         string            `pulumi:"comments"`
+	ConfigContext    string            `pulumi:"configContext"`
+	CustomFields     map[string]string `pulumi:"customFields"`
+	Description      string            `pulumi:"description"`
+	DeviceId         int               `pulumi:"deviceId"`
+	DeviceTypeId     int               `pulumi:"deviceTypeId"`
+	LocalContextData string            `pulumi:"localContextData"`
+	LocationId       int               `pulumi:"locationId"`
+	ManufacturerId   int               `pulumi:"manufacturerId"`
+	Model            string            `pulumi:"model"`
+	Name             string            `pulumi:"name"`
+	PlatformId       int               `pulumi:"platformId"`
+	PrimaryIpv4      string            `pulumi:"primaryIpv4"`
+	PrimaryIpv6      string            `pulumi:"primaryIpv6"`
+	RackFace         string            `pulumi:"rackFace"`
+	RackId           int               `pulumi:"rackId"`
+	RackPosition     float64           `pulumi:"rackPosition"`
+	RoleId           int               `pulumi:"roleId"`
+	Serial           string            `pulumi:"serial"`
+	SiteId           int               `pulumi:"siteId"`
+	Status           string            `pulumi:"status"`
+	Tags             []string          `pulumi:"tags"`
+	TenantId         int               `pulumi:"tenantId"`
 }
 
 // GetDevicesDeviceInput is an input type that accepts GetDevicesDeviceArgs and GetDevicesDeviceOutput values.
@@ -719,29 +721,31 @@ type GetDevicesDeviceInput interface {
 }
 
 type GetDevicesDeviceArgs struct {
-	AssetTag       pulumi.StringInput      `pulumi:"assetTag"`
-	ClusterId      pulumi.IntInput         `pulumi:"clusterId"`
-	Comments       pulumi.StringInput      `pulumi:"comments"`
-	CustomFields   pulumi.MapInput         `pulumi:"customFields"`
-	Description    pulumi.StringInput      `pulumi:"description"`
-	DeviceId       pulumi.IntInput         `pulumi:"deviceId"`
-	DeviceTypeId   pulumi.IntInput         `pulumi:"deviceTypeId"`
-	LocationId     pulumi.IntInput         `pulumi:"locationId"`
-	ManufacturerId pulumi.IntInput         `pulumi:"manufacturerId"`
-	Model          pulumi.StringInput      `pulumi:"model"`
-	Name           pulumi.StringInput      `pulumi:"name"`
-	PlatformId     pulumi.IntInput         `pulumi:"platformId"`
-	PrimaryIpv4    pulumi.StringInput      `pulumi:"primaryIpv4"`
-	PrimaryIpv6    pulumi.StringInput      `pulumi:"primaryIpv6"`
-	RackFace       pulumi.StringInput      `pulumi:"rackFace"`
-	RackId         pulumi.IntInput         `pulumi:"rackId"`
-	RackPosition   pulumi.Float64Input     `pulumi:"rackPosition"`
-	RoleId         pulumi.IntInput         `pulumi:"roleId"`
-	Serial         pulumi.StringInput      `pulumi:"serial"`
-	SiteId         pulumi.IntInput         `pulumi:"siteId"`
-	Status         pulumi.StringInput      `pulumi:"status"`
-	Tags           pulumi.StringArrayInput `pulumi:"tags"`
-	TenantId       pulumi.IntInput         `pulumi:"tenantId"`
+	AssetTag         pulumi.StringInput      `pulumi:"assetTag"`
+	ClusterId        pulumi.IntInput         `pulumi:"clusterId"`
+	Comments         pulumi.StringInput      `pulumi:"comments"`
+	ConfigContext    pulumi.StringInput      `pulumi:"configContext"`
+	CustomFields     pulumi.StringMapInput   `pulumi:"customFields"`
+	Description      pulumi.StringInput      `pulumi:"description"`
+	DeviceId         pulumi.IntInput         `pulumi:"deviceId"`
+	DeviceTypeId     pulumi.IntInput         `pulumi:"deviceTypeId"`
+	LocalContextData pulumi.StringInput      `pulumi:"localContextData"`
+	LocationId       pulumi.IntInput         `pulumi:"locationId"`
+	ManufacturerId   pulumi.IntInput         `pulumi:"manufacturerId"`
+	Model            pulumi.StringInput      `pulumi:"model"`
+	Name             pulumi.StringInput      `pulumi:"name"`
+	PlatformId       pulumi.IntInput         `pulumi:"platformId"`
+	PrimaryIpv4      pulumi.StringInput      `pulumi:"primaryIpv4"`
+	PrimaryIpv6      pulumi.StringInput      `pulumi:"primaryIpv6"`
+	RackFace         pulumi.StringInput      `pulumi:"rackFace"`
+	RackId           pulumi.IntInput         `pulumi:"rackId"`
+	RackPosition     pulumi.Float64Input     `pulumi:"rackPosition"`
+	RoleId           pulumi.IntInput         `pulumi:"roleId"`
+	Serial           pulumi.StringInput      `pulumi:"serial"`
+	SiteId           pulumi.IntInput         `pulumi:"siteId"`
+	Status           pulumi.StringInput      `pulumi:"status"`
+	Tags             pulumi.StringArrayInput `pulumi:"tags"`
+	TenantId         pulumi.IntInput         `pulumi:"tenantId"`
 }
 
 func (GetDevicesDeviceArgs) ElementType() reflect.Type {
@@ -807,8 +811,12 @@ func (o GetDevicesDeviceOutput) Comments() pulumi.StringOutput {
 	return o.ApplyT(func(v GetDevicesDevice) string { return v.Comments }).(pulumi.StringOutput)
 }
 
-func (o GetDevicesDeviceOutput) CustomFields() pulumi.MapOutput {
-	return o.ApplyT(func(v GetDevicesDevice) map[string]interface{} { return v.CustomFields }).(pulumi.MapOutput)
+func (o GetDevicesDeviceOutput) ConfigContext() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDevicesDevice) string { return v.ConfigContext }).(pulumi.StringOutput)
+}
+
+func (o GetDevicesDeviceOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetDevicesDevice) map[string]string { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o GetDevicesDeviceOutput) Description() pulumi.StringOutput {
@@ -821,6 +829,10 @@ func (o GetDevicesDeviceOutput) DeviceId() pulumi.IntOutput {
 
 func (o GetDevicesDeviceOutput) DeviceTypeId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetDevicesDevice) int { return v.DeviceTypeId }).(pulumi.IntOutput)
+}
+
+func (o GetDevicesDeviceOutput) LocalContextData() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDevicesDevice) string { return v.LocalContextData }).(pulumi.StringOutput)
 }
 
 func (o GetDevicesDeviceOutput) LocationId() pulumi.IntOutput {
@@ -1117,6 +1129,7 @@ type GetLocationsLocation struct {
 	Description string  `pulumi:"description"`
 	Id          string  `pulumi:"id"`
 	Name        *string `pulumi:"name"`
+	ParentId    int     `pulumi:"parentId"`
 	SiteId      int     `pulumi:"siteId"`
 	Slug        *string `pulumi:"slug"`
 	Status      string  `pulumi:"status"`
@@ -1138,6 +1151,7 @@ type GetLocationsLocationArgs struct {
 	Description pulumi.StringInput    `pulumi:"description"`
 	Id          pulumi.StringInput    `pulumi:"id"`
 	Name        pulumi.StringPtrInput `pulumi:"name"`
+	ParentId    pulumi.IntInput       `pulumi:"parentId"`
 	SiteId      pulumi.IntInput       `pulumi:"siteId"`
 	Slug        pulumi.StringPtrInput `pulumi:"slug"`
 	Status      pulumi.StringInput    `pulumi:"status"`
@@ -1205,6 +1219,10 @@ func (o GetLocationsLocationOutput) Id() pulumi.StringOutput {
 
 func (o GetLocationsLocationOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v GetLocationsLocation) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o GetLocationsLocationOutput) ParentId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetLocationsLocation) int { return v.ParentId }).(pulumi.IntOutput)
 }
 
 func (o GetLocationsLocationOutput) SiteId() pulumi.IntOutput {
@@ -1344,31 +1362,31 @@ func (o GetRacksFilterArrayOutput) Index(i pulumi.IntInput) GetRacksFilterOutput
 }
 
 type GetRacksRack struct {
-	AssetTag      string                 `pulumi:"assetTag"`
-	Comments      string                 `pulumi:"comments"`
-	CustomFields  map[string]interface{} `pulumi:"customFields"`
-	DescUnits     bool                   `pulumi:"descUnits"`
-	Description   string                 `pulumi:"description"`
-	FacilityId    string                 `pulumi:"facilityId"`
-	Id            int                    `pulumi:"id"`
-	LocationId    int                    `pulumi:"locationId"`
-	MaxWeight     int                    `pulumi:"maxWeight"`
-	MountingDepth int                    `pulumi:"mountingDepth"`
-	Name          string                 `pulumi:"name"`
-	OuterDepth    int                    `pulumi:"outerDepth"`
-	OuterUnit     string                 `pulumi:"outerUnit"`
-	OuterWidth    int                    `pulumi:"outerWidth"`
-	RoleId        int                    `pulumi:"roleId"`
-	Serial        string                 `pulumi:"serial"`
-	SiteId        int                    `pulumi:"siteId"`
-	Status        string                 `pulumi:"status"`
-	Tags          []string               `pulumi:"tags"`
-	TenantId      int                    `pulumi:"tenantId"`
-	Type          string                 `pulumi:"type"`
-	UHeight       int                    `pulumi:"uHeight"`
-	Weight        float64                `pulumi:"weight"`
-	WeightUnit    string                 `pulumi:"weightUnit"`
-	Width         int                    `pulumi:"width"`
+	AssetTag      string            `pulumi:"assetTag"`
+	Comments      string            `pulumi:"comments"`
+	CustomFields  map[string]string `pulumi:"customFields"`
+	DescUnits     bool              `pulumi:"descUnits"`
+	Description   string            `pulumi:"description"`
+	FacilityId    string            `pulumi:"facilityId"`
+	Id            int               `pulumi:"id"`
+	LocationId    int               `pulumi:"locationId"`
+	MaxWeight     int               `pulumi:"maxWeight"`
+	MountingDepth int               `pulumi:"mountingDepth"`
+	Name          string            `pulumi:"name"`
+	OuterDepth    int               `pulumi:"outerDepth"`
+	OuterUnit     string            `pulumi:"outerUnit"`
+	OuterWidth    int               `pulumi:"outerWidth"`
+	RoleId        int               `pulumi:"roleId"`
+	Serial        string            `pulumi:"serial"`
+	SiteId        int               `pulumi:"siteId"`
+	Status        string            `pulumi:"status"`
+	Tags          []string          `pulumi:"tags"`
+	TenantId      int               `pulumi:"tenantId"`
+	TypeId        int               `pulumi:"typeId"`
+	UHeight       int               `pulumi:"uHeight"`
+	Weight        float64           `pulumi:"weight"`
+	WeightUnit    string            `pulumi:"weightUnit"`
+	Width         int               `pulumi:"width"`
 }
 
 // GetRacksRackInput is an input type that accepts GetRacksRackArgs and GetRacksRackOutput values.
@@ -1385,7 +1403,7 @@ type GetRacksRackInput interface {
 type GetRacksRackArgs struct {
 	AssetTag      pulumi.StringInput      `pulumi:"assetTag"`
 	Comments      pulumi.StringInput      `pulumi:"comments"`
-	CustomFields  pulumi.MapInput         `pulumi:"customFields"`
+	CustomFields  pulumi.StringMapInput   `pulumi:"customFields"`
 	DescUnits     pulumi.BoolInput        `pulumi:"descUnits"`
 	Description   pulumi.StringInput      `pulumi:"description"`
 	FacilityId    pulumi.StringInput      `pulumi:"facilityId"`
@@ -1403,7 +1421,7 @@ type GetRacksRackArgs struct {
 	Status        pulumi.StringInput      `pulumi:"status"`
 	Tags          pulumi.StringArrayInput `pulumi:"tags"`
 	TenantId      pulumi.IntInput         `pulumi:"tenantId"`
-	Type          pulumi.StringInput      `pulumi:"type"`
+	TypeId        pulumi.IntInput         `pulumi:"typeId"`
 	UHeight       pulumi.IntInput         `pulumi:"uHeight"`
 	Weight        pulumi.Float64Input     `pulumi:"weight"`
 	WeightUnit    pulumi.StringInput      `pulumi:"weightUnit"`
@@ -1469,8 +1487,8 @@ func (o GetRacksRackOutput) Comments() pulumi.StringOutput {
 	return o.ApplyT(func(v GetRacksRack) string { return v.Comments }).(pulumi.StringOutput)
 }
 
-func (o GetRacksRackOutput) CustomFields() pulumi.MapOutput {
-	return o.ApplyT(func(v GetRacksRack) map[string]interface{} { return v.CustomFields }).(pulumi.MapOutput)
+func (o GetRacksRackOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetRacksRack) map[string]string { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o GetRacksRackOutput) DescUnits() pulumi.BoolOutput {
@@ -1541,8 +1559,8 @@ func (o GetRacksRackOutput) TenantId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetRacksRack) int { return v.TenantId }).(pulumi.IntOutput)
 }
 
-func (o GetRacksRackOutput) Type() pulumi.StringOutput {
-	return o.ApplyT(func(v GetRacksRack) string { return v.Type }).(pulumi.StringOutput)
+func (o GetRacksRackOutput) TypeId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetRacksRack) int { return v.TypeId }).(pulumi.IntOutput)
 }
 
 func (o GetRacksRackOutput) UHeight() pulumi.IntOutput {

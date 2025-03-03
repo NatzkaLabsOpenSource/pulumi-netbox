@@ -39,15 +39,11 @@ type GetIpAddressesResult struct {
 }
 
 func GetIpAddressesOutput(ctx *pulumi.Context, args GetIpAddressesOutputArgs, opts ...pulumi.InvokeOption) GetIpAddressesResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetIpAddressesResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetIpAddressesResultOutput, error) {
 			args := v.(GetIpAddressesArgs)
-			r, err := GetIpAddresses(ctx, &args, opts...)
-			var s GetIpAddressesResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getIpAddresses:getIpAddresses", args, GetIpAddressesResultOutput{}, options).(GetIpAddressesResultOutput), nil
 		}).(GetIpAddressesResultOutput)
 }
 

@@ -23,7 +23,7 @@ type VirtualMachine struct {
 	CustomFields pulumi.StringMapOutput `pulumi:"customFields"`
 	Description  pulumi.StringPtrOutput `pulumi:"description"`
 	DeviceId     pulumi.IntPtrOutput    `pulumi:"deviceId"`
-	DiskSizeGb   pulumi.IntPtrOutput    `pulumi:"diskSizeGb"`
+	DiskSizeMb   pulumi.IntOutput       `pulumi:"diskSizeMb"`
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData pulumi.StringPtrOutput `pulumi:"localContextData"`
 	MemoryMb         pulumi.IntPtrOutput    `pulumi:"memoryMb"`
@@ -77,7 +77,7 @@ type virtualMachineState struct {
 	CustomFields map[string]string `pulumi:"customFields"`
 	Description  *string           `pulumi:"description"`
 	DeviceId     *int              `pulumi:"deviceId"`
-	DiskSizeGb   *int              `pulumi:"diskSizeGb"`
+	DiskSizeMb   *int              `pulumi:"diskSizeMb"`
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData *string `pulumi:"localContextData"`
 	MemoryMb         *int    `pulumi:"memoryMb"`
@@ -102,7 +102,7 @@ type VirtualMachineState struct {
 	CustomFields pulumi.StringMapInput
 	Description  pulumi.StringPtrInput
 	DeviceId     pulumi.IntPtrInput
-	DiskSizeGb   pulumi.IntPtrInput
+	DiskSizeMb   pulumi.IntPtrInput
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData pulumi.StringPtrInput
 	MemoryMb         pulumi.IntPtrInput
@@ -131,7 +131,7 @@ type virtualMachineArgs struct {
 	CustomFields map[string]string `pulumi:"customFields"`
 	Description  *string           `pulumi:"description"`
 	DeviceId     *int              `pulumi:"deviceId"`
-	DiskSizeGb   *int              `pulumi:"diskSizeGb"`
+	DiskSizeMb   *int              `pulumi:"diskSizeMb"`
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData *string `pulumi:"localContextData"`
 	MemoryMb         *int    `pulumi:"memoryMb"`
@@ -155,7 +155,7 @@ type VirtualMachineArgs struct {
 	CustomFields pulumi.StringMapInput
 	Description  pulumi.StringPtrInput
 	DeviceId     pulumi.IntPtrInput
-	DiskSizeGb   pulumi.IntPtrInput
+	DiskSizeMb   pulumi.IntPtrInput
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData pulumi.StringPtrInput
 	MemoryMb         pulumi.IntPtrInput
@@ -279,8 +279,8 @@ func (o VirtualMachineOutput) DeviceId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *VirtualMachine) pulumi.IntPtrOutput { return v.DeviceId }).(pulumi.IntPtrOutput)
 }
 
-func (o VirtualMachineOutput) DiskSizeGb() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *VirtualMachine) pulumi.IntPtrOutput { return v.DiskSizeGb }).(pulumi.IntPtrOutput)
+func (o VirtualMachineOutput) DiskSizeMb() pulumi.IntOutput {
+	return o.ApplyT(func(v *VirtualMachine) pulumi.IntOutput { return v.DiskSizeMb }).(pulumi.IntOutput)
 }
 
 // This is best managed through the use of `jsonencode` and a map of settings.

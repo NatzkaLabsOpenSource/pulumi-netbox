@@ -30,14 +30,16 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testRir, err := ipam.NewRir(ctx, "testRir", nil)
+//			test, err := ipam.NewRir(ctx, "test", &ipam.RirArgs{
+//				Name: pulumi.String("testrir"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewAggregate(ctx, "testAggregate", &ipam.AggregateArgs{
+//			_, err = ipam.NewAggregate(ctx, "test", &ipam.AggregateArgs{
 //				Prefix:      pulumi.String("1.1.1.0/25"),
 //				Description: pulumi.String("my description"),
-//				RirId:       testRir.ID(),
+//				RirId:       test.ID(),
 //			})
 //			if err != nil {
 //				return err

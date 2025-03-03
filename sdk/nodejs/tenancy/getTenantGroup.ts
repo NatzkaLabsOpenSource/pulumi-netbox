@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getTenantGroup(args: GetTenantGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetTenantGroupResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:tenancy/getTenantGroup:getTenantGroup", {
         "name": args.name,
@@ -32,8 +31,11 @@ export interface GetTenantGroupResult {
     readonly parentId: number;
     readonly slug: string;
 }
-export function getTenantGroupOutput(args: GetTenantGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTenantGroupResult> {
-    return pulumi.output(args).apply((a: any) => getTenantGroup(a, opts))
+export function getTenantGroupOutput(args: GetTenantGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTenantGroupResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:tenancy/getTenantGroup:getTenantGroup", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

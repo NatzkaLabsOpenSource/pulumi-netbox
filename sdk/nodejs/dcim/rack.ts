@@ -19,9 +19,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testSite = new netbox.dcim.Site("testSite", {status: "active"});
- * const testRack = new netbox.dcim.Rack("testRack", {
- *     siteId: testSite.id,
+ * const test = new netbox.dcim.Site("test", {
+ *     name: "test",
+ *     status: "active",
+ * });
+ * const testRack = new netbox.dcim.Rack("test", {
+ *     name: "test",
+ *     siteId: test.id,
  *     status: "reserved",
  *     width: 19,
  *     uHeight: 48,
@@ -65,6 +69,10 @@ export class Rack extends pulumi.CustomResource {
     public readonly descUnits!: pulumi.Output<boolean | undefined>;
     public readonly description!: pulumi.Output<string | undefined>;
     public readonly facilityId!: pulumi.Output<string | undefined>;
+    /**
+     * Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+     */
+    public readonly formFactor!: pulumi.Output<string | undefined>;
     public readonly locationId!: pulumi.Output<number | undefined>;
     public readonly maxWeight!: pulumi.Output<number | undefined>;
     public readonly mountingDepth!: pulumi.Output<number | undefined>;
@@ -84,11 +92,7 @@ export class Rack extends pulumi.CustomResource {
     public readonly status!: pulumi.Output<string>;
     public readonly tags!: pulumi.Output<string[] | undefined>;
     public readonly tenantId!: pulumi.Output<number | undefined>;
-    /**
-     * Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-     */
-    public readonly type!: pulumi.Output<string | undefined>;
-    public readonly uHeight!: pulumi.Output<number>;
+    public readonly uHeight!: pulumi.Output<number | undefined>;
     public readonly weight!: pulumi.Output<number | undefined>;
     /**
      * Valid values are `kg`, `g`, `lb` and `oz`. Required when `weight` and `maxWeight` is set.
@@ -97,7 +101,7 @@ export class Rack extends pulumi.CustomResource {
     /**
      * Valid values are `10`, `19`, `21` and `23`.
      */
-    public readonly width!: pulumi.Output<number>;
+    public readonly width!: pulumi.Output<number | undefined>;
 
     /**
      * Create a Rack resource with the given unique name, arguments, and options.
@@ -118,6 +122,7 @@ export class Rack extends pulumi.CustomResource {
             resourceInputs["descUnits"] = state ? state.descUnits : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["facilityId"] = state ? state.facilityId : undefined;
+            resourceInputs["formFactor"] = state ? state.formFactor : undefined;
             resourceInputs["locationId"] = state ? state.locationId : undefined;
             resourceInputs["maxWeight"] = state ? state.maxWeight : undefined;
             resourceInputs["mountingDepth"] = state ? state.mountingDepth : undefined;
@@ -131,7 +136,6 @@ export class Rack extends pulumi.CustomResource {
             resourceInputs["status"] = state ? state.status : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["tenantId"] = state ? state.tenantId : undefined;
-            resourceInputs["type"] = state ? state.type : undefined;
             resourceInputs["uHeight"] = state ? state.uHeight : undefined;
             resourceInputs["weight"] = state ? state.weight : undefined;
             resourceInputs["weightUnit"] = state ? state.weightUnit : undefined;
@@ -144,18 +148,13 @@ export class Rack extends pulumi.CustomResource {
             if ((!args || args.status === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'status'");
             }
-            if ((!args || args.uHeight === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'uHeight'");
-            }
-            if ((!args || args.width === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'width'");
-            }
             resourceInputs["assetTag"] = args ? args.assetTag : undefined;
             resourceInputs["comments"] = args ? args.comments : undefined;
             resourceInputs["customFields"] = args ? args.customFields : undefined;
             resourceInputs["descUnits"] = args ? args.descUnits : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["facilityId"] = args ? args.facilityId : undefined;
+            resourceInputs["formFactor"] = args ? args.formFactor : undefined;
             resourceInputs["locationId"] = args ? args.locationId : undefined;
             resourceInputs["maxWeight"] = args ? args.maxWeight : undefined;
             resourceInputs["mountingDepth"] = args ? args.mountingDepth : undefined;
@@ -169,7 +168,6 @@ export class Rack extends pulumi.CustomResource {
             resourceInputs["status"] = args ? args.status : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["tenantId"] = args ? args.tenantId : undefined;
-            resourceInputs["type"] = args ? args.type : undefined;
             resourceInputs["uHeight"] = args ? args.uHeight : undefined;
             resourceInputs["weight"] = args ? args.weight : undefined;
             resourceInputs["weightUnit"] = args ? args.weightUnit : undefined;
@@ -193,6 +191,10 @@ export interface RackState {
     descUnits?: pulumi.Input<boolean>;
     description?: pulumi.Input<string>;
     facilityId?: pulumi.Input<string>;
+    /**
+     * Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+     */
+    formFactor?: pulumi.Input<string>;
     locationId?: pulumi.Input<number>;
     maxWeight?: pulumi.Input<number>;
     mountingDepth?: pulumi.Input<number>;
@@ -212,10 +214,6 @@ export interface RackState {
     status?: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     tenantId?: pulumi.Input<number>;
-    /**
-     * Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-     */
-    type?: pulumi.Input<string>;
     uHeight?: pulumi.Input<number>;
     weight?: pulumi.Input<number>;
     /**
@@ -241,6 +239,10 @@ export interface RackArgs {
     descUnits?: pulumi.Input<boolean>;
     description?: pulumi.Input<string>;
     facilityId?: pulumi.Input<string>;
+    /**
+     * Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
+     */
+    formFactor?: pulumi.Input<string>;
     locationId?: pulumi.Input<number>;
     maxWeight?: pulumi.Input<number>;
     mountingDepth?: pulumi.Input<number>;
@@ -260,11 +262,7 @@ export interface RackArgs {
     status: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     tenantId?: pulumi.Input<number>;
-    /**
-     * Valid values are `2-post-frame`, `4-post-frame`, `4-post-cabinet`, `wall-frame`, `wall-frame-vertical`, `wall-cabinet` and `wall-cabinet-vertical`.
-     */
-    type?: pulumi.Input<string>;
-    uHeight: pulumi.Input<number>;
+    uHeight?: pulumi.Input<number>;
     weight?: pulumi.Input<number>;
     /**
      * Valid values are `kg`, `g`, `lb` and `oz`. Required when `weight` and `maxWeight` is set.
@@ -273,5 +271,5 @@ export interface RackArgs {
     /**
      * Valid values are `10`, `19`, `21` and `23`.
      */
-    width: pulumi.Input<number>;
+    width?: pulumi.Input<number>;
 }

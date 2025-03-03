@@ -19,6 +19,7 @@ import (
 // > Like a prefix, an IP address can optionally be assigned to a VRF (otherwise, it will appear in the "global" table). IP addresses are automatically arranged under parent prefixes within their respective VRFs according to the IP hierarchy.
 //
 // ## Example Usage
+//
 // ### Creating an IP address that is assigned to a virtual machine interface
 //
 // Starting with provider version 3.5.0, you can use the `virtualMachineInterfaceId` attribute to assign an IP address to a virtual machine interface.
@@ -38,16 +39,18 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			thisInterface, err := virt.NewInterface(ctx, "thisInterface", &virt.InterfaceArgs{
+//			// Assuming a virtual machine with the id `123` exists
+//			this, err := virt.NewInterface(ctx, "this", &virt.InterfaceArgs{
+//				Name:             pulumi.String("eth0"),
 //				VirtualMachineId: pulumi.Int(123),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewIpAddress(ctx, "thisIpAddress", &ipam.IpAddressArgs{
+//			_, err = ipam.NewIpAddress(ctx, "this", &ipam.IpAddressArgs{
 //				IpAddress:                 pulumi.String("10.0.0.60/24"),
 //				Status:                    pulumi.String("active"),
-//				VirtualMachineInterfaceId: thisInterface.ID(),
+//				VirtualMachineInterfaceId: this.ID(),
 //			})
 //			if err != nil {
 //				return err
@@ -72,16 +75,18 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			thisInterface, err := virt.NewInterface(ctx, "thisInterface", &virt.InterfaceArgs{
+//			// Assuming a virtual machine with the id `123` exists
+//			this, err := virt.NewInterface(ctx, "this", &virt.InterfaceArgs{
+//				Name:             pulumi.String("eth0"),
 //				VirtualMachineId: pulumi.Int(123),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewIpAddress(ctx, "thisIpAddress", &ipam.IpAddressArgs{
+//			_, err = ipam.NewIpAddress(ctx, "this", &ipam.IpAddressArgs{
 //				IpAddress:   pulumi.String("10.0.0.60/24"),
 //				Status:      pulumi.String("active"),
-//				InterfaceId: thisInterface.ID(),
+//				InterfaceId: this.ID(),
 //				ObjectType:  pulumi.String("virtualization.vminterface"),
 //			})
 //			if err != nil {
@@ -92,6 +97,7 @@ import (
 //	}
 //
 // ```
+//
 // ### Creating an IP address that is assigned to a device interface
 //
 // Starting with provider version 3.5.0, you can use the `deviceInterfaceId` attribute to assign an IP address to a device interface.
@@ -111,17 +117,19 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			thisDeviceInterface, err := dcim.NewDeviceInterface(ctx, "thisDeviceInterface", &dcim.DeviceInterfaceArgs{
+//			// Assuming a device with the id `123` exists
+//			this, err := dcim.NewDeviceInterface(ctx, "this", &dcim.DeviceInterfaceArgs{
+//				Name:     pulumi.String("eth0"),
 //				DeviceId: pulumi.Int(123),
 //				Type:     pulumi.String("1000base-t"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewIpAddress(ctx, "thisIpAddress", &ipam.IpAddressArgs{
+//			_, err = ipam.NewIpAddress(ctx, "this", &ipam.IpAddressArgs{
 //				IpAddress:         pulumi.String("10.0.0.60/24"),
 //				Status:            pulumi.String("active"),
-//				DeviceInterfaceId: thisDeviceInterface.ID(),
+//				DeviceInterfaceId: this.ID(),
 //			})
 //			if err != nil {
 //				return err
@@ -146,17 +154,19 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			thisDeviceInterface, err := dcim.NewDeviceInterface(ctx, "thisDeviceInterface", &dcim.DeviceInterfaceArgs{
+//			// Assuming a device with the id `123` exists
+//			this, err := dcim.NewDeviceInterface(ctx, "this", &dcim.DeviceInterfaceArgs{
+//				Name:     pulumi.String("eth0"),
 //				DeviceId: pulumi.Int(123),
 //				Type:     pulumi.String("1000base-t"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewIpAddress(ctx, "thisIpAddress", &ipam.IpAddressArgs{
+//			_, err = ipam.NewIpAddress(ctx, "this", &ipam.IpAddressArgs{
 //				IpAddress:   pulumi.String("10.0.0.60/24"),
 //				Status:      pulumi.String("active"),
-//				InterfaceId: thisDeviceInterface.ID(),
+//				InterfaceId: this.ID(),
 //				ObjectType:  pulumi.String("dcim.interface"),
 //			})
 //			if err != nil {
@@ -167,6 +177,7 @@ import (
 //	}
 //
 // ```
+//
 // ### Creating an IP address that is not assigned to anything
 //
 // You can create an IP address that is not assigend to anything by omitting the attributes mentioned above.
@@ -198,7 +209,8 @@ import (
 type IpAddress struct {
 	pulumi.CustomResourceState
 
-	Description pulumi.StringPtrOutput `pulumi:"description"`
+	CustomFields pulumi.StringMapOutput `pulumi:"customFields"`
+	Description  pulumi.StringPtrOutput `pulumi:"description"`
 	// Conflicts with `interfaceId` and `virtualMachineInterfaceId`.
 	DeviceInterfaceId pulumi.IntPtrOutput    `pulumi:"deviceInterfaceId"`
 	DnsName           pulumi.StringPtrOutput `pulumi:"dnsName"`
@@ -256,7 +268,8 @@ func GetIpAddress(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering IpAddress resources.
 type ipAddressState struct {
-	Description *string `pulumi:"description"`
+	CustomFields map[string]string `pulumi:"customFields"`
+	Description  *string           `pulumi:"description"`
 	// Conflicts with `interfaceId` and `virtualMachineInterfaceId`.
 	DeviceInterfaceId *int    `pulumi:"deviceInterfaceId"`
 	DnsName           *string `pulumi:"dnsName"`
@@ -279,7 +292,8 @@ type ipAddressState struct {
 }
 
 type IpAddressState struct {
-	Description pulumi.StringPtrInput
+	CustomFields pulumi.StringMapInput
+	Description  pulumi.StringPtrInput
 	// Conflicts with `interfaceId` and `virtualMachineInterfaceId`.
 	DeviceInterfaceId pulumi.IntPtrInput
 	DnsName           pulumi.StringPtrInput
@@ -306,7 +320,8 @@ func (IpAddressState) ElementType() reflect.Type {
 }
 
 type ipAddressArgs struct {
-	Description *string `pulumi:"description"`
+	CustomFields map[string]string `pulumi:"customFields"`
+	Description  *string           `pulumi:"description"`
 	// Conflicts with `interfaceId` and `virtualMachineInterfaceId`.
 	DeviceInterfaceId *int    `pulumi:"deviceInterfaceId"`
 	DnsName           *string `pulumi:"dnsName"`
@@ -329,7 +344,8 @@ type ipAddressArgs struct {
 
 // The set of arguments for constructing a IpAddress resource.
 type IpAddressArgs struct {
-	Description pulumi.StringPtrInput
+	CustomFields pulumi.StringMapInput
+	Description  pulumi.StringPtrInput
 	// Conflicts with `interfaceId` and `virtualMachineInterfaceId`.
 	DeviceInterfaceId pulumi.IntPtrInput
 	DnsName           pulumi.StringPtrInput
@@ -435,6 +451,10 @@ func (o IpAddressOutput) ToIpAddressOutput() IpAddressOutput {
 
 func (o IpAddressOutput) ToIpAddressOutputWithContext(ctx context.Context) IpAddressOutput {
 	return o
+}
+
+func (o IpAddressOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *IpAddress) pulumi.StringMapOutput { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o IpAddressOutput) Description() pulumi.StringPtrOutput {

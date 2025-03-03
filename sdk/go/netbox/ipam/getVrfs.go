@@ -39,15 +39,11 @@ type GetVrfsResult struct {
 }
 
 func GetVrfsOutput(ctx *pulumi.Context, args GetVrfsOutputArgs, opts ...pulumi.InvokeOption) GetVrfsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetVrfsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetVrfsResultOutput, error) {
 			args := v.(GetVrfsArgs)
-			r, err := GetVrfs(ctx, &args, opts...)
-			var s GetVrfsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getVrfs:getVrfs", args, GetVrfsResultOutput{}, options).(GetVrfsResultOutput), nil
 		}).(GetVrfsResultOutput)
 }
 

@@ -17,19 +17,22 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testSite = new netbox.dcim.Site("testSite", {status: "active"});
- * const testCircuitProvider = new netbox.circuit.CircuitProvider("testCircuitProvider", {});
- * const testCircuitType = new netbox.circuit.CircuitType("testCircuitType", {});
- * const testCircuit = new netbox.circuit.Circuit("testCircuit", {
+ * const test = new netbox.dcim.Site("test", {
+ *     name: "%[1]s",
+ *     status: "active",
+ * });
+ * const testCircuitProvider = new netbox.circuit.CircuitProvider("test", {name: "%[1]s"});
+ * const testCircuitType = new netbox.circuit.CircuitType("test", {name: "%[1]s"});
+ * const testCircuit = new netbox.circuit.Circuit("test", {
  *     cid: "%[1]s",
  *     status: "active",
  *     providerId: testCircuitProvider.id,
  *     typeId: testCircuitType.id,
  * });
- * const testCircuitTermination = new netbox.circuit.CircuitTermination("testCircuitTermination", {
+ * const testCircuitTermination = new netbox.circuit.CircuitTermination("test", {
  *     circuitId: testCircuit.id,
  *     termSide: "A",
- *     siteId: testSite.id,
+ *     siteId: test.id,
  *     portSpeed: 100000,
  *     upstreamSpeed: 50000,
  * });

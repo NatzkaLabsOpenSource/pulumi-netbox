@@ -15,18 +15,19 @@ import * as utilities from "../utilities";
  *
  * // Note that some terraform code is not included in the example for brevity
  * const test = new netbox.dcim.Device("test", {
- *     deviceTypeId: netbox_device_type.test.id,
- *     roleId: netbox_device_role.test.id,
- *     siteId: netbox_site.test.id,
+ *     name: "%[1]s",
+ *     deviceTypeId: testNetboxDeviceType.id,
+ *     roleId: testNetboxDeviceRole.id,
+ *     siteId: testNetboxSite.id,
  * });
- * const testV4IpAddress = new netbox.ipam.IpAddress("testV4IpAddress", {
+ * const testV4 = new netbox.ipam.IpAddress("test_v4", {
  *     ipAddress: "1.1.1.1/32",
  *     status: "active",
- *     deviceInterfaceId: netbox_device_interface.test.id,
+ *     deviceInterfaceId: testNetboxDeviceInterface.id,
  * });
- * const testV4DevicePrimaryIp = new netbox.dcim.DevicePrimaryIp("testV4DevicePrimaryIp", {
+ * const testV4DevicePrimaryIp = new netbox.dcim.DevicePrimaryIp("test_v4", {
  *     deviceId: test.id,
- *     ipAddressId: netbox_ip_address.test.id,
+ *     ipAddressId: testNetboxIpAddress.id,
  * });
  * ```
  */

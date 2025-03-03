@@ -73,15 +73,11 @@ type GetAsnsResult struct {
 }
 
 func GetAsnsOutput(ctx *pulumi.Context, args GetAsnsOutputArgs, opts ...pulumi.InvokeOption) GetAsnsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetAsnsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetAsnsResultOutput, error) {
 			args := v.(GetAsnsArgs)
-			r, err := GetAsns(ctx, &args, opts...)
-			var s GetAsnsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getAsns:getAsns", args, GetAsnsResultOutput{}, options).(GetAsnsResultOutput), nil
 		}).(GetAsnsResultOutput)
 }
 

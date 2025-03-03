@@ -17,10 +17,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testTenant = new netbox.tenancy.Tenant("testTenant", {});
- * const testCircuitProvider = new netbox.circuit.CircuitProvider("testCircuitProvider", {});
- * const testCircuitType = new netbox.circuit.CircuitType("testCircuitType", {});
- * const testCircuit = new netbox.circuit.Circuit("testCircuit", {
+ * const test = new netbox.tenancy.Tenant("test", {name: "test"});
+ * const testCircuitProvider = new netbox.circuit.CircuitProvider("test", {name: "test"});
+ * const testCircuitType = new netbox.circuit.CircuitType("test", {name: "test"});
+ * const testCircuit = new netbox.circuit.Circuit("test", {
  *     cid: "test",
  *     status: "active",
  *     providerId: testCircuitProvider.id,

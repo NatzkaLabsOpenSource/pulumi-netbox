@@ -37,15 +37,11 @@ type LookupRoleResult struct {
 }
 
 func LookupRoleOutput(ctx *pulumi.Context, args LookupRoleOutputArgs, opts ...pulumi.InvokeOption) LookupRoleResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupRoleResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupRoleResultOutput, error) {
 			args := v.(LookupRoleArgs)
-			r, err := LookupRole(ctx, &args, opts...)
-			var s LookupRoleResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getRole:getRole", args, LookupRoleResultOutput{}, options).(LookupRoleResultOutput), nil
 		}).(LookupRoleResultOutput)
 }
 

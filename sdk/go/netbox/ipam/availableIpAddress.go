@@ -26,6 +26,7 @@ import (
 // This resource will retrieve the next available IP address from a given prefix or IP range (specified by ID)
 //
 // ## Example Usage
+//
 // ### Creating an IP in a prefix
 // ```go
 // package main
@@ -39,14 +40,14 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testPrefix, err := ipam.LookupPrefix(ctx, &ipam.LookupPrefixArgs{
+//			test, err := ipam.LookupPrefix(ctx, &ipam.LookupPrefixArgs{
 //				Cidr: pulumi.StringRef("10.0.0.0/24"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewAvailableIpAddress(ctx, "testAvailableIpAddress", &ipam.AvailableIpAddressArgs{
-//				PrefixId: *pulumi.Int(testPrefix.Id),
+//			_, err = ipam.NewAvailableIpAddress(ctx, "test", &ipam.AvailableIpAddressArgs{
+//				PrefixId: pulumi.Int(test.Id),
 //			})
 //			if err != nil {
 //				return err

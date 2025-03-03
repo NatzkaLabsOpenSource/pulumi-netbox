@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const customerA = new netbox.tenancy.Tenant("customerA", {});
+ * const customerA = new netbox.tenancy.Tenant("customer_a", {name: "Customer A"});
  * ```
  */
 export class Tenant extends pulumi.CustomResource {

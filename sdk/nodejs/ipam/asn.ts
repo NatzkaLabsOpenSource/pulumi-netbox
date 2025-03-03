@@ -16,10 +16,12 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testRir = new netbox.ipam.Rir("testRir", {});
- * const testAsn = new netbox.ipam.Asn("testAsn", {
+ * const test = new netbox.ipam.Rir("test", {name: "testrir"});
+ * const testAsn = new netbox.ipam.Asn("test", {
  *     asn: 1337,
- *     rirId: testRir.id,
+ *     rirId: test.id,
+ *     description: "test",
+ *     comments: "test",
  * });
  * ```
  */
@@ -51,7 +53,21 @@ export class Asn extends pulumi.CustomResource {
         return obj['__pulumiType'] === Asn.__pulumiType;
     }
 
+    /**
+     * Value for the AS Number record.
+     */
     public readonly asn!: pulumi.Output<number>;
+    /**
+     * Comments field for the AS Number record.
+     */
+    public readonly comments!: pulumi.Output<string | undefined>;
+    /**
+     * Description field for the AS Number record.
+     */
+    public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * ID for the RIR for the AS Number record.
+     */
     public readonly rirId!: pulumi.Output<number>;
     public readonly tags!: pulumi.Output<string[] | undefined>;
 
@@ -69,6 +85,8 @@ export class Asn extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as AsnState | undefined;
             resourceInputs["asn"] = state ? state.asn : undefined;
+            resourceInputs["comments"] = state ? state.comments : undefined;
+            resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["rirId"] = state ? state.rirId : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
         } else {
@@ -80,6 +98,8 @@ export class Asn extends pulumi.CustomResource {
                 throw new Error("Missing required property 'rirId'");
             }
             resourceInputs["asn"] = args ? args.asn : undefined;
+            resourceInputs["comments"] = args ? args.comments : undefined;
+            resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["rirId"] = args ? args.rirId : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
         }
@@ -92,7 +112,21 @@ export class Asn extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Asn resources.
  */
 export interface AsnState {
+    /**
+     * Value for the AS Number record.
+     */
     asn?: pulumi.Input<number>;
+    /**
+     * Comments field for the AS Number record.
+     */
+    comments?: pulumi.Input<string>;
+    /**
+     * Description field for the AS Number record.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * ID for the RIR for the AS Number record.
+     */
     rirId?: pulumi.Input<number>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
 }
@@ -101,7 +135,21 @@ export interface AsnState {
  * The set of arguments for constructing a Asn resource.
  */
 export interface AsnArgs {
+    /**
+     * Value for the AS Number record.
+     */
     asn: pulumi.Input<number>;
+    /**
+     * Comments field for the AS Number record.
+     */
+    comments?: pulumi.Input<string>;
+    /**
+     * Description field for the AS Number record.
+     */
+    description?: pulumi.Input<string>;
+    /**
+     * ID for the RIR for the AS Number record.
+     */
     rirId: pulumi.Input<number>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
 }

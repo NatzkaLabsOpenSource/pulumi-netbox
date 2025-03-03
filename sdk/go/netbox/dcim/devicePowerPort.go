@@ -30,16 +30,19 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testDevice, err := dcim.NewDevice(ctx, "testDevice", &dcim.DeviceArgs{
-//				DeviceTypeId: pulumi.Any(netbox_device_type.Test.Id),
-//				RoleId:       pulumi.Any(netbox_device_role.Test.Id),
-//				SiteId:       pulumi.Any(netbox_site.Test.Id),
+//			// Note that some terraform code is not included in the example for brevity
+//			test, err := dcim.NewDevice(ctx, "test", &dcim.DeviceArgs{
+//				Name:         pulumi.String("%[1]s"),
+//				DeviceTypeId: pulumi.Any(testNetboxDeviceType.Id),
+//				RoleId:       pulumi.Any(testNetboxDeviceRole.Id),
+//				SiteId:       pulumi.Any(testNetboxSite.Id),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewDevicePowerPort(ctx, "testDevicePowerPort", &dcim.DevicePowerPortArgs{
-//				DeviceId:      testDevice.ID(),
+//			_, err = dcim.NewDevicePowerPort(ctx, "test", &dcim.DevicePowerPortArgs{
+//				DeviceId:      test.ID(),
+//				Name:          pulumi.String("power port"),
 //				MaximumDraw:   pulumi.Int(750),
 //				AllocatedDraw: pulumi.Int(500),
 //				Type:          pulumi.String("iec-60320-c6"),

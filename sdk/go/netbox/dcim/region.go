@@ -32,6 +32,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := dcim.NewRegion(ctx, "test", &dcim.RegionArgs{
+//				Name:        pulumi.String("test"),
 //				Description: pulumi.String("test description"),
 //			})
 //			if err != nil {

@@ -16,7 +16,10 @@ import * as utilities from "./utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const dmz = new netbox.Tag("dmz", {colorHex: "ff00ff"});
+ * const dmz = new netbox.Tag("dmz", {
+ *     name: "DMZ",
+ *     colorHex: "ff00ff",
+ * });
  * ```
  */
 export class Tag extends pulumi.CustomResource {

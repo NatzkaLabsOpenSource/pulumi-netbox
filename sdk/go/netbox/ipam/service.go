@@ -21,7 +21,10 @@ type Service struct {
 	pulumi.CustomResourceState
 
 	CustomFields pulumi.StringMapOutput `pulumi:"customFields"`
-	Name         pulumi.StringOutput    `pulumi:"name"`
+	Description  pulumi.StringPtrOutput `pulumi:"description"`
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	DeviceId pulumi.IntPtrOutput `pulumi:"deviceId"`
+	Name     pulumi.StringOutput `pulumi:"name"`
 	// Exactly one of `port` or `ports` must be given.
 	//
 	// Deprecated: This field is deprecated. Please use the new "ports" attribute instead.
@@ -29,8 +32,10 @@ type Service struct {
 	// Exactly one of `port` or `ports` must be given.
 	Ports pulumi.IntArrayOutput `pulumi:"ports"`
 	// Valid values are `tcp`, `udp` and `sctp`.
-	Protocol         pulumi.StringOutput `pulumi:"protocol"`
-	VirtualMachineId pulumi.IntOutput    `pulumi:"virtualMachineId"`
+	Protocol pulumi.StringOutput      `pulumi:"protocol"`
+	Tags     pulumi.StringArrayOutput `pulumi:"tags"`
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	VirtualMachineId pulumi.IntPtrOutput `pulumi:"virtualMachineId"`
 }
 
 // NewService registers a new resource with the given unique name, arguments, and options.
@@ -42,9 +47,6 @@ func NewService(ctx *pulumi.Context,
 
 	if args.Protocol == nil {
 		return nil, errors.New("invalid value for required argument 'Protocol'")
-	}
-	if args.VirtualMachineId == nil {
-		return nil, errors.New("invalid value for required argument 'VirtualMachineId'")
 	}
 	opts = internal.PkgResourceDefaultOpts(opts)
 	var resource Service
@@ -70,7 +72,10 @@ func GetService(ctx *pulumi.Context,
 // Input properties used for looking up and filtering Service resources.
 type serviceState struct {
 	CustomFields map[string]string `pulumi:"customFields"`
-	Name         *string           `pulumi:"name"`
+	Description  *string           `pulumi:"description"`
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	DeviceId *int    `pulumi:"deviceId"`
+	Name     *string `pulumi:"name"`
 	// Exactly one of `port` or `ports` must be given.
 	//
 	// Deprecated: This field is deprecated. Please use the new "ports" attribute instead.
@@ -78,13 +83,18 @@ type serviceState struct {
 	// Exactly one of `port` or `ports` must be given.
 	Ports []int `pulumi:"ports"`
 	// Valid values are `tcp`, `udp` and `sctp`.
-	Protocol         *string `pulumi:"protocol"`
-	VirtualMachineId *int    `pulumi:"virtualMachineId"`
+	Protocol *string  `pulumi:"protocol"`
+	Tags     []string `pulumi:"tags"`
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	VirtualMachineId *int `pulumi:"virtualMachineId"`
 }
 
 type ServiceState struct {
 	CustomFields pulumi.StringMapInput
-	Name         pulumi.StringPtrInput
+	Description  pulumi.StringPtrInput
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	DeviceId pulumi.IntPtrInput
+	Name     pulumi.StringPtrInput
 	// Exactly one of `port` or `ports` must be given.
 	//
 	// Deprecated: This field is deprecated. Please use the new "ports" attribute instead.
@@ -92,7 +102,9 @@ type ServiceState struct {
 	// Exactly one of `port` or `ports` must be given.
 	Ports pulumi.IntArrayInput
 	// Valid values are `tcp`, `udp` and `sctp`.
-	Protocol         pulumi.StringPtrInput
+	Protocol pulumi.StringPtrInput
+	Tags     pulumi.StringArrayInput
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
 	VirtualMachineId pulumi.IntPtrInput
 }
 
@@ -102,7 +114,10 @@ func (ServiceState) ElementType() reflect.Type {
 
 type serviceArgs struct {
 	CustomFields map[string]string `pulumi:"customFields"`
-	Name         *string           `pulumi:"name"`
+	Description  *string           `pulumi:"description"`
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	DeviceId *int    `pulumi:"deviceId"`
+	Name     *string `pulumi:"name"`
 	// Exactly one of `port` or `ports` must be given.
 	//
 	// Deprecated: This field is deprecated. Please use the new "ports" attribute instead.
@@ -110,14 +125,19 @@ type serviceArgs struct {
 	// Exactly one of `port` or `ports` must be given.
 	Ports []int `pulumi:"ports"`
 	// Valid values are `tcp`, `udp` and `sctp`.
-	Protocol         string `pulumi:"protocol"`
-	VirtualMachineId int    `pulumi:"virtualMachineId"`
+	Protocol string   `pulumi:"protocol"`
+	Tags     []string `pulumi:"tags"`
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	VirtualMachineId *int `pulumi:"virtualMachineId"`
 }
 
 // The set of arguments for constructing a Service resource.
 type ServiceArgs struct {
 	CustomFields pulumi.StringMapInput
-	Name         pulumi.StringPtrInput
+	Description  pulumi.StringPtrInput
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	DeviceId pulumi.IntPtrInput
+	Name     pulumi.StringPtrInput
 	// Exactly one of `port` or `ports` must be given.
 	//
 	// Deprecated: This field is deprecated. Please use the new "ports" attribute instead.
@@ -125,8 +145,10 @@ type ServiceArgs struct {
 	// Exactly one of `port` or `ports` must be given.
 	Ports pulumi.IntArrayInput
 	// Valid values are `tcp`, `udp` and `sctp`.
-	Protocol         pulumi.StringInput
-	VirtualMachineId pulumi.IntInput
+	Protocol pulumi.StringInput
+	Tags     pulumi.StringArrayInput
+	// Exactly one of `virtualMachineId` or `deviceId` must be given.
+	VirtualMachineId pulumi.IntPtrInput
 }
 
 func (ServiceArgs) ElementType() reflect.Type {
@@ -220,6 +242,15 @@ func (o ServiceOutput) CustomFields() pulumi.StringMapOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringMapOutput { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
+func (o ServiceOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Exactly one of `virtualMachineId` or `deviceId` must be given.
+func (o ServiceOutput) DeviceId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.DeviceId }).(pulumi.IntPtrOutput)
+}
+
 func (o ServiceOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
 }
@@ -241,8 +272,13 @@ func (o ServiceOutput) Protocol() pulumi.StringOutput {
 	return o.ApplyT(func(v *Service) pulumi.StringOutput { return v.Protocol }).(pulumi.StringOutput)
 }
 
-func (o ServiceOutput) VirtualMachineId() pulumi.IntOutput {
-	return o.ApplyT(func(v *Service) pulumi.IntOutput { return v.VirtualMachineId }).(pulumi.IntOutput)
+func (o ServiceOutput) Tags() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Service) pulumi.StringArrayOutput { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+// Exactly one of `virtualMachineId` or `deviceId` must be given.
+func (o ServiceOutput) VirtualMachineId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Service) pulumi.IntPtrOutput { return v.VirtualMachineId }).(pulumi.IntPtrOutput)
 }
 
 type ServiceArrayOutput struct{ *pulumi.OutputState }

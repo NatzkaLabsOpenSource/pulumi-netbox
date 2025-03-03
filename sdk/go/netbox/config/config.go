@@ -37,16 +37,12 @@ func GetRequestTimeout(ctx *pulumi.Context) int {
 func GetServerUrl(ctx *pulumi.Context) string {
 	return config.Get(ctx, "netbox:serverUrl")
 }
-
-// If true, do not try to determine the running Netbox version at provider startup. Disables warnings about possibly
-// unsupported Netbox version. Also useful for local testing on terraform plans. Can be set via the
-// `NETBOX_SKIP_VERSION_CHECK` environment variable. Defaults to `false`.
 func GetSkipVersionCheck(ctx *pulumi.Context) bool {
 	return config.GetBool(ctx, "netbox:skipVersionCheck")
 }
 
-// If true, strip trailing slashes from the `server_url` parameter and print a warning when doing so. Note that using
-// trailing slashes in the `server_url` parameter will usually lead to errors. Can be set via the
+// If true, strip trailing slashes from the `serverUrl` parameter and print a warning when doing so. Note that using
+// trailing slashes in the `serverUrl` parameter will usually lead to errors. Can be set via the
 // `NETBOX_STRIP_TRAILING_SLASHES_FROM_URL` environment variable. Defaults to `true`.
 func GetStripTrailingSlashesFromUrl(ctx *pulumi.Context) bool {
 	return config.GetBool(ctx, "netbox:stripTrailingSlashesFromUrl")

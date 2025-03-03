@@ -17,7 +17,6 @@ import * as utilities from "../utilities";
  * ```
  */
 export function getIpRange(args: GetIpRangeArgs, opts?: pulumi.InvokeOptions): Promise<GetIpRangeResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getIpRange:getIpRange", {
         "contains": args.contains,
@@ -53,8 +52,11 @@ export interface GetIpRangeResult {
  * });
  * ```
  */
-export function getIpRangeOutput(args: GetIpRangeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIpRangeResult> {
-    return pulumi.output(args).apply((a: any) => getIpRange(a, opts))
+export function getIpRangeOutput(args: GetIpRangeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetIpRangeResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getIpRange:getIpRange", {
+        "contains": args.contains,
+    }, opts);
 }
 
 /**

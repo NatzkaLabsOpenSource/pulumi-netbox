@@ -15,10 +15,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testTenant = new netbox.tenancy.Tenant("testTenant", {});
- * const testRouteTarget = new netbox.ipam.RouteTarget("testRouteTarget", {
+ * const test = new netbox.tenancy.Tenant("test", {name: "test"});
+ * const testRouteTarget = new netbox.ipam.RouteTarget("test", {
+ *     name: "test",
  *     description: "my description",
- *     tenantId: testTenant.id,
+ *     tenantId: test.id,
  * });
  * ```
  */

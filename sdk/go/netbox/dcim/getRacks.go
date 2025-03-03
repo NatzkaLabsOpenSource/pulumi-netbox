@@ -39,15 +39,11 @@ type GetRacksResult struct {
 }
 
 func GetRacksOutput(ctx *pulumi.Context, args GetRacksOutputArgs, opts ...pulumi.InvokeOption) GetRacksResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetRacksResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetRacksResultOutput, error) {
 			args := v.(GetRacksArgs)
-			r, err := GetRacks(ctx, &args, opts...)
-			var s GetRacksResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getRacks:getRacks", args, GetRacksResultOutput{}, options).(GetRacksResultOutput), nil
 		}).(GetRacksResultOutput)
 }
 

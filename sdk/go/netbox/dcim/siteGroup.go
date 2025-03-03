@@ -32,12 +32,14 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			parent, err := dcim.NewSiteGroup(ctx, "parent", &dcim.SiteGroupArgs{
+//				Name:        pulumi.String("parent"),
 //				Description: pulumi.String("sample description"),
 //			})
 //			if err != nil {
 //				return err
 //			}
 //			_, err = dcim.NewSiteGroup(ctx, "child", &dcim.SiteGroupArgs{
+//				Name:        pulumi.String("child"),
 //				Description: pulumi.String("sample description"),
 //				ParentId:    parent.ID(),
 //			})

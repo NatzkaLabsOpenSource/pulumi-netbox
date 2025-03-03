@@ -55,6 +55,11 @@ export type PrimaryIp = import("./primaryIp").PrimaryIp;
 export const PrimaryIp: typeof import("./primaryIp").PrimaryIp = null as any;
 utilities.lazyLoad(exports, ["PrimaryIp"], () => require("./primaryIp"));
 
+export { VirtualDiskArgs, VirtualDiskState } from "./virtualDisk";
+export type VirtualDisk = import("./virtualDisk").VirtualDisk;
+export const VirtualDisk: typeof import("./virtualDisk").VirtualDisk = null as any;
+utilities.lazyLoad(exports, ["VirtualDisk"], () => require("./virtualDisk"));
+
 export { VirtualMachineArgs, VirtualMachineState } from "./virtualMachine";
 export type VirtualMachine = import("./virtualMachine").VirtualMachine;
 export const VirtualMachine: typeof import("./virtualMachine").VirtualMachine = null as any;
@@ -75,6 +80,8 @@ const _module = {
                 return new Interface(name, <any>undefined, { urn })
             case "netbox:virt/primaryIp:PrimaryIp":
                 return new PrimaryIp(name, <any>undefined, { urn })
+            case "netbox:virt/virtualDisk:VirtualDisk":
+                return new VirtualDisk(name, <any>undefined, { urn })
             case "netbox:virt/virtualMachine:VirtualMachine":
                 return new VirtualMachine(name, <any>undefined, { urn })
             default:
@@ -87,4 +94,5 @@ pulumi.runtime.registerResourceModule("netbox", "virt/clusterGroup", _module)
 pulumi.runtime.registerResourceModule("netbox", "virt/clusterType", _module)
 pulumi.runtime.registerResourceModule("netbox", "virt/interface", _module)
 pulumi.runtime.registerResourceModule("netbox", "virt/primaryIp", _module)
+pulumi.runtime.registerResourceModule("netbox", "virt/virtualDisk", _module)
 pulumi.runtime.registerResourceModule("netbox", "virt/virtualMachine", _module)

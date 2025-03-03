@@ -120,7 +120,7 @@ export namespace ipam {
 
     export interface GetPrefixesFilter {
         /**
-         * The name of the field to filter on. Supported fields are: `prefix`, `vlanVid`, `vrfId`, `vlanId`, `status`, `siteId`, & `tag`.
+         * The name of the field to filter on. Supported fields are: `prefix`, `contains`, `vlanVid`, `vrfId`, `vlanId`, `status`, `tenantId`, `siteId`, & `tag`.
          */
         name: string;
         /**
@@ -131,7 +131,7 @@ export namespace ipam {
 
     export interface GetPrefixesFilterArgs {
         /**
-         * The name of the field to filter on. Supported fields are: `prefix`, `vlanVid`, `vrfId`, `vlanId`, `status`, `siteId`, & `tag`.
+         * The name of the field to filter on. Supported fields are: `prefix`, `contains`, `vlanVid`, `vrfId`, `vlanId`, `status`, `tenantId`, `siteId`, & `tag`.
          */
         name: pulumi.Input<string>;
         /**

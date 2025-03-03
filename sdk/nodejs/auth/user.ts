@@ -14,10 +14,10 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const test = new netbox.auth.User("test", {
- *     active: true,
- *     password: "abcdefghijkl",
- *     staff: true,
  *     username: "johndoe",
+ *     password: "Abcdefghijkl1",
+ *     active: true,
+ *     staff: true,
  * });
  * ```
  */
@@ -53,6 +53,7 @@ export class User extends pulumi.CustomResource {
      * Defaults to `true`.
      */
     public readonly active!: pulumi.Output<boolean | undefined>;
+    public readonly groupIds!: pulumi.Output<number[] | undefined>;
     public readonly password!: pulumi.Output<string>;
     /**
      * Defaults to `false`.
@@ -74,6 +75,7 @@ export class User extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as UserState | undefined;
             resourceInputs["active"] = state ? state.active : undefined;
+            resourceInputs["groupIds"] = state ? state.groupIds : undefined;
             resourceInputs["password"] = state ? state.password : undefined;
             resourceInputs["staff"] = state ? state.staff : undefined;
             resourceInputs["username"] = state ? state.username : undefined;
@@ -86,6 +88,7 @@ export class User extends pulumi.CustomResource {
                 throw new Error("Missing required property 'username'");
             }
             resourceInputs["active"] = args ? args.active : undefined;
+            resourceInputs["groupIds"] = args ? args.groupIds : undefined;
             resourceInputs["password"] = args?.password ? pulumi.secret(args.password) : undefined;
             resourceInputs["staff"] = args ? args.staff : undefined;
             resourceInputs["username"] = args ? args.username : undefined;
@@ -105,6 +108,7 @@ export interface UserState {
      * Defaults to `true`.
      */
     active?: pulumi.Input<boolean>;
+    groupIds?: pulumi.Input<pulumi.Input<number>[]>;
     password?: pulumi.Input<string>;
     /**
      * Defaults to `false`.
@@ -121,6 +125,7 @@ export interface UserArgs {
      * Defaults to `true`.
      */
     active?: pulumi.Input<boolean>;
+    groupIds?: pulumi.Input<pulumi.Input<number>[]>;
     password: pulumi.Input<string>;
     /**
      * Defaults to `false`.

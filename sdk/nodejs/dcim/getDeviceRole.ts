@@ -17,7 +17,6 @@ import * as utilities from "../utilities";
  * ```
  */
 export function getDeviceRole(args: GetDeviceRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetDeviceRoleResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getDeviceRole:getDeviceRole", {
         "name": args.name,
@@ -56,8 +55,11 @@ export interface GetDeviceRoleResult {
  * });
  * ```
  */
-export function getDeviceRoleOutput(args: GetDeviceRoleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDeviceRoleResult> {
-    return pulumi.output(args).apply((a: any) => getDeviceRole(a, opts))
+export function getDeviceRoleOutput(args: GetDeviceRoleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDeviceRoleResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getDeviceRole:getDeviceRole", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

@@ -42,12 +42,13 @@ const (
 	ipamMod    = "ipam"
 	tenancyMod = "tenancy"
 	virtMod    = "virt"
+	vpnMod     = "vpn"
 )
 
 // Provider returns additional overlaid schema and metadata associated with the provider..
 func Provider() tfbridge.ProviderInfo {
 	// Instantiate the Terraform provider
-	p := shimv2.NewProvider(netbox.Provider(), shimv2.WithDiffStrategy(shimv2.PlanState))
+	p := shimv2.NewProvider(netbox.Provider())
 
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
@@ -67,6 +68,9 @@ func Provider() tfbridge.ProviderInfo {
 		Config:            map[string]*tfbridge.SchemaInfo{},
 		Resources: map[string]*tfbridge.ResourceInfo{
 			// Auth
+			"netbox_group": {
+				Tok: tfbridge.MakeResource(mainPkg, authMod, "Group"),
+			},
 			"netbox_permission": {
 				Tok: tfbridge.MakeResource(mainPkg, authMod, "Permission"),
 			},
@@ -131,6 +135,9 @@ func Provider() tfbridge.ProviderInfo {
 			"netbox_device_type": {
 				Tok: tfbridge.MakeResource(mainPkg, dcimMod, "DeviceType"),
 			},
+			"netbox_interface_template": {
+				Tok: tfbridge.MakeResource(mainPkg, dcimMod, "InterfaceTemplate"),
+			},
 			"netbox_inventory_item": {
 				Tok: tfbridge.MakeResource(mainPkg, dcimMod, "InventoryItem"),
 			},
@@ -166,6 +173,9 @@ func Provider() tfbridge.ProviderInfo {
 			},
 			"netbox_rack_role": {
 				Tok: tfbridge.MakeResource(mainPkg, dcimMod, "RackRole"),
+			},
+			"netbox_rack_type": {
+				Tok: tfbridge.MakeResource(mainPkg, dcimMod, "RackType"),
 			},
 			"netbox_region": {
 				Tok: tfbridge.MakeResource(mainPkg, dcimMod, "Region"),
@@ -275,8 +285,22 @@ func Provider() tfbridge.ProviderInfo {
 			"netbox_primary_ip": {
 				Tok: tfbridge.MakeResource(mainPkg, virtMod, "PrimaryIp"),
 			},
+			"netbox_virtual_disk": {
+				Tok: tfbridge.MakeResource(mainPkg, virtMod, "VirtualDisk"),
+			},
 			"netbox_virtual_machine": {
 				Tok: tfbridge.MakeResource(mainPkg, virtMod, "VirtualMachine"),
+			},
+
+			// VPN
+			"netbox_vpn_tunnel": {
+				Tok: tfbridge.MakeResource(mainPkg, vpnMod, "VpnTunnel"),
+			},
+			"netbox_vpn_tunnel_group": {
+				Tok: tfbridge.MakeResource(mainPkg, vpnMod, "VpnTunnelGroup"),
+			},
+			"netbox_vpn_tunnel_termination": {
+				Tok: tfbridge.MakeResource(mainPkg, vpnMod, "VpnTunnelTermination"),
 			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{

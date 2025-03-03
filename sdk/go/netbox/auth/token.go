@@ -32,12 +32,12 @@ import (
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			test, err := auth.NewUser(ctx, "test", &auth.UserArgs{
 //				Username: pulumi.String("johndoe"),
-//				Password: pulumi.String("abcdefghijkl"),
+//				Password: pulumi.String("Abcdefghijkl1"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = auth.NewToken(ctx, "testBasic", &auth.TokenArgs{
+//			_, err = auth.NewToken(ctx, "test_basic", &auth.TokenArgs{
 //				UserId: test.ID(),
 //				Key:    pulumi.String("0123456789012345678901234567890123456789"),
 //				AllowedIps: pulumi.StringArray{

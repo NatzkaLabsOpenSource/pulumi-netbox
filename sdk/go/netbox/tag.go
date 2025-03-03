@@ -31,6 +31,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := netbox.NewTag(ctx, "dmz", &netbox.TagArgs{
+//				Name:     pulumi.String("DMZ"),
 //				ColorHex: pulumi.String("ff00ff"),
 //			})
 //			if err != nil {

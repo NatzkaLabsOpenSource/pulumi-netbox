@@ -22,21 +22,21 @@ import * as utilities from "../utilities";
  *     aTerminations: [
  *         {
  *             objectType: "dcim.consoleserverport",
- *             objectId: netbox_device_console_server_port.kvm1.id,
+ *             objectId: kvm1.id,
  *         },
  *         {
  *             objectType: "dcim.consoleserverport",
- *             objectId: netbox_device_console_server_port.kvm2.id,
+ *             objectId: kvm2.id,
  *         },
  *     ],
  *     bTerminations: [
  *         {
  *             objectType: "dcim.consoleport",
- *             objectId: netbox_device_console_port.server1.id,
+ *             objectId: server1.id,
  *         },
  *         {
  *             objectType: "dcim.consoleport",
- *             objectId: netbox_device_console_port.server2.id,
+ *             objectId: server2.id,
  *         },
  *     ],
  *     status: "connected",

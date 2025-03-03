@@ -24,10 +24,11 @@ func LookupLocation(ctx *pulumi.Context, args *LookupLocationArgs, opts ...pulum
 // A collection of arguments for invoking getLocation.
 type LookupLocationArgs struct {
 	// The ID of this resource.
-	Id     *string `pulumi:"id"`
-	Name   *string `pulumi:"name"`
-	SiteId *int    `pulumi:"siteId"`
-	Slug   *string `pulumi:"slug"`
+	Id       *string `pulumi:"id"`
+	Name     *string `pulumi:"name"`
+	ParentId *int    `pulumi:"parentId"`
+	SiteId   *int    `pulumi:"siteId"`
+	Slug     *string `pulumi:"slug"`
 }
 
 // A collection of values returned by getLocation.
@@ -36,6 +37,7 @@ type LookupLocationResult struct {
 	// The ID of this resource.
 	Id       string  `pulumi:"id"`
 	Name     *string `pulumi:"name"`
+	ParentId int     `pulumi:"parentId"`
 	SiteId   int     `pulumi:"siteId"`
 	Slug     *string `pulumi:"slug"`
 	Status   string  `pulumi:"status"`
@@ -43,25 +45,22 @@ type LookupLocationResult struct {
 }
 
 func LookupLocationOutput(ctx *pulumi.Context, args LookupLocationOutputArgs, opts ...pulumi.InvokeOption) LookupLocationResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupLocationResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupLocationResultOutput, error) {
 			args := v.(LookupLocationArgs)
-			r, err := LookupLocation(ctx, &args, opts...)
-			var s LookupLocationResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getLocation:getLocation", args, LookupLocationResultOutput{}, options).(LookupLocationResultOutput), nil
 		}).(LookupLocationResultOutput)
 }
 
 // A collection of arguments for invoking getLocation.
 type LookupLocationOutputArgs struct {
 	// The ID of this resource.
-	Id     pulumi.StringPtrInput `pulumi:"id"`
-	Name   pulumi.StringPtrInput `pulumi:"name"`
-	SiteId pulumi.IntPtrInput    `pulumi:"siteId"`
-	Slug   pulumi.StringPtrInput `pulumi:"slug"`
+	Id       pulumi.StringPtrInput `pulumi:"id"`
+	Name     pulumi.StringPtrInput `pulumi:"name"`
+	ParentId pulumi.IntPtrInput    `pulumi:"parentId"`
+	SiteId   pulumi.IntPtrInput    `pulumi:"siteId"`
+	Slug     pulumi.StringPtrInput `pulumi:"slug"`
 }
 
 func (LookupLocationOutputArgs) ElementType() reflect.Type {
@@ -94,6 +93,10 @@ func (o LookupLocationResultOutput) Id() pulumi.StringOutput {
 
 func (o LookupLocationResultOutput) Name() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupLocationResult) *string { return v.Name }).(pulumi.StringPtrOutput)
+}
+
+func (o LookupLocationResultOutput) ParentId() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupLocationResult) int { return v.ParentId }).(pulumi.IntOutput)
 }
 
 func (o LookupLocationResultOutput) SiteId() pulumi.IntOutput {

@@ -15,9 +15,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testManufacturer = new netbox.dcim.Manufacturer("testManufacturer", {});
- * const testModuleType = new netbox.dcim.ModuleType("testModuleType", {
- *     manufacturerId: testManufacturer.id,
+ * const test = new netbox.dcim.Manufacturer("test", {name: "Dell"});
+ * const testModuleType = new netbox.dcim.ModuleType("test", {
+ *     manufacturerId: test.id,
  *     model: "Networking",
  * });
  * ```

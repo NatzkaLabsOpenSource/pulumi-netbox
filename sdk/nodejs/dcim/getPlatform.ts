@@ -11,15 +11,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
- * const pANOS = netbox.dcim.getPlatform({
+ * const PANOS = netbox.dcim.getPlatform({
  *     name: "PANOS",
  * });
  * ```
  */
 export function getPlatform(args: GetPlatformArgs, opts?: pulumi.InvokeOptions): Promise<GetPlatformResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getPlatform:getPlatform", {
+        "manufacturerId": args.manufacturerId,
         "name": args.name,
     }, opts);
 }
@@ -28,6 +28,7 @@ export function getPlatform(args: GetPlatformArgs, opts?: pulumi.InvokeOptions):
  * A collection of arguments for invoking getPlatform.
  */
 export interface GetPlatformArgs {
+    manufacturerId?: number;
     name: string;
 }
 
@@ -39,6 +40,7 @@ export interface GetPlatformResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
+    readonly manufacturerId?: number;
     readonly name: string;
     readonly slug: string;
 }
@@ -49,18 +51,23 @@ export interface GetPlatformResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
- * const pANOS = netbox.dcim.getPlatform({
+ * const PANOS = netbox.dcim.getPlatform({
  *     name: "PANOS",
  * });
  * ```
  */
-export function getPlatformOutput(args: GetPlatformOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPlatformResult> {
-    return pulumi.output(args).apply((a: any) => getPlatform(a, opts))
+export function getPlatformOutput(args: GetPlatformOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPlatformResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getPlatform:getPlatform", {
+        "manufacturerId": args.manufacturerId,
+        "name": args.name,
+    }, opts);
 }
 
 /**
  * A collection of arguments for invoking getPlatform.
  */
 export interface GetPlatformOutputArgs {
+    manufacturerId?: pulumi.Input<number>;
     name: pulumi.Input<string>;
 }

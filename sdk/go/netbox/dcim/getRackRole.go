@@ -38,15 +38,11 @@ type LookupRackRoleResult struct {
 }
 
 func LookupRackRoleOutput(ctx *pulumi.Context, args LookupRackRoleOutputArgs, opts ...pulumi.InvokeOption) LookupRackRoleResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupRackRoleResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupRackRoleResultOutput, error) {
 			args := v.(LookupRackRoleArgs)
-			r, err := LookupRackRole(ctx, &args, opts...)
-			var s LookupRackRoleResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getRackRole:getRackRole", args, LookupRackRoleResultOutput{}, options).(LookupRackRoleResultOutput), nil
 		}).(LookupRackRoleResultOutput)
 }
 

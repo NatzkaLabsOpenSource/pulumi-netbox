@@ -31,7 +31,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tenancy.NewTenant(ctx, "customerA", nil)
+//			_, err := tenancy.NewTenant(ctx, "customer_a", &tenancy.TenantArgs{
+//				Name: pulumi.String("Customer A"),
+//			})
 //			if err != nil {
 //				return err
 //			}

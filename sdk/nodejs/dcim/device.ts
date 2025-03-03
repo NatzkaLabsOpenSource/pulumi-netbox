@@ -15,17 +15,21 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testSite = new netbox.dcim.Site("testSite", {});
- * const testDeviceRole = new netbox.dcim.DeviceRole("testDeviceRole", {colorHex: "123456"});
- * const testManufacturer = new netbox.dcim.Manufacturer("testManufacturer", {});
- * const testDeviceType = new netbox.dcim.DeviceType("testDeviceType", {
+ * const test = new netbox.dcim.Site("test", {name: "%[1]s"});
+ * const testDeviceRole = new netbox.dcim.DeviceRole("test", {
+ *     name: "%[1]s",
+ *     colorHex: "123456",
+ * });
+ * const testManufacturer = new netbox.dcim.Manufacturer("test", {name: "test"});
+ * const testDeviceType = new netbox.dcim.DeviceType("test", {
  *     model: "test",
  *     manufacturerId: testManufacturer.id,
  * });
- * const testDevice = new netbox.dcim.Device("testDevice", {
+ * const testDevice = new netbox.dcim.Device("test", {
+ *     name: "%[1]s",
  *     deviceTypeId: testDeviceType.id,
  *     roleId: testDeviceRole.id,
- *     siteId: testSite.id,
+ *     siteId: test.id,
  *     localContextData: JSON.stringify({
  *         setting_a: "Some Setting",
  *         setting_b: 42,
@@ -64,6 +68,7 @@ export class Device extends pulumi.CustomResource {
     public readonly assetTag!: pulumi.Output<string | undefined>;
     public readonly clusterId!: pulumi.Output<number | undefined>;
     public readonly comments!: pulumi.Output<string | undefined>;
+    public readonly configTemplateId!: pulumi.Output<number | undefined>;
     public readonly customFields!: pulumi.Output<{[key: string]: string} | undefined>;
     public readonly description!: pulumi.Output<string | undefined>;
     public readonly deviceTypeId!: pulumi.Output<number>;
@@ -118,6 +123,7 @@ export class Device extends pulumi.CustomResource {
             resourceInputs["assetTag"] = state ? state.assetTag : undefined;
             resourceInputs["clusterId"] = state ? state.clusterId : undefined;
             resourceInputs["comments"] = state ? state.comments : undefined;
+            resourceInputs["configTemplateId"] = state ? state.configTemplateId : undefined;
             resourceInputs["customFields"] = state ? state.customFields : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["deviceTypeId"] = state ? state.deviceTypeId : undefined;
@@ -154,6 +160,7 @@ export class Device extends pulumi.CustomResource {
             resourceInputs["assetTag"] = args ? args.assetTag : undefined;
             resourceInputs["clusterId"] = args ? args.clusterId : undefined;
             resourceInputs["comments"] = args ? args.comments : undefined;
+            resourceInputs["configTemplateId"] = args ? args.configTemplateId : undefined;
             resourceInputs["customFields"] = args ? args.customFields : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["deviceTypeId"] = args ? args.deviceTypeId : undefined;
@@ -189,6 +196,7 @@ export interface DeviceState {
     assetTag?: pulumi.Input<string>;
     clusterId?: pulumi.Input<number>;
     comments?: pulumi.Input<string>;
+    configTemplateId?: pulumi.Input<number>;
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     deviceTypeId?: pulumi.Input<number>;
@@ -235,6 +243,7 @@ export interface DeviceArgs {
     assetTag?: pulumi.Input<string>;
     clusterId?: pulumi.Input<number>;
     comments?: pulumi.Input<string>;
+    configTemplateId?: pulumi.Input<number>;
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     deviceTypeId: pulumi.Input<number>;

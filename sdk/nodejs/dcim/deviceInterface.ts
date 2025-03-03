@@ -17,6 +17,7 @@ import * as utilities from "../utilities";
  *
  * // Assumes a device with ID 123 exists
  * const test = new netbox.dcim.DeviceInterface("test", {
+ *     name: "testinterface",
  *     deviceId: 123,
  *     type: "1000base-t",
  * });
@@ -56,6 +57,7 @@ export class DeviceInterface extends pulumi.CustomResource {
      * Defaults to `true`.
      */
     public readonly enabled!: pulumi.Output<boolean | undefined>;
+    public readonly label!: pulumi.Output<string | undefined>;
     /**
      * If this device is a member of a LAG group, you can reference the LAG interface here.
      */
@@ -94,6 +96,7 @@ export class DeviceInterface extends pulumi.CustomResource {
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["deviceId"] = state ? state.deviceId : undefined;
             resourceInputs["enabled"] = state ? state.enabled : undefined;
+            resourceInputs["label"] = state ? state.label : undefined;
             resourceInputs["lagDeviceInterfaceId"] = state ? state.lagDeviceInterfaceId : undefined;
             resourceInputs["macAddress"] = state ? state.macAddress : undefined;
             resourceInputs["mgmtonly"] = state ? state.mgmtonly : undefined;
@@ -117,6 +120,7 @@ export class DeviceInterface extends pulumi.CustomResource {
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["deviceId"] = args ? args.deviceId : undefined;
             resourceInputs["enabled"] = args ? args.enabled : undefined;
+            resourceInputs["label"] = args ? args.label : undefined;
             resourceInputs["lagDeviceInterfaceId"] = args ? args.lagDeviceInterfaceId : undefined;
             resourceInputs["macAddress"] = args ? args.macAddress : undefined;
             resourceInputs["mgmtonly"] = args ? args.mgmtonly : undefined;
@@ -145,6 +149,7 @@ export interface DeviceInterfaceState {
      * Defaults to `true`.
      */
     enabled?: pulumi.Input<boolean>;
+    label?: pulumi.Input<string>;
     /**
      * If this device is a member of a LAG group, you can reference the LAG interface here.
      */
@@ -178,6 +183,7 @@ export interface DeviceInterfaceArgs {
      * Defaults to `true`.
      */
     enabled?: pulumi.Input<boolean>;
+    label?: pulumi.Input<string>;
     /**
      * If this device is a member of a LAG group, you can reference the LAG interface here.
      */

@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testBasic = new netbox.ipam.Role("testBasic", {});
+ * const testBasic = new netbox.ipam.Role("test_basic", {name: "test"});
  * ```
  */
 export class Role extends pulumi.CustomResource {

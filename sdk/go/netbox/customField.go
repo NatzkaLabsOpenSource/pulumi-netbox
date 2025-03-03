@@ -33,12 +33,13 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := netbox.NewCustomField(ctx, "test", &netbox.CustomFieldArgs{
+//				Name: pulumi.String("test"),
+//				Type: pulumi.String("text"),
 //				ContentTypes: pulumi.StringArray{
 //					pulumi.String("virtualization.vminterface"),
 //				},
-//				Type:            pulumi.String("text"),
-//				ValidationRegex: pulumi.String("^.*$"),
 //				Weight:          pulumi.Int(100),
+//				ValidationRegex: pulumi.String("^.*$"),
 //			})
 //			if err != nil {
 //				return err

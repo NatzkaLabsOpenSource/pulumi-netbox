@@ -30,12 +30,14 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testManufacturer, err := dcim.NewManufacturer(ctx, "testManufacturer", nil)
+//			test, err := dcim.NewManufacturer(ctx, "test", &dcim.ManufacturerArgs{
+//				Name: pulumi.String("Dell"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewModuleType(ctx, "testModuleType", &dcim.ModuleTypeArgs{
-//				ManufacturerId: testManufacturer.ID(),
+//			_, err = dcim.NewModuleType(ctx, "test", &dcim.ModuleTypeArgs{
+//				ManufacturerId: test.ID(),
 //				Model:          pulumi.String("Networking"),
 //			})
 //			if err != nil {

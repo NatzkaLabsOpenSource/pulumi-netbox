@@ -48,33 +48,32 @@ func LookupPlatform(ctx *pulumi.Context, args *LookupPlatformArgs, opts ...pulum
 
 // A collection of arguments for invoking getPlatform.
 type LookupPlatformArgs struct {
-	Name string `pulumi:"name"`
+	ManufacturerId *int   `pulumi:"manufacturerId"`
+	Name           string `pulumi:"name"`
 }
 
 // A collection of values returned by getPlatform.
 type LookupPlatformResult struct {
 	// The provider-assigned unique ID for this managed resource.
-	Id   string `pulumi:"id"`
-	Name string `pulumi:"name"`
-	Slug string `pulumi:"slug"`
+	Id             string `pulumi:"id"`
+	ManufacturerId *int   `pulumi:"manufacturerId"`
+	Name           string `pulumi:"name"`
+	Slug           string `pulumi:"slug"`
 }
 
 func LookupPlatformOutput(ctx *pulumi.Context, args LookupPlatformOutputArgs, opts ...pulumi.InvokeOption) LookupPlatformResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupPlatformResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupPlatformResultOutput, error) {
 			args := v.(LookupPlatformArgs)
-			r, err := LookupPlatform(ctx, &args, opts...)
-			var s LookupPlatformResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getPlatform:getPlatform", args, LookupPlatformResultOutput{}, options).(LookupPlatformResultOutput), nil
 		}).(LookupPlatformResultOutput)
 }
 
 // A collection of arguments for invoking getPlatform.
 type LookupPlatformOutputArgs struct {
-	Name pulumi.StringInput `pulumi:"name"`
+	ManufacturerId pulumi.IntPtrInput `pulumi:"manufacturerId"`
+	Name           pulumi.StringInput `pulumi:"name"`
 }
 
 func (LookupPlatformOutputArgs) ElementType() reflect.Type {
@@ -99,6 +98,10 @@ func (o LookupPlatformResultOutput) ToLookupPlatformResultOutputWithContext(ctx 
 // The provider-assigned unique ID for this managed resource.
 func (o LookupPlatformResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPlatformResult) string { return v.Id }).(pulumi.StringOutput)
+}
+
+func (o LookupPlatformResultOutput) ManufacturerId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LookupPlatformResult) *int { return v.ManufacturerId }).(pulumi.IntPtrOutput)
 }
 
 func (o LookupPlatformResultOutput) Name() pulumi.StringOutput {

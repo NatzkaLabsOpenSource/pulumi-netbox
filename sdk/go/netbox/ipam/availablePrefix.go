@@ -26,14 +26,14 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testPrefix, err := ipam.LookupPrefix(ctx, &ipam.LookupPrefixArgs{
+//			test, err := ipam.LookupPrefix(ctx, &ipam.LookupPrefixArgs{
 //				Cidr: pulumi.StringRef("10.0.0.0/24"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewAvailablePrefix(ctx, "testAvailablePrefix", &ipam.AvailablePrefixArgs{
-//				ParentPrefixId: *pulumi.Int(testPrefix.Id),
+//			_, err = ipam.NewAvailablePrefix(ctx, "test", &ipam.AvailablePrefixArgs{
+//				ParentPrefixId: pulumi.Int(test.Id),
 //				PrefixLength:   pulumi.Int(25),
 //				Status:         pulumi.String("active"),
 //			})

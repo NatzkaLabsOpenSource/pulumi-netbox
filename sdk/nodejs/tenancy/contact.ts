@@ -18,6 +18,7 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const test = new netbox.tenancy.Contact("test", {
+ *     name: "John Doe",
  *     email: "test@example.com",
  *     phone: "123-123123",
  * });

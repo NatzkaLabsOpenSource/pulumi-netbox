@@ -15,10 +15,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const custAProd = new netbox.ipam.Vrf("custAProd", {tags: [
- *     "customer-a",
- *     "prod",
- * ]});
+ * const custAProd = new netbox.ipam.Vrf("cust_a_prod", {
+ *     name: "cust-a-prod",
+ *     tags: [
+ *         "customer-a",
+ *         "prod",
+ *     ],
+ * });
  * ```
  */
 export class Vrf extends pulumi.CustomResource {
@@ -50,7 +53,12 @@ export class Vrf extends pulumi.CustomResource {
     }
 
     public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `true`.
+     */
+    public readonly enforceUnique!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
+    public readonly rd!: pulumi.Output<string | undefined>;
     public readonly tags!: pulumi.Output<string[] | undefined>;
     public readonly tenantId!: pulumi.Output<number | undefined>;
 
@@ -68,13 +76,17 @@ export class Vrf extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as VrfState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["enforceUnique"] = state ? state.enforceUnique : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
+            resourceInputs["rd"] = state ? state.rd : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["tenantId"] = state ? state.tenantId : undefined;
         } else {
             const args = argsOrState as VrfArgs | undefined;
             resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["enforceUnique"] = args ? args.enforceUnique : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
+            resourceInputs["rd"] = args ? args.rd : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["tenantId"] = args ? args.tenantId : undefined;
         }
@@ -88,7 +100,12 @@ export class Vrf extends pulumi.CustomResource {
  */
 export interface VrfState {
     description?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    enforceUnique?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    rd?: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     tenantId?: pulumi.Input<number>;
 }
@@ -98,7 +115,12 @@ export interface VrfState {
  */
 export interface VrfArgs {
     description?: pulumi.Input<string>;
+    /**
+     * Defaults to `true`.
+     */
+    enforceUnique?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
+    rd?: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
     tenantId?: pulumi.Input<number>;
 }

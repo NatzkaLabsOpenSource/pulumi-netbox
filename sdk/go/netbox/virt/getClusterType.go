@@ -35,15 +35,11 @@ type LookupClusterTypeResult struct {
 }
 
 func LookupClusterTypeOutput(ctx *pulumi.Context, args LookupClusterTypeOutputArgs, opts ...pulumi.InvokeOption) LookupClusterTypeResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupClusterTypeResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupClusterTypeResultOutput, error) {
 			args := v.(LookupClusterTypeArgs)
-			r, err := LookupClusterType(ctx, &args, opts...)
-			var s LookupClusterTypeResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:virt/getClusterType:getClusterType", args, LookupClusterTypeResultOutput{}, options).(LookupClusterTypeResultOutput), nil
 		}).(LookupClusterTypeResultOutput)
 }
 

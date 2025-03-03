@@ -39,15 +39,11 @@ type GetVlansResult struct {
 }
 
 func GetVlansOutput(ctx *pulumi.Context, args GetVlansOutputArgs, opts ...pulumi.InvokeOption) GetVlansResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetVlansResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetVlansResultOutput, error) {
 			args := v.(GetVlansArgs)
-			r, err := GetVlans(ctx, &args, opts...)
-			var s GetVlansResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getVlans:getVlans", args, GetVlansResultOutput{}, options).(GetVlansResultOutput), nil
 		}).(GetVlansResultOutput)
 }
 

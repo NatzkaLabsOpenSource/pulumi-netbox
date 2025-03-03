@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getDevices(args?: GetDevicesArgs, opts?: pulumi.InvokeOptions): Promise<GetDevicesResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getDevices:getDevices", {
         "filters": args.filters,
@@ -39,8 +38,14 @@ export interface GetDevicesResult {
     readonly limit?: number;
     readonly nameRegex?: string;
 }
-export function getDevicesOutput(args?: GetDevicesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDevicesResult> {
-    return pulumi.output(args).apply((a: any) => getDevices(a, opts))
+export function getDevicesOutput(args?: GetDevicesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDevicesResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getDevices:getDevices", {
+        "filters": args.filters,
+        "limit": args.limit,
+        "nameRegex": args.nameRegex,
+    }, opts);
 }
 
 /**

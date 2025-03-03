@@ -32,21 +32,26 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testSite, err := dcim.NewSite(ctx, "testSite", nil)
+//			test, err := dcim.NewSite(ctx, "test", &dcim.SiteArgs{
+//				Name: pulumi.String("%[1]s"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testDeviceRole, err := dcim.NewDeviceRole(ctx, "testDeviceRole", &dcim.DeviceRoleArgs{
+//			testDeviceRole, err := dcim.NewDeviceRole(ctx, "test", &dcim.DeviceRoleArgs{
+//				Name:     pulumi.String("%[1]s"),
 //				ColorHex: pulumi.String("123456"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			testManufacturer, err := dcim.NewManufacturer(ctx, "testManufacturer", nil)
+//			testManufacturer, err := dcim.NewManufacturer(ctx, "test", &dcim.ManufacturerArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testDeviceType, err := dcim.NewDeviceType(ctx, "testDeviceType", &dcim.DeviceTypeArgs{
+//			testDeviceType, err := dcim.NewDeviceType(ctx, "test", &dcim.DeviceTypeArgs{
 //				Model:          pulumi.String("test"),
 //				ManufacturerId: testManufacturer.ID(),
 //			})
@@ -61,10 +66,11 @@ import (
 //				return err
 //			}
 //			json0 := string(tmpJSON0)
-//			_, err = dcim.NewDevice(ctx, "testDevice", &dcim.DeviceArgs{
+//			_, err = dcim.NewDevice(ctx, "test", &dcim.DeviceArgs{
+//				Name:             pulumi.String("%[1]s"),
 //				DeviceTypeId:     testDeviceType.ID(),
 //				RoleId:           testDeviceRole.ID(),
-//				SiteId:           testSite.ID(),
+//				SiteId:           test.ID(),
 //				LocalContextData: pulumi.String(json0),
 //			})
 //			if err != nil {
@@ -78,12 +84,13 @@ import (
 type Device struct {
 	pulumi.CustomResourceState
 
-	AssetTag     pulumi.StringPtrOutput `pulumi:"assetTag"`
-	ClusterId    pulumi.IntPtrOutput    `pulumi:"clusterId"`
-	Comments     pulumi.StringPtrOutput `pulumi:"comments"`
-	CustomFields pulumi.StringMapOutput `pulumi:"customFields"`
-	Description  pulumi.StringPtrOutput `pulumi:"description"`
-	DeviceTypeId pulumi.IntOutput       `pulumi:"deviceTypeId"`
+	AssetTag         pulumi.StringPtrOutput `pulumi:"assetTag"`
+	ClusterId        pulumi.IntPtrOutput    `pulumi:"clusterId"`
+	Comments         pulumi.StringPtrOutput `pulumi:"comments"`
+	ConfigTemplateId pulumi.IntPtrOutput    `pulumi:"configTemplateId"`
+	CustomFields     pulumi.StringMapOutput `pulumi:"customFields"`
+	Description      pulumi.StringPtrOutput `pulumi:"description"`
+	DeviceTypeId     pulumi.IntOutput       `pulumi:"deviceTypeId"`
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData pulumi.StringPtrOutput `pulumi:"localContextData"`
 	LocationId       pulumi.IntPtrOutput    `pulumi:"locationId"`
@@ -149,12 +156,13 @@ func GetDevice(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Device resources.
 type deviceState struct {
-	AssetTag     *string           `pulumi:"assetTag"`
-	ClusterId    *int              `pulumi:"clusterId"`
-	Comments     *string           `pulumi:"comments"`
-	CustomFields map[string]string `pulumi:"customFields"`
-	Description  *string           `pulumi:"description"`
-	DeviceTypeId *int              `pulumi:"deviceTypeId"`
+	AssetTag         *string           `pulumi:"assetTag"`
+	ClusterId        *int              `pulumi:"clusterId"`
+	Comments         *string           `pulumi:"comments"`
+	ConfigTemplateId *int              `pulumi:"configTemplateId"`
+	CustomFields     map[string]string `pulumi:"customFields"`
+	Description      *string           `pulumi:"description"`
+	DeviceTypeId     *int              `pulumi:"deviceTypeId"`
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData *string `pulumi:"localContextData"`
 	LocationId       *int    `pulumi:"locationId"`
@@ -182,12 +190,13 @@ type deviceState struct {
 }
 
 type DeviceState struct {
-	AssetTag     pulumi.StringPtrInput
-	ClusterId    pulumi.IntPtrInput
-	Comments     pulumi.StringPtrInput
-	CustomFields pulumi.StringMapInput
-	Description  pulumi.StringPtrInput
-	DeviceTypeId pulumi.IntPtrInput
+	AssetTag         pulumi.StringPtrInput
+	ClusterId        pulumi.IntPtrInput
+	Comments         pulumi.StringPtrInput
+	ConfigTemplateId pulumi.IntPtrInput
+	CustomFields     pulumi.StringMapInput
+	Description      pulumi.StringPtrInput
+	DeviceTypeId     pulumi.IntPtrInput
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData pulumi.StringPtrInput
 	LocationId       pulumi.IntPtrInput
@@ -219,12 +228,13 @@ func (DeviceState) ElementType() reflect.Type {
 }
 
 type deviceArgs struct {
-	AssetTag     *string           `pulumi:"assetTag"`
-	ClusterId    *int              `pulumi:"clusterId"`
-	Comments     *string           `pulumi:"comments"`
-	CustomFields map[string]string `pulumi:"customFields"`
-	Description  *string           `pulumi:"description"`
-	DeviceTypeId int               `pulumi:"deviceTypeId"`
+	AssetTag         *string           `pulumi:"assetTag"`
+	ClusterId        *int              `pulumi:"clusterId"`
+	Comments         *string           `pulumi:"comments"`
+	ConfigTemplateId *int              `pulumi:"configTemplateId"`
+	CustomFields     map[string]string `pulumi:"customFields"`
+	Description      *string           `pulumi:"description"`
+	DeviceTypeId     int               `pulumi:"deviceTypeId"`
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData *string `pulumi:"localContextData"`
 	LocationId       *int    `pulumi:"locationId"`
@@ -251,12 +261,13 @@ type deviceArgs struct {
 
 // The set of arguments for constructing a Device resource.
 type DeviceArgs struct {
-	AssetTag     pulumi.StringPtrInput
-	ClusterId    pulumi.IntPtrInput
-	Comments     pulumi.StringPtrInput
-	CustomFields pulumi.StringMapInput
-	Description  pulumi.StringPtrInput
-	DeviceTypeId pulumi.IntInput
+	AssetTag         pulumi.StringPtrInput
+	ClusterId        pulumi.IntPtrInput
+	Comments         pulumi.StringPtrInput
+	ConfigTemplateId pulumi.IntPtrInput
+	CustomFields     pulumi.StringMapInput
+	Description      pulumi.StringPtrInput
+	DeviceTypeId     pulumi.IntInput
 	// This is best managed through the use of `jsonencode` and a map of settings.
 	LocalContextData pulumi.StringPtrInput
 	LocationId       pulumi.IntPtrInput
@@ -378,6 +389,10 @@ func (o DeviceOutput) ClusterId() pulumi.IntPtrOutput {
 
 func (o DeviceOutput) Comments() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Device) pulumi.StringPtrOutput { return v.Comments }).(pulumi.StringPtrOutput)
+}
+
+func (o DeviceOutput) ConfigTemplateId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Device) pulumi.IntPtrOutput { return v.ConfigTemplateId }).(pulumi.IntPtrOutput)
 }
 
 func (o DeviceOutput) CustomFields() pulumi.StringMapOutput {

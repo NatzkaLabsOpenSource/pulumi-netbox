@@ -40,15 +40,11 @@ type LookupContactRoleResult struct {
 }
 
 func LookupContactRoleOutput(ctx *pulumi.Context, args LookupContactRoleOutputArgs, opts ...pulumi.InvokeOption) LookupContactRoleResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupContactRoleResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupContactRoleResultOutput, error) {
 			args := v.(LookupContactRoleArgs)
-			r, err := LookupContactRole(ctx, &args, opts...)
-			var s LookupContactRoleResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:tenancy/getContactRole:getContactRole", args, LookupContactRoleResultOutput{}, options).(LookupContactRoleResultOutput), nil
 		}).(LookupContactRoleResultOutput)
 }
 

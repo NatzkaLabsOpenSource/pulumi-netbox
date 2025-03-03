@@ -81,7 +81,7 @@ export interface ProviderArgs {
     /**
      * Set these header on all requests to Netbox. Can be set via the `NETBOX_HEADERS` environment variable.
      */
-    headers?: pulumi.Input<{[key: string]: any}>;
+    headers?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
      * Netbox API HTTP request timeout in seconds. Can be set via the `NETBOX_REQUEST_TIMEOUT` environment variable.
      */
@@ -91,15 +91,10 @@ export interface ProviderArgs {
      * environment variable.
      */
     serverUrl: pulumi.Input<string>;
-    /**
-     * If true, do not try to determine the running Netbox version at provider startup. Disables warnings about possibly
-     * unsupported Netbox version. Also useful for local testing on terraform plans. Can be set via the
-     * `NETBOX_SKIP_VERSION_CHECK` environment variable. Defaults to `false`.
-     */
     skipVersionCheck?: pulumi.Input<boolean>;
     /**
-     * If true, strip trailing slashes from the `server_url` parameter and print a warning when doing so. Note that using
-     * trailing slashes in the `server_url` parameter will usually lead to errors. Can be set via the
+     * If true, strip trailing slashes from the `serverUrl` parameter and print a warning when doing so. Note that using
+     * trailing slashes in the `serverUrl` parameter will usually lead to errors. Can be set via the
      * `NETBOX_STRIP_TRAILING_SLASHES_FROM_URL` environment variable. Defaults to `true`.
      */
     stripTrailingSlashesFromUrl?: pulumi.Input<boolean>;

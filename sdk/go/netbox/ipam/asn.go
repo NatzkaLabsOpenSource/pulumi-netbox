@@ -31,13 +31,17 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testRir, err := ipam.NewRir(ctx, "testRir", nil)
+//			test, err := ipam.NewRir(ctx, "test", &ipam.RirArgs{
+//				Name: pulumi.String("testrir"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewAsn(ctx, "testAsn", &ipam.AsnArgs{
-//				Asn:   pulumi.Int(1337),
-//				RirId: testRir.ID(),
+//			_, err = ipam.NewAsn(ctx, "test", &ipam.AsnArgs{
+//				Asn:         pulumi.Int(1337),
+//				RirId:       test.ID(),
+//				Description: pulumi.String("test"),
+//				Comments:    pulumi.String("test"),
 //			})
 //			if err != nil {
 //				return err
@@ -50,7 +54,13 @@ import (
 type Asn struct {
 	pulumi.CustomResourceState
 
-	Asn   pulumi.IntOutput         `pulumi:"asn"`
+	// Value for the AS Number record.
+	Asn pulumi.IntOutput `pulumi:"asn"`
+	// Comments field for the AS Number record.
+	Comments pulumi.StringPtrOutput `pulumi:"comments"`
+	// Description field for the AS Number record.
+	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// ID for the RIR for the AS Number record.
 	RirId pulumi.IntOutput         `pulumi:"rirId"`
 	Tags  pulumi.StringArrayOutput `pulumi:"tags"`
 }
@@ -91,13 +101,25 @@ func GetAsn(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Asn resources.
 type asnState struct {
-	Asn   *int     `pulumi:"asn"`
+	// Value for the AS Number record.
+	Asn *int `pulumi:"asn"`
+	// Comments field for the AS Number record.
+	Comments *string `pulumi:"comments"`
+	// Description field for the AS Number record.
+	Description *string `pulumi:"description"`
+	// ID for the RIR for the AS Number record.
 	RirId *int     `pulumi:"rirId"`
 	Tags  []string `pulumi:"tags"`
 }
 
 type AsnState struct {
-	Asn   pulumi.IntPtrInput
+	// Value for the AS Number record.
+	Asn pulumi.IntPtrInput
+	// Comments field for the AS Number record.
+	Comments pulumi.StringPtrInput
+	// Description field for the AS Number record.
+	Description pulumi.StringPtrInput
+	// ID for the RIR for the AS Number record.
 	RirId pulumi.IntPtrInput
 	Tags  pulumi.StringArrayInput
 }
@@ -107,14 +129,26 @@ func (AsnState) ElementType() reflect.Type {
 }
 
 type asnArgs struct {
-	Asn   int      `pulumi:"asn"`
+	// Value for the AS Number record.
+	Asn int `pulumi:"asn"`
+	// Comments field for the AS Number record.
+	Comments *string `pulumi:"comments"`
+	// Description field for the AS Number record.
+	Description *string `pulumi:"description"`
+	// ID for the RIR for the AS Number record.
 	RirId int      `pulumi:"rirId"`
 	Tags  []string `pulumi:"tags"`
 }
 
 // The set of arguments for constructing a Asn resource.
 type AsnArgs struct {
-	Asn   pulumi.IntInput
+	// Value for the AS Number record.
+	Asn pulumi.IntInput
+	// Comments field for the AS Number record.
+	Comments pulumi.StringPtrInput
+	// Description field for the AS Number record.
+	Description pulumi.StringPtrInput
+	// ID for the RIR for the AS Number record.
 	RirId pulumi.IntInput
 	Tags  pulumi.StringArrayInput
 }
@@ -206,10 +240,22 @@ func (o AsnOutput) ToAsnOutputWithContext(ctx context.Context) AsnOutput {
 	return o
 }
 
+// Value for the AS Number record.
 func (o AsnOutput) Asn() pulumi.IntOutput {
 	return o.ApplyT(func(v *Asn) pulumi.IntOutput { return v.Asn }).(pulumi.IntOutput)
 }
 
+// Comments field for the AS Number record.
+func (o AsnOutput) Comments() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Asn) pulumi.StringPtrOutput { return v.Comments }).(pulumi.StringPtrOutput)
+}
+
+// Description field for the AS Number record.
+func (o AsnOutput) Description() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Asn) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// ID for the RIR for the AS Number record.
 func (o AsnOutput) RirId() pulumi.IntOutput {
 	return o.ApplyT(func(v *Asn) pulumi.IntOutput { return v.RirId }).(pulumi.IntOutput)
 }

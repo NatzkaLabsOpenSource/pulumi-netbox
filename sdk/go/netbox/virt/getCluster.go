@@ -48,6 +48,7 @@ func LookupCluster(ctx *pulumi.Context, args *LookupClusterArgs, opts ...pulumi.
 
 // A collection of arguments for invoking getCluster.
 type LookupClusterArgs struct {
+	ClusterGroupId *int `pulumi:"clusterGroupId"`
 	// At least one of `name`, `siteId` or `id` must be given.
 	Id *string `pulumi:"id"`
 	// At least one of `name`, `siteId` or `id` must be given.
@@ -58,12 +59,12 @@ type LookupClusterArgs struct {
 
 // A collection of values returned by getCluster.
 type LookupClusterResult struct {
-	ClusterGroupId int                    `pulumi:"clusterGroupId"`
-	ClusterId      int                    `pulumi:"clusterId"`
-	ClusterTypeId  int                    `pulumi:"clusterTypeId"`
-	Comments       string                 `pulumi:"comments"`
-	CustomFields   map[string]interface{} `pulumi:"customFields"`
-	Description    string                 `pulumi:"description"`
+	ClusterGroupId int               `pulumi:"clusterGroupId"`
+	ClusterId      int               `pulumi:"clusterId"`
+	ClusterTypeId  int               `pulumi:"clusterTypeId"`
+	Comments       string            `pulumi:"comments"`
+	CustomFields   map[string]string `pulumi:"customFields"`
+	Description    string            `pulumi:"description"`
 	// At least one of `name`, `siteId` or `id` must be given.
 	Id string `pulumi:"id"`
 	// At least one of `name`, `siteId` or `id` must be given.
@@ -74,20 +75,17 @@ type LookupClusterResult struct {
 }
 
 func LookupClusterOutput(ctx *pulumi.Context, args LookupClusterOutputArgs, opts ...pulumi.InvokeOption) LookupClusterResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupClusterResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupClusterResultOutput, error) {
 			args := v.(LookupClusterArgs)
-			r, err := LookupCluster(ctx, &args, opts...)
-			var s LookupClusterResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:virt/getCluster:getCluster", args, LookupClusterResultOutput{}, options).(LookupClusterResultOutput), nil
 		}).(LookupClusterResultOutput)
 }
 
 // A collection of arguments for invoking getCluster.
 type LookupClusterOutputArgs struct {
+	ClusterGroupId pulumi.IntPtrInput `pulumi:"clusterGroupId"`
 	// At least one of `name`, `siteId` or `id` must be given.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// At least one of `name`, `siteId` or `id` must be given.
@@ -131,8 +129,8 @@ func (o LookupClusterResultOutput) Comments() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupClusterResult) string { return v.Comments }).(pulumi.StringOutput)
 }
 
-func (o LookupClusterResultOutput) CustomFields() pulumi.MapOutput {
-	return o.ApplyT(func(v LookupClusterResult) map[string]interface{} { return v.CustomFields }).(pulumi.MapOutput)
+func (o LookupClusterResultOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v LookupClusterResult) map[string]string { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o LookupClusterResultOutput) Description() pulumi.StringOutput {

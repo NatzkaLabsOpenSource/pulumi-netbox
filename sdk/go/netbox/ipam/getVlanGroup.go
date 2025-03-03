@@ -25,22 +25,25 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Get VLAN group by name
 //			_, err := ipam.LookupVlanGroup(ctx, &ipam.LookupVlanGroupArgs{
 //				Name: pulumi.StringRef("example1"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+//			// Get VLAN group by stub
 //			_, err = ipam.LookupVlanGroup(ctx, &ipam.LookupVlanGroupArgs{
 //				Slug: pulumi.StringRef("example2"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+//			// Get VLAN group by name and scope_type/id
 //			_, err = ipam.LookupVlanGroup(ctx, &ipam.LookupVlanGroupArgs{
 //				Name:      pulumi.StringRef("example"),
 //				ScopeType: pulumi.StringRef("dcim.site"),
-//				ScopeId:   pulumi.IntRef(netbox_site.Example.Id),
+//				ScopeId:   pulumi.IntRef(example.Id),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -62,13 +65,13 @@ func LookupVlanGroup(ctx *pulumi.Context, args *LookupVlanGroupArgs, opts ...pul
 
 // A collection of arguments for invoking getVlanGroup.
 type LookupVlanGroupArgs struct {
-	// At least one of `name` or `slug` must be given.
+	// At least one of `name`, `slug` or `scopeType` must be given.
 	Name *string `pulumi:"name"`
 	// Required when `scopeType` is set.
 	ScopeId *int `pulumi:"scopeId"`
-	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`. At least one of `name`, `slug` or `scopeType` must be given.
 	ScopeType *string `pulumi:"scopeType"`
-	// At least one of `name` or `slug` must be given.
+	// At least one of `name`, `slug` or `scopeType` must be given.
 	Slug *string `pulumi:"slug"`
 }
 
@@ -76,42 +79,36 @@ type LookupVlanGroupArgs struct {
 type LookupVlanGroupResult struct {
 	Description string `pulumi:"description"`
 	// The provider-assigned unique ID for this managed resource.
-	Id     string `pulumi:"id"`
-	MaxVid int    `pulumi:"maxVid"`
-	MinVid int    `pulumi:"minVid"`
-	// At least one of `name` or `slug` must be given.
+	Id string `pulumi:"id"`
+	// At least one of `name`, `slug` or `scopeType` must be given.
 	Name string `pulumi:"name"`
 	// Required when `scopeType` is set.
 	ScopeId *int `pulumi:"scopeId"`
-	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`. At least one of `name`, `slug` or `scopeType` must be given.
 	ScopeType *string `pulumi:"scopeType"`
-	// At least one of `name` or `slug` must be given.
+	// At least one of `name`, `slug` or `scopeType` must be given.
 	Slug      string `pulumi:"slug"`
 	VlanCount int    `pulumi:"vlanCount"`
 }
 
 func LookupVlanGroupOutput(ctx *pulumi.Context, args LookupVlanGroupOutputArgs, opts ...pulumi.InvokeOption) LookupVlanGroupResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupVlanGroupResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupVlanGroupResultOutput, error) {
 			args := v.(LookupVlanGroupArgs)
-			r, err := LookupVlanGroup(ctx, &args, opts...)
-			var s LookupVlanGroupResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getVlanGroup:getVlanGroup", args, LookupVlanGroupResultOutput{}, options).(LookupVlanGroupResultOutput), nil
 		}).(LookupVlanGroupResultOutput)
 }
 
 // A collection of arguments for invoking getVlanGroup.
 type LookupVlanGroupOutputArgs struct {
-	// At least one of `name` or `slug` must be given.
+	// At least one of `name`, `slug` or `scopeType` must be given.
 	Name pulumi.StringPtrInput `pulumi:"name"`
 	// Required when `scopeType` is set.
 	ScopeId pulumi.IntPtrInput `pulumi:"scopeId"`
-	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+	// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`. At least one of `name`, `slug` or `scopeType` must be given.
 	ScopeType pulumi.StringPtrInput `pulumi:"scopeType"`
-	// At least one of `name` or `slug` must be given.
+	// At least one of `name`, `slug` or `scopeType` must be given.
 	Slug pulumi.StringPtrInput `pulumi:"slug"`
 }
 
@@ -143,15 +140,7 @@ func (o LookupVlanGroupResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupVlanGroupResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o LookupVlanGroupResultOutput) MaxVid() pulumi.IntOutput {
-	return o.ApplyT(func(v LookupVlanGroupResult) int { return v.MaxVid }).(pulumi.IntOutput)
-}
-
-func (o LookupVlanGroupResultOutput) MinVid() pulumi.IntOutput {
-	return o.ApplyT(func(v LookupVlanGroupResult) int { return v.MinVid }).(pulumi.IntOutput)
-}
-
-// At least one of `name` or `slug` must be given.
+// At least one of `name`, `slug` or `scopeType` must be given.
 func (o LookupVlanGroupResultOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupVlanGroupResult) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -161,12 +150,12 @@ func (o LookupVlanGroupResultOutput) ScopeId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LookupVlanGroupResult) *int { return v.ScopeId }).(pulumi.IntPtrOutput)
 }
 
-// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+// Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`. At least one of `name`, `slug` or `scopeType` must be given.
 func (o LookupVlanGroupResultOutput) ScopeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupVlanGroupResult) *string { return v.ScopeType }).(pulumi.StringPtrOutput)
 }
 
-// At least one of `name` or `slug` must be given.
+// At least one of `name`, `slug` or `scopeType` must be given.
 func (o LookupVlanGroupResultOutput) Slug() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupVlanGroupResult) string { return v.Slug }).(pulumi.StringOutput)
 }

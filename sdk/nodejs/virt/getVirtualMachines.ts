@@ -13,6 +13,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Assumes vmw-cluster-01 exists as a cluster in Netbox
  * const vmwCluster01 = netbox.virt.getCluster({
  *     name: "vmw-cluster-01",
  * });
@@ -27,7 +28,6 @@ import * as utilities from "../utilities";
  */
 export function getVirtualMachines(args?: GetVirtualMachinesArgs, opts?: pulumi.InvokeOptions): Promise<GetVirtualMachinesResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:virt/getVirtualMachines:getVirtualMachines", {
         "filters": args.filters,
@@ -65,6 +65,7 @@ export interface GetVirtualMachinesResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Assumes vmw-cluster-01 exists as a cluster in Netbox
  * const vmwCluster01 = netbox.virt.getCluster({
  *     name: "vmw-cluster-01",
  * });
@@ -77,8 +78,14 @@ export interface GetVirtualMachinesResult {
  * }));
  * ```
  */
-export function getVirtualMachinesOutput(args?: GetVirtualMachinesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVirtualMachinesResult> {
-    return pulumi.output(args).apply((a: any) => getVirtualMachines(a, opts))
+export function getVirtualMachinesOutput(args?: GetVirtualMachinesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVirtualMachinesResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:virt/getVirtualMachines:getVirtualMachines", {
+        "filters": args.filters,
+        "limit": args.limit,
+        "nameRegex": args.nameRegex,
+    }, opts);
 }
 
 /**

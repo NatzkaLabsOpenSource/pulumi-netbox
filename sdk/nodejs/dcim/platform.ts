@@ -16,7 +16,7 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Resource for PanOS (e.g. Panorama from Palo Alto)
- * const pANOS = new netbox.dcim.Platform("pANOS", {});
+ * const PANOS = new netbox.dcim.Platform("PANOS", {name: "PANOS"});
  * ```
  */
 export class Platform extends pulumi.CustomResource {
@@ -47,6 +47,7 @@ export class Platform extends pulumi.CustomResource {
         return obj['__pulumiType'] === Platform.__pulumiType;
     }
 
+    public readonly manufacturerId!: pulumi.Output<number | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly slug!: pulumi.Output<string>;
 
@@ -63,10 +64,12 @@ export class Platform extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as PlatformState | undefined;
+            resourceInputs["manufacturerId"] = state ? state.manufacturerId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["slug"] = state ? state.slug : undefined;
         } else {
             const args = argsOrState as PlatformArgs | undefined;
+            resourceInputs["manufacturerId"] = args ? args.manufacturerId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["slug"] = args ? args.slug : undefined;
         }
@@ -79,6 +82,7 @@ export class Platform extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Platform resources.
  */
 export interface PlatformState {
+    manufacturerId?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
 }
@@ -87,6 +91,7 @@ export interface PlatformState {
  * The set of arguments for constructing a Platform resource.
  */
 export interface PlatformArgs {
+    manufacturerId?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
 }

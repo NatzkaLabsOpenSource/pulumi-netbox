@@ -15,9 +15,9 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const custAProd = new netbox.ipam.IpRange("custAProd", {
- *     endAddress: "10.0.0.50/24",
+ * const custAProd = new netbox.ipam.IpRange("cust_a_prod", {
  *     startAddress: "10.0.0.1/24",
+ *     endAddress: "10.0.0.50/24",
  *     tags: [
  *         "customer-a",
  *         "prod",

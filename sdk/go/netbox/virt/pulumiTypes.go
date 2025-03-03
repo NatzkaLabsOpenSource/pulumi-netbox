@@ -580,28 +580,29 @@ func (o GetVirtualMachinesFilterArrayOutput) Index(i pulumi.IntInput) GetVirtual
 }
 
 type GetVirtualMachinesVm struct {
-	ClusterId        int                    `pulumi:"clusterId"`
-	Comments         string                 `pulumi:"comments"`
-	ConfigContext    string                 `pulumi:"configContext"`
-	CustomFields     map[string]interface{} `pulumi:"customFields"`
-	Description      string                 `pulumi:"description"`
-	DeviceId         int                    `pulumi:"deviceId"`
-	DeviceName       string                 `pulumi:"deviceName"`
-	DiskSizeGb       int                    `pulumi:"diskSizeGb"`
-	LocalContextData string                 `pulumi:"localContextData"`
-	MemoryMb         int                    `pulumi:"memoryMb"`
-	Name             string                 `pulumi:"name"`
-	PlatformId       int                    `pulumi:"platformId"`
-	PrimaryIp        string                 `pulumi:"primaryIp"`
-	PrimaryIp4       string                 `pulumi:"primaryIp4"`
-	PrimaryIp6       string                 `pulumi:"primaryIp6"`
-	RoleId           int                    `pulumi:"roleId"`
-	SiteId           int                    `pulumi:"siteId"`
-	Status           string                 `pulumi:"status"`
-	TagIds           []int                  `pulumi:"tagIds"`
-	TenantId         int                    `pulumi:"tenantId"`
-	Vcpus            float64                `pulumi:"vcpus"`
-	VmId             int                    `pulumi:"vmId"`
+	ClusterId        int               `pulumi:"clusterId"`
+	Comments         string            `pulumi:"comments"`
+	ConfigContext    string            `pulumi:"configContext"`
+	CustomFields     map[string]string `pulumi:"customFields"`
+	Description      string            `pulumi:"description"`
+	DeviceId         int               `pulumi:"deviceId"`
+	DeviceName       string            `pulumi:"deviceName"`
+	DiskSizeMb       int               `pulumi:"diskSizeMb"`
+	LocalContextData string            `pulumi:"localContextData"`
+	MemoryMb         int               `pulumi:"memoryMb"`
+	Name             string            `pulumi:"name"`
+	PlatformId       int               `pulumi:"platformId"`
+	PlatformSlug     string            `pulumi:"platformSlug"`
+	PrimaryIp        string            `pulumi:"primaryIp"`
+	PrimaryIp4       string            `pulumi:"primaryIp4"`
+	PrimaryIp6       string            `pulumi:"primaryIp6"`
+	RoleId           int               `pulumi:"roleId"`
+	SiteId           int               `pulumi:"siteId"`
+	Status           string            `pulumi:"status"`
+	TagIds           []int             `pulumi:"tagIds"`
+	TenantId         int               `pulumi:"tenantId"`
+	Vcpus            float64           `pulumi:"vcpus"`
+	VmId             int               `pulumi:"vmId"`
 }
 
 // GetVirtualMachinesVmInput is an input type that accepts GetVirtualMachinesVmArgs and GetVirtualMachinesVmOutput values.
@@ -616,28 +617,29 @@ type GetVirtualMachinesVmInput interface {
 }
 
 type GetVirtualMachinesVmArgs struct {
-	ClusterId        pulumi.IntInput      `pulumi:"clusterId"`
-	Comments         pulumi.StringInput   `pulumi:"comments"`
-	ConfigContext    pulumi.StringInput   `pulumi:"configContext"`
-	CustomFields     pulumi.MapInput      `pulumi:"customFields"`
-	Description      pulumi.StringInput   `pulumi:"description"`
-	DeviceId         pulumi.IntInput      `pulumi:"deviceId"`
-	DeviceName       pulumi.StringInput   `pulumi:"deviceName"`
-	DiskSizeGb       pulumi.IntInput      `pulumi:"diskSizeGb"`
-	LocalContextData pulumi.StringInput   `pulumi:"localContextData"`
-	MemoryMb         pulumi.IntInput      `pulumi:"memoryMb"`
-	Name             pulumi.StringInput   `pulumi:"name"`
-	PlatformId       pulumi.IntInput      `pulumi:"platformId"`
-	PrimaryIp        pulumi.StringInput   `pulumi:"primaryIp"`
-	PrimaryIp4       pulumi.StringInput   `pulumi:"primaryIp4"`
-	PrimaryIp6       pulumi.StringInput   `pulumi:"primaryIp6"`
-	RoleId           pulumi.IntInput      `pulumi:"roleId"`
-	SiteId           pulumi.IntInput      `pulumi:"siteId"`
-	Status           pulumi.StringInput   `pulumi:"status"`
-	TagIds           pulumi.IntArrayInput `pulumi:"tagIds"`
-	TenantId         pulumi.IntInput      `pulumi:"tenantId"`
-	Vcpus            pulumi.Float64Input  `pulumi:"vcpus"`
-	VmId             pulumi.IntInput      `pulumi:"vmId"`
+	ClusterId        pulumi.IntInput       `pulumi:"clusterId"`
+	Comments         pulumi.StringInput    `pulumi:"comments"`
+	ConfigContext    pulumi.StringInput    `pulumi:"configContext"`
+	CustomFields     pulumi.StringMapInput `pulumi:"customFields"`
+	Description      pulumi.StringInput    `pulumi:"description"`
+	DeviceId         pulumi.IntInput       `pulumi:"deviceId"`
+	DeviceName       pulumi.StringInput    `pulumi:"deviceName"`
+	DiskSizeMb       pulumi.IntInput       `pulumi:"diskSizeMb"`
+	LocalContextData pulumi.StringInput    `pulumi:"localContextData"`
+	MemoryMb         pulumi.IntInput       `pulumi:"memoryMb"`
+	Name             pulumi.StringInput    `pulumi:"name"`
+	PlatformId       pulumi.IntInput       `pulumi:"platformId"`
+	PlatformSlug     pulumi.StringInput    `pulumi:"platformSlug"`
+	PrimaryIp        pulumi.StringInput    `pulumi:"primaryIp"`
+	PrimaryIp4       pulumi.StringInput    `pulumi:"primaryIp4"`
+	PrimaryIp6       pulumi.StringInput    `pulumi:"primaryIp6"`
+	RoleId           pulumi.IntInput       `pulumi:"roleId"`
+	SiteId           pulumi.IntInput       `pulumi:"siteId"`
+	Status           pulumi.StringInput    `pulumi:"status"`
+	TagIds           pulumi.IntArrayInput  `pulumi:"tagIds"`
+	TenantId         pulumi.IntInput       `pulumi:"tenantId"`
+	Vcpus            pulumi.Float64Input   `pulumi:"vcpus"`
+	VmId             pulumi.IntInput       `pulumi:"vmId"`
 }
 
 func (GetVirtualMachinesVmArgs) ElementType() reflect.Type {
@@ -703,8 +705,8 @@ func (o GetVirtualMachinesVmOutput) ConfigContext() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVirtualMachinesVm) string { return v.ConfigContext }).(pulumi.StringOutput)
 }
 
-func (o GetVirtualMachinesVmOutput) CustomFields() pulumi.MapOutput {
-	return o.ApplyT(func(v GetVirtualMachinesVm) map[string]interface{} { return v.CustomFields }).(pulumi.MapOutput)
+func (o GetVirtualMachinesVmOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetVirtualMachinesVm) map[string]string { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o GetVirtualMachinesVmOutput) Description() pulumi.StringOutput {
@@ -719,8 +721,8 @@ func (o GetVirtualMachinesVmOutput) DeviceName() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVirtualMachinesVm) string { return v.DeviceName }).(pulumi.StringOutput)
 }
 
-func (o GetVirtualMachinesVmOutput) DiskSizeGb() pulumi.IntOutput {
-	return o.ApplyT(func(v GetVirtualMachinesVm) int { return v.DiskSizeGb }).(pulumi.IntOutput)
+func (o GetVirtualMachinesVmOutput) DiskSizeMb() pulumi.IntOutput {
+	return o.ApplyT(func(v GetVirtualMachinesVm) int { return v.DiskSizeMb }).(pulumi.IntOutput)
 }
 
 func (o GetVirtualMachinesVmOutput) LocalContextData() pulumi.StringOutput {
@@ -737,6 +739,10 @@ func (o GetVirtualMachinesVmOutput) Name() pulumi.StringOutput {
 
 func (o GetVirtualMachinesVmOutput) PlatformId() pulumi.IntOutput {
 	return o.ApplyT(func(v GetVirtualMachinesVm) int { return v.PlatformId }).(pulumi.IntOutput)
+}
+
+func (o GetVirtualMachinesVmOutput) PlatformSlug() pulumi.StringOutput {
+	return o.ApplyT(func(v GetVirtualMachinesVm) string { return v.PlatformSlug }).(pulumi.StringOutput)
 }
 
 func (o GetVirtualMachinesVmOutput) PrimaryIp() pulumi.StringOutput {

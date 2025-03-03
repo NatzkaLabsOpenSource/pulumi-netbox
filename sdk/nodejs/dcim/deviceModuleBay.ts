@@ -16,12 +16,16 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Note that some terraform code is not included in the example for brevity
- * const testDevice = new netbox.dcim.Device("testDevice", {
- *     deviceTypeId: netbox_device_type.test.id,
- *     roleId: netbox_device_role.test.id,
- *     siteId: netbox_site.test.id,
+ * const test = new netbox.dcim.Device("test", {
+ *     name: "%[1]s",
+ *     deviceTypeId: testNetboxDeviceType.id,
+ *     roleId: testNetboxDeviceRole.id,
+ *     siteId: testNetboxSite.id,
  * });
- * const testDeviceModuleBay = new netbox.dcim.DeviceModuleBay("testDeviceModuleBay", {deviceId: testDevice.id});
+ * const testDeviceModuleBay = new netbox.dcim.DeviceModuleBay("test", {
+ *     deviceId: test.id,
+ *     name: "module bay 1",
+ * });
  * ```
  */
 export class DeviceModuleBay extends pulumi.CustomResource {

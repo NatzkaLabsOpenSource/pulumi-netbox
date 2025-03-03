@@ -29,25 +29,27 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Note that some terraform code is not included in the example for brevity
 //			test, err := dcim.NewDevice(ctx, "test", &dcim.DeviceArgs{
-//				DeviceTypeId: pulumi.Any(netbox_device_type.Test.Id),
-//				RoleId:       pulumi.Any(netbox_device_role.Test.Id),
-//				SiteId:       pulumi.Any(netbox_site.Test.Id),
+//				Name:         pulumi.String("%[1]s"),
+//				DeviceTypeId: pulumi.Any(testNetboxDeviceType.Id),
+//				RoleId:       pulumi.Any(testNetboxDeviceRole.Id),
+//				SiteId:       pulumi.Any(testNetboxSite.Id),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = ipam.NewIpAddress(ctx, "testV4IpAddress", &ipam.IpAddressArgs{
+//			_, err = ipam.NewIpAddress(ctx, "test_v4", &ipam.IpAddressArgs{
 //				IpAddress:         pulumi.String("1.1.1.1/32"),
 //				Status:            pulumi.String("active"),
-//				DeviceInterfaceId: pulumi.Any(netbox_device_interface.Test.Id),
+//				DeviceInterfaceId: pulumi.Any(testNetboxDeviceInterface.Id),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewDevicePrimaryIp(ctx, "testV4DevicePrimaryIp", &dcim.DevicePrimaryIpArgs{
+//			_, err = dcim.NewDevicePrimaryIp(ctx, "test_v4", &dcim.DevicePrimaryIpArgs{
 //				DeviceId:    test.ID(),
-//				IpAddressId: pulumi.Any(netbox_ip_address.Test.Id),
+//				IpAddressId: pulumi.Any(testNetboxIpAddress.Id),
 //			})
 //			if err != nil {
 //				return err

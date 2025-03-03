@@ -6,11 +6,11 @@ import * as utilities from "../utilities";
 
 export function getLocation(args?: GetLocationArgs, opts?: pulumi.InvokeOptions): Promise<GetLocationResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getLocation:getLocation", {
         "id": args.id,
         "name": args.name,
+        "parentId": args.parentId,
         "siteId": args.siteId,
         "slug": args.slug,
     }, opts);
@@ -25,6 +25,7 @@ export interface GetLocationArgs {
      */
     id?: string;
     name?: string;
+    parentId?: number;
     siteId?: number;
     slug?: string;
 }
@@ -39,13 +40,22 @@ export interface GetLocationResult {
      */
     readonly id: string;
     readonly name?: string;
+    readonly parentId: number;
     readonly siteId: number;
     readonly slug?: string;
     readonly status: string;
     readonly tenantId: number;
 }
-export function getLocationOutput(args?: GetLocationOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetLocationResult> {
-    return pulumi.output(args).apply((a: any) => getLocation(a, opts))
+export function getLocationOutput(args?: GetLocationOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLocationResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getLocation:getLocation", {
+        "id": args.id,
+        "name": args.name,
+        "parentId": args.parentId,
+        "siteId": args.siteId,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**
@@ -57,6 +67,7 @@ export interface GetLocationOutputArgs {
      */
     id?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
+    parentId?: pulumi.Input<number>;
     siteId?: pulumi.Input<number>;
     slug?: pulumi.Input<string>;
 }

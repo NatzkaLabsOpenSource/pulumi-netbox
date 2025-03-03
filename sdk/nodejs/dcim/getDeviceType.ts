@@ -11,12 +11,15 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Get device type by model name
  * const ex1 = netbox.dcim.getDeviceType({
  *     model: "7210 SAS-Sx 10/100GE",
  * });
+ * // Get device type by slug
  * const ex2 = netbox.dcim.getDeviceType({
  *     slug: "7210-sas-sx-10-100GE",
  * });
+ * // Get device type by manufacturer and part number information
  * const ex3 = netbox.dcim.getDeviceType({
  *     manufacturer: "Nokia",
  *     partNumber: "3HE11597AARB01",
@@ -25,7 +28,6 @@ import * as utilities from "../utilities";
  */
 export function getDeviceType(args?: GetDeviceTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetDeviceTypeResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getDeviceType:getDeviceType", {
         "manufacturer": args.manufacturer,
@@ -68,20 +70,30 @@ export interface GetDeviceTypeResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Get device type by model name
  * const ex1 = netbox.dcim.getDeviceType({
  *     model: "7210 SAS-Sx 10/100GE",
  * });
+ * // Get device type by slug
  * const ex2 = netbox.dcim.getDeviceType({
  *     slug: "7210-sas-sx-10-100GE",
  * });
+ * // Get device type by manufacturer and part number information
  * const ex3 = netbox.dcim.getDeviceType({
  *     manufacturer: "Nokia",
  *     partNumber: "3HE11597AARB01",
  * });
  * ```
  */
-export function getDeviceTypeOutput(args?: GetDeviceTypeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetDeviceTypeResult> {
-    return pulumi.output(args).apply((a: any) => getDeviceType(a, opts))
+export function getDeviceTypeOutput(args?: GetDeviceTypeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDeviceTypeResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getDeviceType:getDeviceType", {
+        "manufacturer": args.manufacturer,
+        "model": args.model,
+        "partNumber": args.partNumber,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**

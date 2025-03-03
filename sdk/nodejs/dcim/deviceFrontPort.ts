@@ -16,19 +16,22 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Note that some terraform code is not included in the example for brevity
- * const testDevice = new netbox.dcim.Device("testDevice", {
- *     deviceTypeId: netbox_device_type.test.id,
- *     roleId: netbox_device_role.test.id,
- *     siteId: netbox_site.test.id,
+ * const test = new netbox.dcim.Device("test", {
+ *     name: "%[1]s",
+ *     deviceTypeId: testNetboxDeviceType.id,
+ *     roleId: testNetboxDeviceRole.id,
+ *     siteId: testNetboxSite.id,
  * });
- * const testDeviceRearPort = new netbox.dcim.DeviceRearPort("testDeviceRearPort", {
- *     deviceId: testDevice.id,
+ * const testDeviceRearPort = new netbox.dcim.DeviceRearPort("test", {
+ *     deviceId: test.id,
+ *     name: "rear port 1",
  *     type: "8p8c",
  *     positions: 2,
  *     markConnected: true,
  * });
- * const testDeviceFrontPort = new netbox.dcim.DeviceFrontPort("testDeviceFrontPort", {
- *     deviceId: testDevice.id,
+ * const testDeviceFrontPort = new netbox.dcim.DeviceFrontPort("test", {
+ *     deviceId: test.id,
+ *     name: "front port 1",
  *     type: "8p8c",
  *     rearPortId: testDeviceRearPort.id,
  *     rearPortPosition: 2,

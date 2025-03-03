@@ -29,7 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tenancy.NewContactGroup(ctx, "test", nil)
+//			_, err := tenancy.NewContactGroup(ctx, "test", &tenancy.ContactGroupArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}

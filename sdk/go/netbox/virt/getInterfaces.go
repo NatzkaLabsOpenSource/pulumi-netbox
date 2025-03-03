@@ -11,6 +11,7 @@ import (
 	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
 )
 
+// ## Example Usage
 func GetInterfaces(ctx *pulumi.Context, args *GetInterfacesArgs, opts ...pulumi.InvokeOption) (*GetInterfacesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInterfacesResult
@@ -23,8 +24,10 @@ func GetInterfaces(ctx *pulumi.Context, args *GetInterfacesArgs, opts ...pulumi.
 
 // A collection of arguments for invoking getInterfaces.
 type GetInterfacesArgs struct {
-	Filters   []GetInterfacesFilter `pulumi:"filters"`
-	NameRegex *string               `pulumi:"nameRegex"`
+	Filters []GetInterfacesFilter `pulumi:"filters"`
+	// The limit of objects to return from the API lookup. Defaults to `0`.
+	Limit     *int    `pulumi:"limit"`
+	NameRegex *string `pulumi:"nameRegex"`
 }
 
 // A collection of values returned by getInterfaces.
@@ -33,26 +36,26 @@ type GetInterfacesResult struct {
 	// The provider-assigned unique ID for this managed resource.
 	Id         string                   `pulumi:"id"`
 	Interfaces []GetInterfacesInterface `pulumi:"interfaces"`
-	NameRegex  *string                  `pulumi:"nameRegex"`
+	// The limit of objects to return from the API lookup. Defaults to `0`.
+	Limit     *int    `pulumi:"limit"`
+	NameRegex *string `pulumi:"nameRegex"`
 }
 
 func GetInterfacesOutput(ctx *pulumi.Context, args GetInterfacesOutputArgs, opts ...pulumi.InvokeOption) GetInterfacesResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetInterfacesResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetInterfacesResultOutput, error) {
 			args := v.(GetInterfacesArgs)
-			r, err := GetInterfaces(ctx, &args, opts...)
-			var s GetInterfacesResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:virt/getInterfaces:getInterfaces", args, GetInterfacesResultOutput{}, options).(GetInterfacesResultOutput), nil
 		}).(GetInterfacesResultOutput)
 }
 
 // A collection of arguments for invoking getInterfaces.
 type GetInterfacesOutputArgs struct {
-	Filters   GetInterfacesFilterArrayInput `pulumi:"filters"`
-	NameRegex pulumi.StringPtrInput         `pulumi:"nameRegex"`
+	Filters GetInterfacesFilterArrayInput `pulumi:"filters"`
+	// The limit of objects to return from the API lookup. Defaults to `0`.
+	Limit     pulumi.IntPtrInput    `pulumi:"limit"`
+	NameRegex pulumi.StringPtrInput `pulumi:"nameRegex"`
 }
 
 func (GetInterfacesOutputArgs) ElementType() reflect.Type {
@@ -85,6 +88,11 @@ func (o GetInterfacesResultOutput) Id() pulumi.StringOutput {
 
 func (o GetInterfacesResultOutput) Interfaces() GetInterfacesInterfaceArrayOutput {
 	return o.ApplyT(func(v GetInterfacesResult) []GetInterfacesInterface { return v.Interfaces }).(GetInterfacesInterfaceArrayOutput)
+}
+
+// The limit of objects to return from the API lookup. Defaults to `0`.
+func (o GetInterfacesResultOutput) Limit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v GetInterfacesResult) *int { return v.Limit }).(pulumi.IntPtrOutput)
 }
 
 func (o GetInterfacesResultOutput) NameRegex() pulumi.StringPtrOutput {

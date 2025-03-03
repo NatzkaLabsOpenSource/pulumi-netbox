@@ -15,7 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const test = new netbox.ipam.Rir("test", {description: "my description"});
+ * const test = new netbox.ipam.Rir("test", {
+ *     name: "test",
+ *     description: "my description",
+ * });
  * ```
  */
 export class Rir extends pulumi.CustomResource {
@@ -47,6 +50,10 @@ export class Rir extends pulumi.CustomResource {
     }
 
     public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * Defaults to `false`.
+     */
+    public readonly isPrivate!: pulumi.Output<boolean | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly slug!: pulumi.Output<string>;
 
@@ -64,11 +71,13 @@ export class Rir extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as RirState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["isPrivate"] = state ? state.isPrivate : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["slug"] = state ? state.slug : undefined;
         } else {
             const args = argsOrState as RirArgs | undefined;
             resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["isPrivate"] = args ? args.isPrivate : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["slug"] = args ? args.slug : undefined;
         }
@@ -82,6 +91,10 @@ export class Rir extends pulumi.CustomResource {
  */
 export interface RirState {
     description?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
+    isPrivate?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
 }
@@ -91,6 +104,10 @@ export interface RirState {
  */
 export interface RirArgs {
     description?: pulumi.Input<string>;
+    /**
+     * Defaults to `false`.
+     */
+    isPrivate?: pulumi.Input<boolean>;
     name?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
 }

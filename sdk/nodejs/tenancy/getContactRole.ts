@@ -6,7 +6,6 @@ import * as utilities from "../utilities";
 
 export function getContactRole(args?: GetContactRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetContactRoleResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:tenancy/getContactRole:getContactRole", {
         "name": args.name,
@@ -45,8 +44,13 @@ export interface GetContactRoleResult {
      */
     readonly slug: string;
 }
-export function getContactRoleOutput(args?: GetContactRoleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetContactRoleResult> {
-    return pulumi.output(args).apply((a: any) => getContactRole(a, opts))
+export function getContactRoleOutput(args?: GetContactRoleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetContactRoleResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:tenancy/getContactRole:getContactRole", {
+        "name": args.name,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**

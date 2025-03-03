@@ -11,6 +11,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Assumes the corresponding site groups exist
  * const getByName = netbox.dcim.getSiteGroup({
  *     name: "example-sitegroup-1",
  * });
@@ -21,7 +22,6 @@ import * as utilities from "../utilities";
  */
 export function getSiteGroup(args?: GetSiteGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetSiteGroupResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getSiteGroup:getSiteGroup", {
         "name": args.name,
@@ -68,6 +68,7 @@ export interface GetSiteGroupResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Assumes the corresponding site groups exist
  * const getByName = netbox.dcim.getSiteGroup({
  *     name: "example-sitegroup-1",
  * });
@@ -76,8 +77,13 @@ export interface GetSiteGroupResult {
  * });
  * ```
  */
-export function getSiteGroupOutput(args?: GetSiteGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetSiteGroupResult> {
-    return pulumi.output(args).apply((a: any) => getSiteGroup(a, opts))
+export function getSiteGroupOutput(args?: GetSiteGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSiteGroupResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getSiteGroup:getSiteGroup", {
+        "name": args.name,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**

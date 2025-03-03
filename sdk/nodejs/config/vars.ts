@@ -33,10 +33,10 @@ Object.defineProperty(exports, "apiToken", {
 /**
  * Set these header on all requests to Netbox. Can be set via the `NETBOX_HEADERS` environment variable.
  */
-export declare const headers: {[key: string]: any} | undefined;
+export declare const headers: {[key: string]: string} | undefined;
 Object.defineProperty(exports, "headers", {
     get() {
-        return __config.getObject<{[key: string]: any}>("headers");
+        return __config.getObject<{[key: string]: string}>("headers");
     },
     enumerable: true,
 });
@@ -64,11 +64,6 @@ Object.defineProperty(exports, "serverUrl", {
     enumerable: true,
 });
 
-/**
- * If true, do not try to determine the running Netbox version at provider startup. Disables warnings about possibly
- * unsupported Netbox version. Also useful for local testing on terraform plans. Can be set via the
- * `NETBOX_SKIP_VERSION_CHECK` environment variable. Defaults to `false`.
- */
 export declare const skipVersionCheck: boolean | undefined;
 Object.defineProperty(exports, "skipVersionCheck", {
     get() {
@@ -78,8 +73,8 @@ Object.defineProperty(exports, "skipVersionCheck", {
 });
 
 /**
- * If true, strip trailing slashes from the `server_url` parameter and print a warning when doing so. Note that using
- * trailing slashes in the `server_url` parameter will usually lead to errors. Can be set via the
+ * If true, strip trailing slashes from the `serverUrl` parameter and print a warning when doing so. Note that using
+ * trailing slashes in the `serverUrl` parameter will usually lead to errors. Can be set via the
  * `NETBOX_STRIP_TRAILING_SLASHES_FROM_URL` environment variable. Defaults to `true`.
  */
 export declare const stripTrailingSlashesFromUrl: boolean | undefined;

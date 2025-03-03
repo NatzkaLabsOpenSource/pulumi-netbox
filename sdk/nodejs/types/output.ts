@@ -64,10 +64,12 @@ export namespace dcim {
         assetTag: string;
         clusterId: number;
         comments: string;
-        customFields: {[key: string]: any};
+        configContext: string;
+        customFields: {[key: string]: string};
         description: string;
         deviceId: number;
         deviceTypeId: number;
+        localContextData: string;
         locationId: number;
         manufacturerId: number;
         model: string;
@@ -106,6 +108,7 @@ export namespace dcim {
         description: string;
         id: string;
         name?: string;
+        parentId: number;
         siteId: number;
         slug?: string;
         status: string;
@@ -120,7 +123,7 @@ export namespace dcim {
     export interface GetRacksRack {
         assetTag: string;
         comments: string;
-        customFields: {[key: string]: any};
+        customFields: {[key: string]: string};
         descUnits: boolean;
         description: string;
         facilityId: string;
@@ -138,7 +141,7 @@ export namespace dcim {
         status: string;
         tags: string[];
         tenantId: number;
-        type: string;
+        typeId: number;
         uHeight: number;
         weight: number;
         weightUnit: string;
@@ -183,7 +186,7 @@ export namespace ipam {
     export interface GetIpAddressesIpAddress {
         addressFamily: string;
         created: string;
-        customFields: {[key: string]: any};
+        customFields: {[key: string]: string};
         description: string;
         dnsName: string;
         id: number;
@@ -210,7 +213,7 @@ export namespace ipam {
 
     export interface GetPrefixesFilter {
         /**
-         * The name of the field to filter on. Supported fields are: `prefix`, `vlanVid`, `vrfId`, `vlanId`, `status`, `siteId`, & `tag`.
+         * The name of the field to filter on. Supported fields are: `prefix`, `contains`, `vlanVid`, `vrfId`, `vlanId`, `status`, `tenantId`, `siteId`, & `tag`.
          */
         name: string;
         /**
@@ -223,8 +226,10 @@ export namespace ipam {
         description: string;
         id: number;
         prefix: string;
+        siteId: number;
         status: string;
         tags: string[];
+        tenantId: number;
         vlanId: number;
         vlanVid: number;
         vrfId: number;
@@ -242,6 +247,7 @@ export namespace ipam {
         role: number;
         site: number;
         status: string;
+        tagIds: number[];
         tenant: number;
         vid: number;
     }
@@ -278,7 +284,7 @@ export namespace tenancy {
         clusterCount: number;
         comments: string;
         created: string;
-        customFields: {[key: string]: any};
+        customFields: {[key: string]: string};
         description: string;
         deviceCount: number;
         id: number;
@@ -345,15 +351,16 @@ export namespace virt {
         clusterId: number;
         comments: string;
         configContext: string;
-        customFields: {[key: string]: any};
+        customFields: {[key: string]: string};
         description: string;
         deviceId: number;
         deviceName: string;
-        diskSizeGb: number;
+        diskSizeMb: number;
         localContextData: string;
         memoryMb: number;
         name: string;
         platformId: number;
+        platformSlug: string;
         primaryIp: string;
         primaryIp4: string;
         primaryIp6: string;

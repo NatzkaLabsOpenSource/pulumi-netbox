@@ -41,15 +41,11 @@ type GetPrefixesResult struct {
 }
 
 func GetPrefixesOutput(ctx *pulumi.Context, args GetPrefixesOutputArgs, opts ...pulumi.InvokeOption) GetPrefixesResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetPrefixesResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetPrefixesResultOutput, error) {
 			args := v.(GetPrefixesArgs)
-			r, err := GetPrefixes(ctx, &args, opts...)
-			var s GetPrefixesResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getPrefixes:getPrefixes", args, GetPrefixesResultOutput{}, options).(GetPrefixesResultOutput), nil
 		}).(GetPrefixesResultOutput)
 }
 

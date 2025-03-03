@@ -61,15 +61,11 @@ type LookupVrfResult struct {
 }
 
 func LookupVrfOutput(ctx *pulumi.Context, args LookupVrfOutputArgs, opts ...pulumi.InvokeOption) LookupVrfResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupVrfResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupVrfResultOutput, error) {
 			args := v.(LookupVrfArgs)
-			r, err := LookupVrf(ctx, &args, opts...)
-			var s LookupVrfResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getVrf:getVrf", args, LookupVrfResultOutput{}, options).(LookupVrfResultOutput), nil
 		}).(LookupVrfResultOutput)
 }
 

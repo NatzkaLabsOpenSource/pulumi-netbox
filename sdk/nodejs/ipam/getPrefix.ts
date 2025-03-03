@@ -6,16 +6,19 @@ import * as utilities from "../utilities";
 
 export function getPrefix(args?: GetPrefixArgs, opts?: pulumi.InvokeOptions): Promise<GetPrefixResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getPrefix:getPrefix", {
         "cidr": args.cidr,
+        "customFields": args.customFields,
         "description": args.description,
         "family": args.family,
         "prefix": args.prefix,
+        "roleId": args.roleId,
         "siteId": args.siteId,
+        "status": args.status,
         "tag": args.tag,
         "tagN": args.tagN,
+        "tenantId": args.tenantId,
         "vlanId": args.vlanId,
         "vlanVid": args.vlanVid,
         "vrfId": args.vrfId,
@@ -27,29 +30,38 @@ export function getPrefix(args?: GetPrefixArgs, opts?: pulumi.InvokeOptions): Pr
  */
 export interface GetPrefixArgs {
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `prefix`.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `prefix`.
      *
      * @deprecated The `cidr` parameter is deprecated in favor of the canonical `prefix` attribute.
      */
     cidr?: string;
+    customFields?: {[key: string]: string};
     /**
-     * Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     description?: string;
     /**
-     * The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     family?: number;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `cidr`.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `cidr`.
      */
     prefix?: string;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    roleId?: number;
+    /**
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     siteId?: number;
     /**
-     * Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    status?: string;
+    /**
+     * Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     tag?: string;
     /**
@@ -59,15 +71,19 @@ export interface GetPrefixArgs {
      */
     tagN?: string;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    tenantId?: number;
+    /**
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     vlanId?: number;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     vlanVid?: number;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     vrfId?: number;
 }
@@ -77,17 +93,18 @@ export interface GetPrefixArgs {
  */
 export interface GetPrefixResult {
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `prefix`.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `prefix`.
      *
      * @deprecated The `cidr` parameter is deprecated in favor of the canonical `prefix` attribute.
      */
     readonly cidr?: string;
+    readonly customFields?: {[key: string]: string};
     /**
-     * Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     readonly description: string;
     /**
-     * The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     readonly family: number;
     /**
@@ -95,16 +112,23 @@ export interface GetPrefixResult {
      */
     readonly id: number;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `cidr`.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `cidr`.
      */
     readonly prefix?: string;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    readonly roleId: number;
+    /**
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     readonly siteId?: number;
-    readonly status: string;
     /**
-     * Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    readonly status?: string;
+    /**
+     * Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     readonly tag?: string;
     /**
@@ -115,20 +139,41 @@ export interface GetPrefixResult {
     readonly tagN?: string;
     readonly tags: string[];
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    readonly tenantId?: number;
+    /**
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     readonly vlanId?: number;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     readonly vlanVid?: number;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     readonly vrfId?: number;
 }
-export function getPrefixOutput(args?: GetPrefixOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPrefixResult> {
-    return pulumi.output(args).apply((a: any) => getPrefix(a, opts))
+export function getPrefixOutput(args?: GetPrefixOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPrefixResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getPrefix:getPrefix", {
+        "cidr": args.cidr,
+        "customFields": args.customFields,
+        "description": args.description,
+        "family": args.family,
+        "prefix": args.prefix,
+        "roleId": args.roleId,
+        "siteId": args.siteId,
+        "status": args.status,
+        "tag": args.tag,
+        "tagN": args.tagN,
+        "tenantId": args.tenantId,
+        "vlanId": args.vlanId,
+        "vlanVid": args.vlanVid,
+        "vrfId": args.vrfId,
+    }, opts);
 }
 
 /**
@@ -136,29 +181,38 @@ export function getPrefixOutput(args?: GetPrefixOutputArgs, opts?: pulumi.Invoke
  */
 export interface GetPrefixOutputArgs {
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `prefix`.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `prefix`.
      *
      * @deprecated The `cidr` parameter is deprecated in favor of the canonical `prefix` attribute.
      */
     cidr?: pulumi.Input<string>;
+    customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     /**
-     * Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     description?: pulumi.Input<string>;
     /**
-     * The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     family?: pulumi.Input<number>;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `cidr`.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `cidr`.
      */
     prefix?: pulumi.Input<string>;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    roleId?: pulumi.Input<number>;
+    /**
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     siteId?: pulumi.Input<number>;
     /**
-     * Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    status?: pulumi.Input<string>;
+    /**
+     * Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     tag?: pulumi.Input<string>;
     /**
@@ -168,15 +222,19 @@ export interface GetPrefixOutputArgs {
      */
     tagN?: pulumi.Input<string>;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+     */
+    tenantId?: pulumi.Input<number>;
+    /**
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     vlanId?: pulumi.Input<number>;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     vlanVid?: pulumi.Input<number>;
     /**
-     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+     * At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
      */
     vrfId?: pulumi.Input<number>;
 }

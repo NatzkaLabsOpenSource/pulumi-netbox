@@ -39,15 +39,11 @@ type GetDevicesResult struct {
 }
 
 func GetDevicesOutput(ctx *pulumi.Context, args GetDevicesOutputArgs, opts ...pulumi.InvokeOption) GetDevicesResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetDevicesResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetDevicesResultOutput, error) {
 			args := v.(GetDevicesArgs)
-			r, err := GetDevices(ctx, &args, opts...)
-			var s GetDevicesResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getDevices:getDevices", args, GetDevicesResultOutput{}, options).(GetDevicesResultOutput), nil
 		}).(GetDevicesResultOutput)
 }
 

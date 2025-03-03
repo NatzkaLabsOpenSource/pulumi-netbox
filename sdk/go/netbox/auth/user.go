@@ -29,10 +29,10 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := auth.NewUser(ctx, "test", &auth.UserArgs{
-//				Active:   pulumi.Bool(true),
-//				Password: pulumi.String("abcdefghijkl"),
-//				Staff:    pulumi.Bool(true),
 //				Username: pulumi.String("johndoe"),
+//				Password: pulumi.String("Abcdefghijkl1"),
+//				Active:   pulumi.Bool(true),
+//				Staff:    pulumi.Bool(true),
 //			})
 //			if err != nil {
 //				return err
@@ -46,8 +46,9 @@ type User struct {
 	pulumi.CustomResourceState
 
 	// Defaults to `true`.
-	Active   pulumi.BoolPtrOutput `pulumi:"active"`
-	Password pulumi.StringOutput  `pulumi:"password"`
+	Active   pulumi.BoolPtrOutput  `pulumi:"active"`
+	GroupIds pulumi.IntArrayOutput `pulumi:"groupIds"`
+	Password pulumi.StringOutput   `pulumi:"password"`
 	// Defaults to `false`.
 	Staff    pulumi.BoolPtrOutput `pulumi:"staff"`
 	Username pulumi.StringOutput  `pulumi:"username"`
@@ -98,6 +99,7 @@ func GetUser(ctx *pulumi.Context,
 type userState struct {
 	// Defaults to `true`.
 	Active   *bool   `pulumi:"active"`
+	GroupIds []int   `pulumi:"groupIds"`
 	Password *string `pulumi:"password"`
 	// Defaults to `false`.
 	Staff    *bool   `pulumi:"staff"`
@@ -107,6 +109,7 @@ type userState struct {
 type UserState struct {
 	// Defaults to `true`.
 	Active   pulumi.BoolPtrInput
+	GroupIds pulumi.IntArrayInput
 	Password pulumi.StringPtrInput
 	// Defaults to `false`.
 	Staff    pulumi.BoolPtrInput
@@ -120,6 +123,7 @@ func (UserState) ElementType() reflect.Type {
 type userArgs struct {
 	// Defaults to `true`.
 	Active   *bool  `pulumi:"active"`
+	GroupIds []int  `pulumi:"groupIds"`
 	Password string `pulumi:"password"`
 	// Defaults to `false`.
 	Staff    *bool  `pulumi:"staff"`
@@ -130,6 +134,7 @@ type userArgs struct {
 type UserArgs struct {
 	// Defaults to `true`.
 	Active   pulumi.BoolPtrInput
+	GroupIds pulumi.IntArrayInput
 	Password pulumi.StringInput
 	// Defaults to `false`.
 	Staff    pulumi.BoolPtrInput
@@ -226,6 +231,10 @@ func (o UserOutput) ToUserOutputWithContext(ctx context.Context) UserOutput {
 // Defaults to `true`.
 func (o UserOutput) Active() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v *User) pulumi.BoolPtrOutput { return v.Active }).(pulumi.BoolPtrOutput)
+}
+
+func (o UserOutput) GroupIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *User) pulumi.IntArrayOutput { return v.GroupIds }).(pulumi.IntArrayOutput)
 }
 
 func (o UserOutput) Password() pulumi.StringOutput {

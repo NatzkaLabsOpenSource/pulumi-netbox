@@ -5,6 +5,16 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "./utilities";
 
 // Export members:
+export { ConfigContextArgs, ConfigContextState } from "./configContext";
+export type ConfigContext = import("./configContext").ConfigContext;
+export const ConfigContext: typeof import("./configContext").ConfigContext = null as any;
+utilities.lazyLoad(exports, ["ConfigContext"], () => require("./configContext"));
+
+export { ConfigTemplateArgs, ConfigTemplateState } from "./configTemplate";
+export type ConfigTemplate = import("./configTemplate").ConfigTemplate;
+export const ConfigTemplate: typeof import("./configTemplate").ConfigTemplate = null as any;
+utilities.lazyLoad(exports, ["ConfigTemplate"], () => require("./configTemplate"));
+
 export { CustomFieldArgs, CustomFieldState } from "./customField";
 export type CustomField = import("./customField").CustomField;
 export const CustomField: typeof import("./customField").CustomField = null as any;
@@ -14,6 +24,16 @@ export { CustomFieldChoiceSetArgs, CustomFieldChoiceSetState } from "./customFie
 export type CustomFieldChoiceSet = import("./customFieldChoiceSet").CustomFieldChoiceSet;
 export const CustomFieldChoiceSet: typeof import("./customFieldChoiceSet").CustomFieldChoiceSet = null as any;
 utilities.lazyLoad(exports, ["CustomFieldChoiceSet"], () => require("./customFieldChoiceSet"));
+
+export { EventRuleArgs, EventRuleState } from "./eventRule";
+export type EventRule = import("./eventRule").EventRule;
+export const EventRule: typeof import("./eventRule").EventRule = null as any;
+utilities.lazyLoad(exports, ["EventRule"], () => require("./eventRule"));
+
+export { GetConfigContextArgs, GetConfigContextResult, GetConfigContextOutputArgs } from "./getConfigContext";
+export const getConfigContext: typeof import("./getConfigContext").getConfigContext = null as any;
+export const getConfigContextOutput: typeof import("./getConfigContext").getConfigContextOutput = null as any;
+utilities.lazyLoad(exports, ["getConfigContext","getConfigContextOutput"], () => require("./getConfigContext"));
 
 export { GetTagArgs, GetTagResult, GetTagOutputArgs } from "./getTag";
 export const getTag: typeof import("./getTag").getTag = null as any;
@@ -50,6 +70,7 @@ import * as ipam from "./ipam";
 import * as tenancy from "./tenancy";
 import * as types from "./types";
 import * as virt from "./virt";
+import * as vpn from "./vpn";
 
 export {
     auth,
@@ -60,16 +81,23 @@ export {
     tenancy,
     types,
     virt,
+    vpn,
 };
 
 const _module = {
     version: utilities.getVersion(),
     construct: (name: string, type: string, urn: string): pulumi.Resource => {
         switch (type) {
+            case "netbox:index/configContext:ConfigContext":
+                return new ConfigContext(name, <any>undefined, { urn })
+            case "netbox:index/configTemplate:ConfigTemplate":
+                return new ConfigTemplate(name, <any>undefined, { urn })
             case "netbox:index/customField:CustomField":
                 return new CustomField(name, <any>undefined, { urn })
             case "netbox:index/customFieldChoiceSet:CustomFieldChoiceSet":
                 return new CustomFieldChoiceSet(name, <any>undefined, { urn })
+            case "netbox:index/eventRule:EventRule":
+                return new EventRule(name, <any>undefined, { urn })
             case "netbox:index/tag:Tag":
                 return new Tag(name, <any>undefined, { urn })
             case "netbox:index/webhook:Webhook":
@@ -79,8 +107,11 @@ const _module = {
         }
     },
 };
+pulumi.runtime.registerResourceModule("netbox", "index/configContext", _module)
+pulumi.runtime.registerResourceModule("netbox", "index/configTemplate", _module)
 pulumi.runtime.registerResourceModule("netbox", "index/customField", _module)
 pulumi.runtime.registerResourceModule("netbox", "index/customFieldChoiceSet", _module)
+pulumi.runtime.registerResourceModule("netbox", "index/eventRule", _module)
 pulumi.runtime.registerResourceModule("netbox", "index/tag", _module)
 pulumi.runtime.registerResourceModule("netbox", "index/webhook", _module)
 pulumi.runtime.registerResourcePackage("netbox", {

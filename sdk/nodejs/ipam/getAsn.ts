@@ -23,7 +23,6 @@ import * as utilities from "../utilities";
  */
 export function getAsn(args?: GetAsnArgs, opts?: pulumi.InvokeOptions): Promise<GetAsnResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getAsn:getAsn", {
         "asn": args.asn,
@@ -94,8 +93,14 @@ export interface GetAsnResult {
  * });
  * ```
  */
-export function getAsnOutput(args?: GetAsnOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAsnResult> {
-    return pulumi.output(args).apply((a: any) => getAsn(a, opts))
+export function getAsnOutput(args?: GetAsnOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAsnResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getAsn:getAsn", {
+        "asn": args.asn,
+        "tag": args.tag,
+        "tagN": args.tagN,
+    }, opts);
 }
 
 /**

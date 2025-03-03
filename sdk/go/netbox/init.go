@@ -21,10 +21,16 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "netbox:index/configContext:ConfigContext":
+		r = &ConfigContext{}
+	case "netbox:index/configTemplate:ConfigTemplate":
+		r = &ConfigTemplate{}
 	case "netbox:index/customField:CustomField":
 		r = &CustomField{}
 	case "netbox:index/customFieldChoiceSet:CustomFieldChoiceSet":
 		r = &CustomFieldChoiceSet{}
+	case "netbox:index/eventRule:EventRule":
+		r = &EventRule{}
 	case "netbox:index/tag:Tag":
 		r = &Tag{}
 	case "netbox:index/webhook:Webhook":
@@ -62,12 +68,27 @@ func init() {
 	}
 	pulumi.RegisterResourceModule(
 		"netbox",
+		"index/configContext",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"netbox",
+		"index/configTemplate",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"netbox",
 		"index/customField",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(
 		"netbox",
 		"index/customFieldChoiceSet",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"netbox",
+		"index/eventRule",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

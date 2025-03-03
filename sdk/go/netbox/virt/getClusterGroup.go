@@ -60,15 +60,11 @@ type LookupClusterGroupResult struct {
 }
 
 func LookupClusterGroupOutput(ctx *pulumi.Context, args LookupClusterGroupOutputArgs, opts ...pulumi.InvokeOption) LookupClusterGroupResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupClusterGroupResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupClusterGroupResultOutput, error) {
 			args := v.(LookupClusterGroupArgs)
-			r, err := LookupClusterGroup(ctx, &args, opts...)
-			var s LookupClusterGroupResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:virt/getClusterGroup:getClusterGroup", args, LookupClusterGroupResultOutput{}, options).(LookupClusterGroupResultOutput), nil
 		}).(LookupClusterGroupResultOutput)
 }
 

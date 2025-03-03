@@ -18,13 +18,15 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Note that some terraform code is not included in the example for brevity
- * const testDevice = new netbox.dcim.Device("testDevice", {
- *     deviceTypeId: netbox_device_type.test.id,
- *     roleId: netbox_device_role.test.id,
- *     siteId: netbox_site.test.id,
+ * const test = new netbox.dcim.Device("test", {
+ *     name: "%[1]s",
+ *     deviceTypeId: testNetboxDeviceType.id,
+ *     roleId: testNetboxDeviceRole.id,
+ *     siteId: testNetboxSite.id,
  * });
- * const testDevicePowerOutlet = new netbox.dcim.DevicePowerOutlet("testDevicePowerOutlet", {
- *     deviceId: testDevice.id,
+ * const testDevicePowerOutlet = new netbox.dcim.DevicePowerOutlet("test", {
+ *     deviceId: test.id,
+ *     name: "power outlet",
  *     type: "iec-60320-c5",
  *     feedLeg: "A",
  * });

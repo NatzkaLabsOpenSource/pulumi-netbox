@@ -118,7 +118,7 @@ type GetTenantsTenant struct {
 	ClusterCount   int                           `pulumi:"clusterCount"`
 	Comments       string                        `pulumi:"comments"`
 	Created        string                        `pulumi:"created"`
-	CustomFields   map[string]interface{}        `pulumi:"customFields"`
+	CustomFields   map[string]string             `pulumi:"customFields"`
 	Description    string                        `pulumi:"description"`
 	DeviceCount    int                           `pulumi:"deviceCount"`
 	Id             int                           `pulumi:"id"`
@@ -151,7 +151,7 @@ type GetTenantsTenantArgs struct {
 	ClusterCount   pulumi.IntInput                       `pulumi:"clusterCount"`
 	Comments       pulumi.StringInput                    `pulumi:"comments"`
 	Created        pulumi.StringInput                    `pulumi:"created"`
-	CustomFields   pulumi.MapInput                       `pulumi:"customFields"`
+	CustomFields   pulumi.StringMapInput                 `pulumi:"customFields"`
 	Description    pulumi.StringInput                    `pulumi:"description"`
 	DeviceCount    pulumi.IntInput                       `pulumi:"deviceCount"`
 	Id             pulumi.IntInput                       `pulumi:"id"`
@@ -235,8 +235,8 @@ func (o GetTenantsTenantOutput) Created() pulumi.StringOutput {
 	return o.ApplyT(func(v GetTenantsTenant) string { return v.Created }).(pulumi.StringOutput)
 }
 
-func (o GetTenantsTenantOutput) CustomFields() pulumi.MapOutput {
-	return o.ApplyT(func(v GetTenantsTenant) map[string]interface{} { return v.CustomFields }).(pulumi.MapOutput)
+func (o GetTenantsTenantOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetTenantsTenant) map[string]string { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o GetTenantsTenantOutput) Description() pulumi.StringOutput {

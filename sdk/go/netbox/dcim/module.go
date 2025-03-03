@@ -32,33 +32,38 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testDevice, err := dcim.NewDevice(ctx, "testDevice", &dcim.DeviceArgs{
-//				DeviceTypeId: pulumi.Any(netbox_device_type.Test.Id),
-//				RoleId:       pulumi.Any(netbox_device_role.Test.Id),
-//				SiteId:       pulumi.Any(netbox_site.Test.Id),
+//			// Note that some terraform code is not included in the example for brevity
+//			test, err := dcim.NewDevice(ctx, "test", &dcim.DeviceArgs{
+//				Name:         pulumi.String("%[1]s"),
+//				DeviceTypeId: pulumi.Any(testNetboxDeviceType.Id),
+//				RoleId:       pulumi.Any(testNetboxDeviceRole.Id),
+//				SiteId:       pulumi.Any(testNetboxSite.Id),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			testDeviceModuleBay, err := dcim.NewDeviceModuleBay(ctx, "testDeviceModuleBay", &dcim.DeviceModuleBayArgs{
-//				DeviceId: testDevice.ID(),
+//			testDeviceModuleBay, err := dcim.NewDeviceModuleBay(ctx, "test", &dcim.DeviceModuleBayArgs{
+//				DeviceId: test.ID(),
+//				Name:     pulumi.String("SFP"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			testManufacturer, err := dcim.NewManufacturer(ctx, "testManufacturer", nil)
+//			testManufacturer, err := dcim.NewManufacturer(ctx, "test", &dcim.ManufacturerArgs{
+//				Name: pulumi.String("Dell"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testModuleType, err := dcim.NewModuleType(ctx, "testModuleType", &dcim.ModuleTypeArgs{
+//			testModuleType, err := dcim.NewModuleType(ctx, "test", &dcim.ModuleTypeArgs{
 //				ManufacturerId: testManufacturer.ID(),
 //				Model:          pulumi.String("Networking"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewModule(ctx, "testModule", &dcim.ModuleArgs{
-//				DeviceId:     testDevice.ID(),
+//			_, err = dcim.NewModule(ctx, "test", &dcim.ModuleArgs{
+//				DeviceId:     test.ID(),
 //				ModuleBayId:  testDeviceModuleBay.ID(),
 //				ModuleTypeId: testModuleType.ID(),
 //				Status:       pulumi.String("active"),

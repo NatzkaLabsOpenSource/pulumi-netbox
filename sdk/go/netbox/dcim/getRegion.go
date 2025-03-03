@@ -38,15 +38,11 @@ type LookupRegionResult struct {
 }
 
 func LookupRegionOutput(ctx *pulumi.Context, args LookupRegionOutputArgs, opts ...pulumi.InvokeOption) LookupRegionResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupRegionResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupRegionResultOutput, error) {
 			args := v.(LookupRegionArgs)
-			r, err := LookupRegion(ctx, &args, opts...)
-			var s LookupRegionResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getRegion:getRegion", args, LookupRegionResultOutput{}, options).(LookupRegionResultOutput), nil
 		}).(LookupRegionResultOutput)
 }
 

@@ -31,6 +31,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Interface{}
 	case "netbox:virt/primaryIp:PrimaryIp":
 		r = &PrimaryIp{}
+	case "netbox:virt/virtualDisk:VirtualDisk":
+		r = &VirtualDisk{}
 	case "netbox:virt/virtualMachine:VirtualMachine":
 		r = &VirtualMachine{}
 	default:
@@ -69,6 +71,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"netbox",
 		"virt/primaryIp",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"netbox",
+		"virt/virtualDisk",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

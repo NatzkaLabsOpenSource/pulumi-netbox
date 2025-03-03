@@ -29,7 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := ipam.NewRole(ctx, "testBasic", nil)
+//			_, err := ipam.NewRole(ctx, "test_basic", &ipam.RoleArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}

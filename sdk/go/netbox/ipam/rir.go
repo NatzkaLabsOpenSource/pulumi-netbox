@@ -30,6 +30,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ipam.NewRir(ctx, "test", &ipam.RirArgs{
+//				Name:        pulumi.String("test"),
 //				Description: pulumi.String("my description"),
 //			})
 //			if err != nil {
@@ -44,8 +45,10 @@ type Rir struct {
 	pulumi.CustomResourceState
 
 	Description pulumi.StringPtrOutput `pulumi:"description"`
-	Name        pulumi.StringOutput    `pulumi:"name"`
-	Slug        pulumi.StringOutput    `pulumi:"slug"`
+	// Defaults to `false`.
+	IsPrivate pulumi.BoolPtrOutput `pulumi:"isPrivate"`
+	Name      pulumi.StringOutput  `pulumi:"name"`
+	Slug      pulumi.StringOutput  `pulumi:"slug"`
 }
 
 // NewRir registers a new resource with the given unique name, arguments, and options.
@@ -79,14 +82,18 @@ func GetRir(ctx *pulumi.Context,
 // Input properties used for looking up and filtering Rir resources.
 type rirState struct {
 	Description *string `pulumi:"description"`
-	Name        *string `pulumi:"name"`
-	Slug        *string `pulumi:"slug"`
+	// Defaults to `false`.
+	IsPrivate *bool   `pulumi:"isPrivate"`
+	Name      *string `pulumi:"name"`
+	Slug      *string `pulumi:"slug"`
 }
 
 type RirState struct {
 	Description pulumi.StringPtrInput
-	Name        pulumi.StringPtrInput
-	Slug        pulumi.StringPtrInput
+	// Defaults to `false`.
+	IsPrivate pulumi.BoolPtrInput
+	Name      pulumi.StringPtrInput
+	Slug      pulumi.StringPtrInput
 }
 
 func (RirState) ElementType() reflect.Type {
@@ -95,15 +102,19 @@ func (RirState) ElementType() reflect.Type {
 
 type rirArgs struct {
 	Description *string `pulumi:"description"`
-	Name        *string `pulumi:"name"`
-	Slug        *string `pulumi:"slug"`
+	// Defaults to `false`.
+	IsPrivate *bool   `pulumi:"isPrivate"`
+	Name      *string `pulumi:"name"`
+	Slug      *string `pulumi:"slug"`
 }
 
 // The set of arguments for constructing a Rir resource.
 type RirArgs struct {
 	Description pulumi.StringPtrInput
-	Name        pulumi.StringPtrInput
-	Slug        pulumi.StringPtrInput
+	// Defaults to `false`.
+	IsPrivate pulumi.BoolPtrInput
+	Name      pulumi.StringPtrInput
+	Slug      pulumi.StringPtrInput
 }
 
 func (RirArgs) ElementType() reflect.Type {
@@ -195,6 +206,11 @@ func (o RirOutput) ToRirOutputWithContext(ctx context.Context) RirOutput {
 
 func (o RirOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Rir) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Defaults to `false`.
+func (o RirOutput) IsPrivate() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Rir) pulumi.BoolPtrOutput { return v.IsPrivate }).(pulumi.BoolPtrOutput)
 }
 
 func (o RirOutput) Name() pulumi.StringOutput {

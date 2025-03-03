@@ -40,6 +40,11 @@ export class Service extends pulumi.CustomResource {
     }
 
     public readonly customFields!: pulumi.Output<{[key: string]: string} | undefined>;
+    public readonly description!: pulumi.Output<string | undefined>;
+    /**
+     * Exactly one of `virtualMachineId` or `deviceId` must be given.
+     */
+    public readonly deviceId!: pulumi.Output<number | undefined>;
     public readonly name!: pulumi.Output<string>;
     /**
      * Exactly one of `port` or `ports` must be given.
@@ -55,7 +60,11 @@ export class Service extends pulumi.CustomResource {
      * Valid values are `tcp`, `udp` and `sctp`.
      */
     public readonly protocol!: pulumi.Output<string>;
-    public readonly virtualMachineId!: pulumi.Output<number>;
+    public readonly tags!: pulumi.Output<string[] | undefined>;
+    /**
+     * Exactly one of `virtualMachineId` or `deviceId` must be given.
+     */
+    public readonly virtualMachineId!: pulumi.Output<number | undefined>;
 
     /**
      * Create a Service resource with the given unique name, arguments, and options.
@@ -71,24 +80,27 @@ export class Service extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as ServiceState | undefined;
             resourceInputs["customFields"] = state ? state.customFields : undefined;
+            resourceInputs["description"] = state ? state.description : undefined;
+            resourceInputs["deviceId"] = state ? state.deviceId : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["port"] = state ? state.port : undefined;
             resourceInputs["ports"] = state ? state.ports : undefined;
             resourceInputs["protocol"] = state ? state.protocol : undefined;
+            resourceInputs["tags"] = state ? state.tags : undefined;
             resourceInputs["virtualMachineId"] = state ? state.virtualMachineId : undefined;
         } else {
             const args = argsOrState as ServiceArgs | undefined;
             if ((!args || args.protocol === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'protocol'");
             }
-            if ((!args || args.virtualMachineId === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'virtualMachineId'");
-            }
             resourceInputs["customFields"] = args ? args.customFields : undefined;
+            resourceInputs["description"] = args ? args.description : undefined;
+            resourceInputs["deviceId"] = args ? args.deviceId : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["port"] = args ? args.port : undefined;
             resourceInputs["ports"] = args ? args.ports : undefined;
             resourceInputs["protocol"] = args ? args.protocol : undefined;
+            resourceInputs["tags"] = args ? args.tags : undefined;
             resourceInputs["virtualMachineId"] = args ? args.virtualMachineId : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -101,6 +113,11 @@ export class Service extends pulumi.CustomResource {
  */
 export interface ServiceState {
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    description?: pulumi.Input<string>;
+    /**
+     * Exactly one of `virtualMachineId` or `deviceId` must be given.
+     */
+    deviceId?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
     /**
      * Exactly one of `port` or `ports` must be given.
@@ -116,6 +133,10 @@ export interface ServiceState {
      * Valid values are `tcp`, `udp` and `sctp`.
      */
     protocol?: pulumi.Input<string>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Exactly one of `virtualMachineId` or `deviceId` must be given.
+     */
     virtualMachineId?: pulumi.Input<number>;
 }
 
@@ -124,6 +145,11 @@ export interface ServiceState {
  */
 export interface ServiceArgs {
     customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
+    description?: pulumi.Input<string>;
+    /**
+     * Exactly one of `virtualMachineId` or `deviceId` must be given.
+     */
+    deviceId?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
     /**
      * Exactly one of `port` or `ports` must be given.
@@ -139,5 +165,9 @@ export interface ServiceArgs {
      * Valid values are `tcp`, `udp` and `sctp`.
      */
     protocol: pulumi.Input<string>;
-    virtualMachineId: pulumi.Input<number>;
+    tags?: pulumi.Input<pulumi.Input<string>[]>;
+    /**
+     * Exactly one of `virtualMachineId` or `deviceId` must be given.
+     */
+    virtualMachineId?: pulumi.Input<number>;
 }

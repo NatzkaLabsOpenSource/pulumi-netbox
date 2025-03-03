@@ -18,10 +18,11 @@ import * as utilities from "./utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const test = new netbox.CustomField("test", {
- *     contentTypes: ["virtualization.vminterface"],
+ *     name: "test",
  *     type: "text",
- *     validationRegex: "^.*$",
+ *     contentTypes: ["virtualization.vminterface"],
  *     weight: 100,
+ *     validationRegex: "^.*$",
  * });
  * ```
  */

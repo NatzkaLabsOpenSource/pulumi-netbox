@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getClusterType(args: GetClusterTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterTypeResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:virt/getClusterType:getClusterType", {
         "name": args.name,
@@ -30,8 +29,11 @@ export interface GetClusterTypeResult {
     readonly id: string;
     readonly name: string;
 }
-export function getClusterTypeOutput(args: GetClusterTypeOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetClusterTypeResult> {
-    return pulumi.output(args).apply((a: any) => getClusterType(a, opts))
+export function getClusterTypeOutput(args: GetClusterTypeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterTypeResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:virt/getClusterType:getClusterType", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

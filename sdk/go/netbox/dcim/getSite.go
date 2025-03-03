@@ -54,7 +54,6 @@ func LookupSite(ctx *pulumi.Context, args *LookupSiteArgs, opts ...pulumi.Invoke
 
 // A collection of arguments for invoking getSite.
 type LookupSiteArgs struct {
-	AsnIds   []int   `pulumi:"asnIds"`
 	Facility *string `pulumi:"facility"`
 	// The ID of this resource.
 	Id   *string `pulumi:"id"`
@@ -70,32 +69,27 @@ type LookupSiteResult struct {
 	Facility    string `pulumi:"facility"`
 	GroupId     int    `pulumi:"groupId"`
 	// The ID of this resource.
-	Id       string  `pulumi:"id"`
-	Name     *string `pulumi:"name"`
-	RegionId int     `pulumi:"regionId"`
-	SiteId   int     `pulumi:"siteId"`
-	Slug     *string `pulumi:"slug"`
-	Status   string  `pulumi:"status"`
-	TenantId int     `pulumi:"tenantId"`
-	TimeZone string  `pulumi:"timeZone"`
+	Id       string `pulumi:"id"`
+	Name     string `pulumi:"name"`
+	RegionId int    `pulumi:"regionId"`
+	SiteId   int    `pulumi:"siteId"`
+	Slug     string `pulumi:"slug"`
+	Status   string `pulumi:"status"`
+	TenantId int    `pulumi:"tenantId"`
+	TimeZone string `pulumi:"timeZone"`
 }
 
 func LookupSiteOutput(ctx *pulumi.Context, args LookupSiteOutputArgs, opts ...pulumi.InvokeOption) LookupSiteResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupSiteResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupSiteResultOutput, error) {
 			args := v.(LookupSiteArgs)
-			r, err := LookupSite(ctx, &args, opts...)
-			var s LookupSiteResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getSite:getSite", args, LookupSiteResultOutput{}, options).(LookupSiteResultOutput), nil
 		}).(LookupSiteResultOutput)
 }
 
 // A collection of arguments for invoking getSite.
 type LookupSiteOutputArgs struct {
-	AsnIds   pulumi.IntArrayInput  `pulumi:"asnIds"`
 	Facility pulumi.StringPtrInput `pulumi:"facility"`
 	// The ID of this resource.
 	Id   pulumi.StringPtrInput `pulumi:"id"`
@@ -147,8 +141,8 @@ func (o LookupSiteResultOutput) Id() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupSiteResult) string { return v.Id }).(pulumi.StringOutput)
 }
 
-func (o LookupSiteResultOutput) Name() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v LookupSiteResult) *string { return v.Name }).(pulumi.StringPtrOutput)
+func (o LookupSiteResultOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSiteResult) string { return v.Name }).(pulumi.StringOutput)
 }
 
 func (o LookupSiteResultOutput) RegionId() pulumi.IntOutput {
@@ -159,8 +153,8 @@ func (o LookupSiteResultOutput) SiteId() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupSiteResult) int { return v.SiteId }).(pulumi.IntOutput)
 }
 
-func (o LookupSiteResultOutput) Slug() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v LookupSiteResult) *string { return v.Slug }).(pulumi.StringPtrOutput)
+func (o LookupSiteResultOutput) Slug() pulumi.StringOutput {
+	return o.ApplyT(func(v LookupSiteResult) string { return v.Slug }).(pulumi.StringOutput)
 }
 
 func (o LookupSiteResultOutput) Status() pulumi.StringOutput {

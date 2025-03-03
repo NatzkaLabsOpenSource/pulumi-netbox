@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getTenants(args?: GetTenantsArgs, opts?: pulumi.InvokeOptions): Promise<GetTenantsResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:tenancy/getTenants:getTenants", {
         "filters": args.filters,
@@ -42,8 +41,13 @@ export interface GetTenantsResult {
     readonly limit?: number;
     readonly tenants: outputs.tenancy.GetTenantsTenant[];
 }
-export function getTenantsOutput(args?: GetTenantsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTenantsResult> {
-    return pulumi.output(args).apply((a: any) => getTenants(a, opts))
+export function getTenantsOutput(args?: GetTenantsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTenantsResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:tenancy/getTenants:getTenants", {
+        "filters": args.filters,
+        "limit": args.limit,
+    }, opts);
 }
 
 /**

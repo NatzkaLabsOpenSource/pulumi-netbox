@@ -30,18 +30,23 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testContact, err := tenancy.NewContact(ctx, "testContact", nil)
+//			test, err := tenancy.NewContact(ctx, "test", &tenancy.ContactArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testContactRole, err := tenancy.NewContactRole(ctx, "testContactRole", nil)
+//			testContactRole, err := tenancy.NewContactRole(ctx, "test", &tenancy.ContactRoleArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = tenancy.NewContactAssignment(ctx, "testContactAssignment", &tenancy.ContactAssignmentArgs{
+//			// Assumes that a device with id 123 exists
+//			_, err = tenancy.NewContactAssignment(ctx, "test", &tenancy.ContactAssignmentArgs{
 //				ContentType: pulumi.String("dcim.device"),
 //				ObjectId:    pulumi.Int(123),
-//				ContactId:   testContact.ID(),
+//				ContactId:   test.ID(),
 //				RoleId:      testContactRole.ID(),
 //				Priority:    pulumi.String("primary"),
 //			})

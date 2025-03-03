@@ -30,25 +30,26 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// assumes that the referenced console port resources exist
 //			_, err := dcim.NewCable(ctx, "test", &dcim.CableArgs{
 //				ATerminations: dcim.CableATerminationArray{
 //					&dcim.CableATerminationArgs{
 //						ObjectType: pulumi.String("dcim.consoleserverport"),
-//						ObjectId:   pulumi.Any(netbox_device_console_server_port.Kvm1.Id),
+//						ObjectId:   pulumi.Any(kvm1.Id),
 //					},
 //					&dcim.CableATerminationArgs{
 //						ObjectType: pulumi.String("dcim.consoleserverport"),
-//						ObjectId:   pulumi.Any(netbox_device_console_server_port.Kvm2.Id),
+//						ObjectId:   pulumi.Any(kvm2.Id),
 //					},
 //				},
 //				BTerminations: dcim.CableBTerminationArray{
 //					&dcim.CableBTerminationArgs{
 //						ObjectType: pulumi.String("dcim.consoleport"),
-//						ObjectId:   pulumi.Any(netbox_device_console_port.Server1.Id),
+//						ObjectId:   pulumi.Any(server1.Id),
 //					},
 //					&dcim.CableBTerminationArgs{
 //						ObjectType: pulumi.String("dcim.consoleport"),
-//						ObjectId:   pulumi.Any(netbox_device_console_port.Server2.Id),
+//						ObjectId:   pulumi.Any(server2.Id),
 //					},
 //				},
 //				Status:     pulumi.String("connected"),

@@ -32,17 +32,22 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testSite, err := dcim.NewSite(ctx, "testSite", nil)
+//			test, err := dcim.NewSite(ctx, "test", &dcim.SiteArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			testTenant, err := tenancy.NewTenant(ctx, "testTenant", nil)
+//			testTenant, err := tenancy.NewTenant(ctx, "test", &tenancy.TenantArgs{
+//				Name: pulumi.String("test"),
+//			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewLocation(ctx, "testLocation", &dcim.LocationArgs{
+//			_, err = dcim.NewLocation(ctx, "test", &dcim.LocationArgs{
+//				Name:        pulumi.String("test"),
 //				Description: pulumi.String("my description"),
-//				SiteId:      testSite.ID(),
+//				SiteId:      test.ID(),
 //				TenantId:    testTenant.ID(),
 //			})
 //			if err != nil {
@@ -59,6 +64,7 @@ type Location struct {
 	CustomFields pulumi.StringMapOutput   `pulumi:"customFields"`
 	Description  pulumi.StringPtrOutput   `pulumi:"description"`
 	Name         pulumi.StringOutput      `pulumi:"name"`
+	ParentId     pulumi.IntPtrOutput      `pulumi:"parentId"`
 	SiteId       pulumi.IntPtrOutput      `pulumi:"siteId"`
 	Slug         pulumi.StringOutput      `pulumi:"slug"`
 	Tags         pulumi.StringArrayOutput `pulumi:"tags"`
@@ -98,6 +104,7 @@ type locationState struct {
 	CustomFields map[string]string `pulumi:"customFields"`
 	Description  *string           `pulumi:"description"`
 	Name         *string           `pulumi:"name"`
+	ParentId     *int              `pulumi:"parentId"`
 	SiteId       *int              `pulumi:"siteId"`
 	Slug         *string           `pulumi:"slug"`
 	Tags         []string          `pulumi:"tags"`
@@ -108,6 +115,7 @@ type LocationState struct {
 	CustomFields pulumi.StringMapInput
 	Description  pulumi.StringPtrInput
 	Name         pulumi.StringPtrInput
+	ParentId     pulumi.IntPtrInput
 	SiteId       pulumi.IntPtrInput
 	Slug         pulumi.StringPtrInput
 	Tags         pulumi.StringArrayInput
@@ -122,6 +130,7 @@ type locationArgs struct {
 	CustomFields map[string]string `pulumi:"customFields"`
 	Description  *string           `pulumi:"description"`
 	Name         *string           `pulumi:"name"`
+	ParentId     *int              `pulumi:"parentId"`
 	SiteId       *int              `pulumi:"siteId"`
 	Slug         *string           `pulumi:"slug"`
 	Tags         []string          `pulumi:"tags"`
@@ -133,6 +142,7 @@ type LocationArgs struct {
 	CustomFields pulumi.StringMapInput
 	Description  pulumi.StringPtrInput
 	Name         pulumi.StringPtrInput
+	ParentId     pulumi.IntPtrInput
 	SiteId       pulumi.IntPtrInput
 	Slug         pulumi.StringPtrInput
 	Tags         pulumi.StringArrayInput
@@ -236,6 +246,10 @@ func (o LocationOutput) Description() pulumi.StringPtrOutput {
 
 func (o LocationOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Location) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o LocationOutput) ParentId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *Location) pulumi.IntPtrOutput { return v.ParentId }).(pulumi.IntPtrOutput)
 }
 
 func (o LocationOutput) SiteId() pulumi.IntPtrOutput {

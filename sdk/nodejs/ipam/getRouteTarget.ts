@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getRouteTarget(args: GetRouteTargetArgs, opts?: pulumi.InvokeOptions): Promise<GetRouteTargetResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getRouteTarget:getRouteTarget", {
         "name": args.name,
@@ -34,8 +33,12 @@ export interface GetRouteTargetResult {
     readonly tags?: string[];
     readonly tenantId: number;
 }
-export function getRouteTargetOutput(args: GetRouteTargetOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRouteTargetResult> {
-    return pulumi.output(args).apply((a: any) => getRouteTarget(a, opts))
+export function getRouteTargetOutput(args: GetRouteTargetOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRouteTargetResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getRouteTarget:getRouteTarget", {
+        "name": args.name,
+        "tags": args.tags,
+    }, opts);
 }
 
 /**

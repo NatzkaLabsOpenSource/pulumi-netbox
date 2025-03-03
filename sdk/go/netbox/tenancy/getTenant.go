@@ -68,15 +68,11 @@ type LookupTenantResult struct {
 }
 
 func LookupTenantOutput(ctx *pulumi.Context, args LookupTenantOutputArgs, opts ...pulumi.InvokeOption) LookupTenantResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupTenantResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupTenantResultOutput, error) {
 			args := v.(LookupTenantArgs)
-			r, err := LookupTenant(ctx, &args, opts...)
-			var s LookupTenantResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:tenancy/getTenant:getTenant", args, LookupTenantResultOutput{}, options).(LookupTenantResultOutput), nil
 		}).(LookupTenantResultOutput)
 }
 

@@ -45,15 +45,11 @@ type GetLocationsResult struct {
 }
 
 func GetLocationsOutput(ctx *pulumi.Context, args GetLocationsOutputArgs, opts ...pulumi.InvokeOption) GetLocationsResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (GetLocationsResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (GetLocationsResultOutput, error) {
 			args := v.(GetLocationsArgs)
-			r, err := GetLocations(ctx, &args, opts...)
-			var s GetLocationsResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getLocations:getLocations", args, GetLocationsResultOutput{}, options).(GetLocationsResultOutput), nil
 		}).(GetLocationsResultOutput)
 }
 

@@ -7,7 +7,6 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 export function getAvailablePrefix(args: GetAvailablePrefixArgs, opts?: pulumi.InvokeOptions): Promise<GetAvailablePrefixResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getAvailablePrefix:getAvailablePrefix", {
         "prefixId": args.prefixId,
@@ -32,8 +31,11 @@ export interface GetAvailablePrefixResult {
     readonly prefixId: number;
     readonly prefixesAvailables: outputs.ipam.GetAvailablePrefixPrefixesAvailable[];
 }
-export function getAvailablePrefixOutput(args: GetAvailablePrefixOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetAvailablePrefixResult> {
-    return pulumi.output(args).apply((a: any) => getAvailablePrefix(a, opts))
+export function getAvailablePrefixOutput(args: GetAvailablePrefixOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAvailablePrefixResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getAvailablePrefix:getAvailablePrefix", {
+        "prefixId": args.prefixId,
+    }, opts);
 }
 
 /**

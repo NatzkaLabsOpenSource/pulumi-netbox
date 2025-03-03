@@ -11,22 +11,24 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Get VLAN group by name
  * const example1 = netbox.ipam.getVlanGroup({
  *     name: "example1",
  * });
+ * // Get VLAN group by stub
  * const example2 = netbox.ipam.getVlanGroup({
  *     slug: "example2",
  * });
+ * // Get VLAN group by name and scope_type/id
  * const example3 = netbox.ipam.getVlanGroup({
  *     name: "example",
  *     scopeType: "dcim.site",
- *     scopeId: netbox_site.example.id,
+ *     scopeId: example.id,
  * });
  * ```
  */
 export function getVlanGroup(args?: GetVlanGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetVlanGroupResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getVlanGroup:getVlanGroup", {
         "name": args.name,
@@ -41,7 +43,7 @@ export function getVlanGroup(args?: GetVlanGroupArgs, opts?: pulumi.InvokeOption
  */
 export interface GetVlanGroupArgs {
     /**
-     * At least one of `name` or `slug` must be given.
+     * At least one of `name`, `slug` or `scopeType` must be given.
      */
     name?: string;
     /**
@@ -49,11 +51,11 @@ export interface GetVlanGroupArgs {
      */
     scopeId?: number;
     /**
-     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`. At least one of `name`, `slug` or `scopeType` must be given.
      */
     scopeType?: string;
     /**
-     * At least one of `name` or `slug` must be given.
+     * At least one of `name`, `slug` or `scopeType` must be given.
      */
     slug?: string;
 }
@@ -67,10 +69,8 @@ export interface GetVlanGroupResult {
      * The provider-assigned unique ID for this managed resource.
      */
     readonly id: string;
-    readonly maxVid: number;
-    readonly minVid: number;
     /**
-     * At least one of `name` or `slug` must be given.
+     * At least one of `name`, `slug` or `scopeType` must be given.
      */
     readonly name: string;
     /**
@@ -78,11 +78,11 @@ export interface GetVlanGroupResult {
      */
     readonly scopeId?: number;
     /**
-     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`. At least one of `name`, `slug` or `scopeType` must be given.
      */
     readonly scopeType?: string;
     /**
-     * At least one of `name` or `slug` must be given.
+     * At least one of `name`, `slug` or `scopeType` must be given.
      */
     readonly slug: string;
     readonly vlanCount: number;
@@ -94,21 +94,31 @@ export interface GetVlanGroupResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Get VLAN group by name
  * const example1 = netbox.ipam.getVlanGroup({
  *     name: "example1",
  * });
+ * // Get VLAN group by stub
  * const example2 = netbox.ipam.getVlanGroup({
  *     slug: "example2",
  * });
+ * // Get VLAN group by name and scope_type/id
  * const example3 = netbox.ipam.getVlanGroup({
  *     name: "example",
  *     scopeType: "dcim.site",
- *     scopeId: netbox_site.example.id,
+ *     scopeId: example.id,
  * });
  * ```
  */
-export function getVlanGroupOutput(args?: GetVlanGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVlanGroupResult> {
-    return pulumi.output(args).apply((a: any) => getVlanGroup(a, opts))
+export function getVlanGroupOutput(args?: GetVlanGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVlanGroupResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getVlanGroup:getVlanGroup", {
+        "name": args.name,
+        "scopeId": args.scopeId,
+        "scopeType": args.scopeType,
+        "slug": args.slug,
+    }, opts);
 }
 
 /**
@@ -116,7 +126,7 @@ export function getVlanGroupOutput(args?: GetVlanGroupOutputArgs, opts?: pulumi.
  */
 export interface GetVlanGroupOutputArgs {
     /**
-     * At least one of `name` or `slug` must be given.
+     * At least one of `name`, `slug` or `scopeType` must be given.
      */
     name?: pulumi.Input<string>;
     /**
@@ -124,11 +134,11 @@ export interface GetVlanGroupOutputArgs {
      */
     scopeId?: pulumi.Input<number>;
     /**
-     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
+     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`. At least one of `name`, `slug` or `scopeType` must be given.
      */
     scopeType?: pulumi.Input<string>;
     /**
-     * At least one of `name` or `slug` must be given.
+     * At least one of `name`, `slug` or `scopeType` must be given.
      */
     slug?: pulumi.Input<string>;
 }

@@ -3,6 +3,7 @@
         "resources": {
             "netbox_aggregate": {
                 "current": "netbox:ipam/aggregate:Aggregate",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -11,6 +12,7 @@
             },
             "netbox_asn": {
                 "current": "netbox:ipam/asn:Asn",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -19,6 +21,7 @@
             },
             "netbox_available_ip_address": {
                 "current": "netbox:ipam/availableIpAddress:AvailableIpAddress",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -27,6 +30,7 @@
             },
             "netbox_available_prefix": {
                 "current": "netbox:ipam/availablePrefix:AvailablePrefix",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -35,6 +39,7 @@
             },
             "netbox_cable": {
                 "current": "netbox:dcim/cable:Cable",
+                "majorVersion": 1,
                 "fields": {
                     "a_termination": {
                         "maxItemsOne": false
@@ -48,13 +53,16 @@
                 }
             },
             "netbox_circuit": {
-                "current": "netbox:circuit/circuit:Circuit"
+                "current": "netbox:circuit/circuit:Circuit",
+                "majorVersion": 1
             },
             "netbox_circuit_provider": {
-                "current": "netbox:circuit/circuitProvider:CircuitProvider"
+                "current": "netbox:circuit/circuitProvider:CircuitProvider",
+                "majorVersion": 1
             },
             "netbox_circuit_termination": {
                 "current": "netbox:circuit/circuitTermination:CircuitTermination",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -62,10 +70,12 @@
                 }
             },
             "netbox_circuit_type": {
-                "current": "netbox:circuit/circuitType:CircuitType"
+                "current": "netbox:circuit/circuitType:CircuitType",
+                "majorVersion": 1
             },
             "netbox_cluster": {
                 "current": "netbox:virt/cluster:Cluster",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -73,13 +83,70 @@
                 }
             },
             "netbox_cluster_group": {
-                "current": "netbox:virt/clusterGroup:ClusterGroup"
+                "current": "netbox:virt/clusterGroup:ClusterGroup",
+                "majorVersion": 1
             },
             "netbox_cluster_type": {
-                "current": "netbox:virt/clusterType:ClusterType"
+                "current": "netbox:virt/clusterType:ClusterType",
+                "majorVersion": 1
+            },
+            "netbox_config_context": {
+                "current": "netbox:index/configContext:ConfigContext",
+                "majorVersion": 1,
+                "fields": {
+                    "cluster_groups": {
+                        "maxItemsOne": false
+                    },
+                    "cluster_types": {
+                        "maxItemsOne": false
+                    },
+                    "clusters": {
+                        "maxItemsOne": false
+                    },
+                    "device_types": {
+                        "maxItemsOne": false
+                    },
+                    "locations": {
+                        "maxItemsOne": false
+                    },
+                    "platforms": {
+                        "maxItemsOne": false
+                    },
+                    "regions": {
+                        "maxItemsOne": false
+                    },
+                    "roles": {
+                        "maxItemsOne": false
+                    },
+                    "site_groups": {
+                        "maxItemsOne": false
+                    },
+                    "sites": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "tenant_groups": {
+                        "maxItemsOne": false
+                    },
+                    "tenants": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_config_template": {
+                "current": "netbox:index/configTemplate:ConfigTemplate",
+                "majorVersion": 1,
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "netbox_contact": {
                 "current": "netbox:tenancy/contact:Contact",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -87,16 +154,20 @@
                 }
             },
             "netbox_contact_assignment": {
-                "current": "netbox:tenancy/contactAssignment:ContactAssignment"
+                "current": "netbox:tenancy/contactAssignment:ContactAssignment",
+                "majorVersion": 1
             },
             "netbox_contact_group": {
-                "current": "netbox:tenancy/contactGroup:ContactGroup"
+                "current": "netbox:tenancy/contactGroup:ContactGroup",
+                "majorVersion": 1
             },
             "netbox_contact_role": {
-                "current": "netbox:tenancy/contactRole:ContactRole"
+                "current": "netbox:tenancy/contactRole:ContactRole",
+                "majorVersion": 1
             },
             "netbox_custom_field": {
                 "current": "netbox:index/customField:CustomField",
+                "majorVersion": 1,
                 "fields": {
                     "content_types": {
                         "maxItemsOne": false
@@ -105,6 +176,7 @@
             },
             "netbox_custom_field_choice_set": {
                 "current": "netbox:index/customFieldChoiceSet:CustomFieldChoiceSet",
+                "majorVersion": 1,
                 "fields": {
                     "extra_choices": {
                         "maxItemsOne": false,
@@ -116,6 +188,7 @@
             },
             "netbox_device": {
                 "current": "netbox:dcim/device:Device",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -124,6 +197,7 @@
             },
             "netbox_device_console_port": {
                 "current": "netbox:dcim/deviceConsolePort:DeviceConsolePort",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -132,6 +206,7 @@
             },
             "netbox_device_console_server_port": {
                 "current": "netbox:dcim/deviceConsoleServerPort:DeviceConsoleServerPort",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -140,6 +215,7 @@
             },
             "netbox_device_front_port": {
                 "current": "netbox:dcim/deviceFrontPort:DeviceFrontPort",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -148,6 +224,7 @@
             },
             "netbox_device_interface": {
                 "current": "netbox:dcim/deviceInterface:DeviceInterface",
+                "majorVersion": 1,
                 "fields": {
                     "tagged_vlans": {
                         "maxItemsOne": false
@@ -159,6 +236,7 @@
             },
             "netbox_device_module_bay": {
                 "current": "netbox:dcim/deviceModuleBay:DeviceModuleBay",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -167,6 +245,7 @@
             },
             "netbox_device_power_outlet": {
                 "current": "netbox:dcim/devicePowerOutlet:DevicePowerOutlet",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -175,6 +254,7 @@
             },
             "netbox_device_power_port": {
                 "current": "netbox:dcim/devicePowerPort:DevicePowerPort",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -182,10 +262,12 @@
                 }
             },
             "netbox_device_primary_ip": {
-                "current": "netbox:dcim/devicePrimaryIp:DevicePrimaryIp"
+                "current": "netbox:dcim/devicePrimaryIp:DevicePrimaryIp",
+                "majorVersion": 1
             },
             "netbox_device_rear_port": {
                 "current": "netbox:dcim/deviceRearPort:DeviceRearPort",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -194,6 +276,7 @@
             },
             "netbox_device_role": {
                 "current": "netbox:dcim/deviceRole:DeviceRole",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -202,14 +285,35 @@
             },
             "netbox_device_type": {
                 "current": "netbox:dcim/deviceType:DeviceType",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
                     }
                 }
             },
+            "netbox_event_rule": {
+                "current": "netbox:index/eventRule:EventRule",
+                "majorVersion": 1,
+                "fields": {
+                    "content_types": {
+                        "maxItemsOne": false
+                    },
+                    "event_types": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_group": {
+                "current": "netbox:auth/group:Group",
+                "majorVersion": 1
+            },
             "netbox_interface": {
                 "current": "netbox:virt/interface:Interface",
+                "majorVersion": 1,
                 "fields": {
                     "tagged_vlans": {
                         "maxItemsOne": false
@@ -219,8 +323,13 @@
                     }
                 }
             },
+            "netbox_interface_template": {
+                "current": "netbox:dcim/interfaceTemplate:InterfaceTemplate",
+                "majorVersion": 1
+            },
             "netbox_inventory_item": {
                 "current": "netbox:dcim/inventoryItem:InventoryItem",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -229,6 +338,7 @@
             },
             "netbox_inventory_item_role": {
                 "current": "netbox:dcim/inventoryItemRole:InventoryItemRole",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -237,6 +347,7 @@
             },
             "netbox_ip_address": {
                 "current": "netbox:ipam/ipAddress:IpAddress",
+                "majorVersion": 1,
                 "fields": {
                     "nat_outside_addresses": {
                         "maxItemsOne": false
@@ -248,6 +359,7 @@
             },
             "netbox_ip_range": {
                 "current": "netbox:ipam/ipRange:IpRange",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -255,10 +367,12 @@
                 }
             },
             "netbox_ipam_role": {
-                "current": "netbox:ipam/role:Role"
+                "current": "netbox:ipam/role:Role",
+                "majorVersion": 1
             },
             "netbox_location": {
                 "current": "netbox:dcim/location:Location",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -266,10 +380,12 @@
                 }
             },
             "netbox_manufacturer": {
-                "current": "netbox:dcim/manufacturer:Manufacturer"
+                "current": "netbox:dcim/manufacturer:Manufacturer",
+                "majorVersion": 1
             },
             "netbox_module": {
                 "current": "netbox:dcim/module:Module",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -278,6 +394,7 @@
             },
             "netbox_module_type": {
                 "current": "netbox:dcim/moduleType:ModuleType",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -286,6 +403,7 @@
             },
             "netbox_permission": {
                 "current": "netbox:auth/permission:Permission",
+                "majorVersion": 1,
                 "fields": {
                     "actions": {
                         "maxItemsOne": false
@@ -302,10 +420,12 @@
                 }
             },
             "netbox_platform": {
-                "current": "netbox:dcim/platform:Platform"
+                "current": "netbox:dcim/platform:Platform",
+                "majorVersion": 1
             },
             "netbox_power_feed": {
                 "current": "netbox:dcim/powerFeed:PowerFeed",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -314,6 +434,7 @@
             },
             "netbox_power_panel": {
                 "current": "netbox:dcim/powerPanel:PowerPanel",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -322,6 +443,7 @@
             },
             "netbox_prefix": {
                 "current": "netbox:ipam/prefix:Prefix",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -329,10 +451,12 @@
                 }
             },
             "netbox_primary_ip": {
-                "current": "netbox:virt/primaryIp:PrimaryIp"
+                "current": "netbox:virt/primaryIp:PrimaryIp",
+                "majorVersion": 1
             },
             "netbox_rack": {
                 "current": "netbox:dcim/rack:Rack",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -341,6 +465,7 @@
             },
             "netbox_rack_reservation": {
                 "current": "netbox:dcim/rackReservation:RackReservation",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -352,6 +477,16 @@
             },
             "netbox_rack_role": {
                 "current": "netbox:dcim/rackRole:RackRole",
+                "majorVersion": 1,
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_rack_type": {
+                "current": "netbox:dcim/rackType:RackType",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -359,13 +494,16 @@
                 }
             },
             "netbox_region": {
-                "current": "netbox:dcim/region:Region"
+                "current": "netbox:dcim/region:Region",
+                "majorVersion": 1
             },
             "netbox_rir": {
-                "current": "netbox:ipam/rir:Rir"
+                "current": "netbox:ipam/rir:Rir",
+                "majorVersion": 1
             },
             "netbox_route_target": {
                 "current": "netbox:ipam/routeTarget:RouteTarget",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -374,14 +512,19 @@
             },
             "netbox_service": {
                 "current": "netbox:ipam/service:Service",
+                "majorVersion": 1,
                 "fields": {
                     "ports": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
                         "maxItemsOne": false
                     }
                 }
             },
             "netbox_site": {
                 "current": "netbox:dcim/site:Site",
+                "majorVersion": 1,
                 "fields": {
                     "asn_ids": {
                         "maxItemsOne": false
@@ -392,10 +535,12 @@
                 }
             },
             "netbox_site_group": {
-                "current": "netbox:dcim/siteGroup:SiteGroup"
+                "current": "netbox:dcim/siteGroup:SiteGroup",
+                "majorVersion": 1
             },
             "netbox_tag": {
                 "current": "netbox:index/tag:Tag",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -404,6 +549,7 @@
             },
             "netbox_tenant": {
                 "current": "netbox:tenancy/tenant:Tenant",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -411,10 +557,12 @@
                 }
             },
             "netbox_tenant_group": {
-                "current": "netbox:tenancy/tenantGroup:TenantGroup"
+                "current": "netbox:tenancy/tenantGroup:TenantGroup",
+                "majorVersion": 1
             },
             "netbox_token": {
                 "current": "netbox:auth/token:Token",
+                "majorVersion": 1,
                 "fields": {
                     "allowed_ips": {
                         "maxItemsOne": false
@@ -422,10 +570,26 @@
                 }
             },
             "netbox_user": {
-                "current": "netbox:auth/user:User"
+                "current": "netbox:auth/user:User",
+                "majorVersion": 1,
+                "fields": {
+                    "group_ids": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "netbox_virtual_chassis": {
                 "current": "netbox:dcim/virtualChassis:VirtualChassis",
+                "majorVersion": 1,
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_virtual_disk": {
+                "current": "netbox:virt/virtualDisk:VirtualDisk",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -434,6 +598,7 @@
             },
             "netbox_virtual_machine": {
                 "current": "netbox:virt/virtualMachine:VirtualMachine",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -442,6 +607,7 @@
             },
             "netbox_vlan": {
                 "current": "netbox:ipam/vlan:Vlan",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -450,6 +616,35 @@
             },
             "netbox_vlan_group": {
                 "current": "netbox:ipam/vlanGroup:VlanGroup",
+                "majorVersion": 1,
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "vid_ranges": {
+                        "maxItemsOne": false,
+                        "elem": {
+                            "maxItemsOne": false
+                        }
+                    }
+                }
+            },
+            "netbox_vpn_tunnel": {
+                "current": "netbox:vpn/vpnTunnel:VpnTunnel",
+                "majorVersion": 1,
+                "fields": {
+                    "tags": {
+                        "maxItemsOne": false
+                    }
+                }
+            },
+            "netbox_vpn_tunnel_group": {
+                "current": "netbox:vpn/vpnTunnelGroup:VpnTunnelGroup",
+                "majorVersion": 1
+            },
+            "netbox_vpn_tunnel_termination": {
+                "current": "netbox:vpn/vpnTunnelTermination:VpnTunnelTermination",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -458,6 +653,7 @@
             },
             "netbox_vrf": {
                 "current": "netbox:ipam/vrf:Vrf",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -466,16 +662,13 @@
             },
             "netbox_webhook": {
                 "current": "netbox:index/webhook:Webhook",
-                "fields": {
-                    "content_types": {
-                        "maxItemsOne": false
-                    }
-                }
+                "majorVersion": 1
             }
         },
         "datasources": {
             "netbox_asn": {
                 "current": "netbox:ipam/getAsn:getAsn",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -484,6 +677,7 @@
             },
             "netbox_asns": {
                 "current": "netbox:ipam/getAsns:getAsns",
+                "majorVersion": 1,
                 "fields": {
                     "asns": {
                         "maxItemsOne": false,
@@ -502,6 +696,7 @@
             },
             "netbox_available_prefix": {
                 "current": "netbox:ipam/getAvailablePrefix:getAvailablePrefix",
+                "majorVersion": 1,
                 "fields": {
                     "prefixes_available": {
                         "maxItemsOne": false
@@ -510,6 +705,7 @@
             },
             "netbox_cluster": {
                 "current": "netbox:virt/getCluster:getCluster",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -517,22 +713,73 @@
                 }
             },
             "netbox_cluster_group": {
-                "current": "netbox:virt/getClusterGroup:getClusterGroup"
+                "current": "netbox:virt/getClusterGroup:getClusterGroup",
+                "majorVersion": 1
             },
             "netbox_cluster_type": {
-                "current": "netbox:virt/getClusterType:getClusterType"
+                "current": "netbox:virt/getClusterType:getClusterType",
+                "majorVersion": 1
+            },
+            "netbox_config_context": {
+                "current": "netbox:index/getConfigContext:getConfigContext",
+                "majorVersion": 1,
+                "fields": {
+                    "cluster_groups": {
+                        "maxItemsOne": false
+                    },
+                    "cluster_types": {
+                        "maxItemsOne": false
+                    },
+                    "clusters": {
+                        "maxItemsOne": false
+                    },
+                    "device_types": {
+                        "maxItemsOne": false
+                    },
+                    "locations": {
+                        "maxItemsOne": false
+                    },
+                    "platforms": {
+                        "maxItemsOne": false
+                    },
+                    "regions": {
+                        "maxItemsOne": false
+                    },
+                    "roles": {
+                        "maxItemsOne": false
+                    },
+                    "site_groups": {
+                        "maxItemsOne": false
+                    },
+                    "sites": {
+                        "maxItemsOne": false
+                    },
+                    "tags": {
+                        "maxItemsOne": false
+                    },
+                    "tenant_groups": {
+                        "maxItemsOne": false
+                    },
+                    "tenants": {
+                        "maxItemsOne": false
+                    }
+                }
             },
             "netbox_contact": {
-                "current": "netbox:tenancy/getContact:getContact"
+                "current": "netbox:tenancy/getContact:getContact",
+                "majorVersion": 1
             },
             "netbox_contact_group": {
-                "current": "netbox:tenancy/getContactGroup:getContactGroup"
+                "current": "netbox:tenancy/getContactGroup:getContactGroup",
+                "majorVersion": 1
             },
             "netbox_contact_role": {
-                "current": "netbox:tenancy/getContactRole:getContactRole"
+                "current": "netbox:tenancy/getContactRole:getContactRole",
+                "majorVersion": 1
             },
             "netbox_device_interfaces": {
                 "current": "netbox:dcim/getDeviceInterfaces:getDeviceInterfaces",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -557,6 +804,7 @@
             },
             "netbox_device_role": {
                 "current": "netbox:dcim/getDeviceRole:getDeviceRole",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -564,10 +812,12 @@
                 }
             },
             "netbox_device_type": {
-                "current": "netbox:dcim/getDeviceType:getDeviceType"
+                "current": "netbox:dcim/getDeviceType:getDeviceType",
+                "majorVersion": 1
             },
             "netbox_devices": {
                 "current": "netbox:dcim/getDevices:getDevices",
+                "majorVersion": 1,
                 "fields": {
                     "devices": {
                         "maxItemsOne": false,
@@ -586,6 +836,7 @@
             },
             "netbox_interfaces": {
                 "current": "netbox:virt/getInterfaces:getInterfaces",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -610,6 +861,7 @@
             },
             "netbox_ip_addresses": {
                 "current": "netbox:ipam/getIpAddresses:getIpAddresses",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -630,16 +882,20 @@
                 }
             },
             "netbox_ip_range": {
-                "current": "netbox:ipam/getIpRange:getIpRange"
+                "current": "netbox:ipam/getIpRange:getIpRange",
+                "majorVersion": 1
             },
             "netbox_ipam_role": {
-                "current": "netbox:ipam/getRole:getRole"
+                "current": "netbox:ipam/getRole:getRole",
+                "majorVersion": 1
             },
             "netbox_location": {
-                "current": "netbox:dcim/getLocation:getLocation"
+                "current": "netbox:dcim/getLocation:getLocation",
+                "majorVersion": 1
             },
             "netbox_locations": {
                 "current": "netbox:dcim/getLocations:getLocations",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -653,10 +909,12 @@
                 }
             },
             "netbox_platform": {
-                "current": "netbox:dcim/getPlatform:getPlatform"
+                "current": "netbox:dcim/getPlatform:getPlatform",
+                "majorVersion": 1
             },
             "netbox_prefix": {
                 "current": "netbox:ipam/getPrefix:getPrefix",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -665,6 +923,7 @@
             },
             "netbox_prefixes": {
                 "current": "netbox:ipam/getPrefixes:getPrefixes",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -683,6 +942,7 @@
             },
             "netbox_rack_role": {
                 "current": "netbox:dcim/getRackRole:getRackRole",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -691,6 +951,7 @@
             },
             "netbox_racks": {
                 "current": "netbox:dcim/getRacks:getRacks",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -709,6 +970,7 @@
             },
             "netbox_region": {
                 "current": "netbox:dcim/getRegion:getRegion",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -717,6 +979,7 @@
             },
             "netbox_route_target": {
                 "current": "netbox:ipam/getRouteTarget:getRouteTarget",
+                "majorVersion": 1,
                 "fields": {
                     "tags": {
                         "maxItemsOne": false
@@ -725,6 +988,7 @@
             },
             "netbox_site": {
                 "current": "netbox:dcim/getSite:getSite",
+                "majorVersion": 1,
                 "fields": {
                     "asn_ids": {
                         "maxItemsOne": false
@@ -732,13 +996,16 @@
                 }
             },
             "netbox_site_group": {
-                "current": "netbox:dcim/getSiteGroup:getSiteGroup"
+                "current": "netbox:dcim/getSiteGroup:getSiteGroup",
+                "majorVersion": 1
             },
             "netbox_tag": {
-                "current": "netbox:index/getTag:getTag"
+                "current": "netbox:index/getTag:getTag",
+                "majorVersion": 1
             },
             "netbox_tags": {
                 "current": "netbox:index/getTags:getTags",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -749,13 +1016,16 @@
                 }
             },
             "netbox_tenant": {
-                "current": "netbox:tenancy/getTenant:getTenant"
+                "current": "netbox:tenancy/getTenant:getTenant",
+                "majorVersion": 1
             },
             "netbox_tenant_group": {
-                "current": "netbox:tenancy/getTenantGroup:getTenantGroup"
+                "current": "netbox:tenancy/getTenantGroup:getTenantGroup",
+                "majorVersion": 1
             },
             "netbox_tenants": {
                 "current": "netbox:tenancy/getTenants:getTenants",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -774,6 +1044,7 @@
             },
             "netbox_virtual_machines": {
                 "current": "netbox:virt/getVirtualMachines:getVirtualMachines",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
@@ -791,27 +1062,39 @@
                 }
             },
             "netbox_vlan": {
-                "current": "netbox:ipam/getVlan:getVlan"
+                "current": "netbox:ipam/getVlan:getVlan",
+                "majorVersion": 1
             },
             "netbox_vlan_group": {
-                "current": "netbox:ipam/getVlanGroup:getVlanGroup"
+                "current": "netbox:ipam/getVlanGroup:getVlanGroup",
+                "majorVersion": 1
             },
             "netbox_vlans": {
                 "current": "netbox:ipam/getVlans:getVlans",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false
                     },
                     "vlans": {
-                        "maxItemsOne": false
+                        "maxItemsOne": false,
+                        "elem": {
+                            "fields": {
+                                "tag_ids": {
+                                    "maxItemsOne": false
+                                }
+                            }
+                        }
                     }
                 }
             },
             "netbox_vrf": {
-                "current": "netbox:ipam/getVrf:getVrf"
+                "current": "netbox:ipam/getVrf:getVrf",
+                "majorVersion": 1
             },
             "netbox_vrfs": {
                 "current": "netbox:ipam/getVrfs:getVrfs",
+                "majorVersion": 1,
                 "fields": {
                     "filter": {
                         "maxItemsOne": false

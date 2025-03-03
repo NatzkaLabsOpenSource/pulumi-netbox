@@ -20,16 +20,17 @@ import * as utilities from "../utilities";
  * This resource will retrieve the next available IP address from a given prefix or IP range (specified by ID)
  *
  * ## Example Usage
+ *
  * ### Creating an IP in a prefix
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  * import * as netbox from "@pulumi/netbox";
  *
- * const testPrefix = netbox.ipam.getPrefix({
+ * const test = netbox.ipam.getPrefix({
  *     cidr: "10.0.0.0/24",
  * });
- * const testAvailableIpAddress = new netbox.ipam.AvailableIpAddress("testAvailableIpAddress", {prefixId: testPrefix.then(testPrefix => testPrefix.id)});
+ * const testAvailableIpAddress = new netbox.ipam.AvailableIpAddress("test", {prefixId: test.then(test => test.id)});
  * ```
  */
 export class AvailableIpAddress extends pulumi.CustomResource {

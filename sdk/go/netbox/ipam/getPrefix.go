@@ -23,102 +23,118 @@ func LookupPrefix(ctx *pulumi.Context, args *LookupPrefixArgs, opts ...pulumi.In
 
 // A collection of arguments for invoking getPrefix.
 type LookupPrefixArgs struct {
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `prefix`.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `prefix`.
 	//
 	// Deprecated: The `cidr` parameter is deprecated in favor of the canonical `prefix` attribute.
-	Cidr *string `pulumi:"cidr"`
-	// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	Cidr         *string           `pulumi:"cidr"`
+	CustomFields map[string]string `pulumi:"customFields"`
+	// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Description *string `pulumi:"description"`
-	// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Family *int `pulumi:"family"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `cidr`.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `cidr`.
 	Prefix *string `pulumi:"prefix"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	RoleId *int `pulumi:"roleId"`
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	SiteId *int `pulumi:"siteId"`
-	// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	Status *string `pulumi:"status"`
+	// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Tag *string `pulumi:"tag"`
 	// Tag to exclude from the data source filter (must match the tag's slug).
 	// Refer to [Netbox's documentation](https://demo.netbox.dev/static/docs/rest-api/filtering/#lookup-expressions)
 	// for more information on available lookup expressions.
 	TagN *string `pulumi:"tagN"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	TenantId *int `pulumi:"tenantId"`
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VlanId *int `pulumi:"vlanId"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VlanVid *float64 `pulumi:"vlanVid"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VrfId *int `pulumi:"vrfId"`
 }
 
 // A collection of values returned by getPrefix.
 type LookupPrefixResult struct {
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `prefix`.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `prefix`.
 	//
 	// Deprecated: The `cidr` parameter is deprecated in favor of the canonical `prefix` attribute.
-	Cidr *string `pulumi:"cidr"`
-	// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	Cidr         *string           `pulumi:"cidr"`
+	CustomFields map[string]string `pulumi:"customFields"`
+	// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Description string `pulumi:"description"`
-	// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Family int `pulumi:"family"`
 	// The ID of this resource.
 	Id int `pulumi:"id"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `cidr`.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `cidr`.
 	Prefix *string `pulumi:"prefix"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
-	SiteId *int   `pulumi:"siteId"`
-	Status string `pulumi:"status"`
-	// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	RoleId int `pulumi:"roleId"`
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	SiteId *int `pulumi:"siteId"`
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	Status *string `pulumi:"status"`
+	// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Tag *string `pulumi:"tag"`
 	// Tag to exclude from the data source filter (must match the tag's slug).
 	// Refer to [Netbox's documentation](https://demo.netbox.dev/static/docs/rest-api/filtering/#lookup-expressions)
 	// for more information on available lookup expressions.
 	TagN *string  `pulumi:"tagN"`
 	Tags []string `pulumi:"tags"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	TenantId *int `pulumi:"tenantId"`
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VlanId *int `pulumi:"vlanId"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VlanVid *float64 `pulumi:"vlanVid"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VrfId *int `pulumi:"vrfId"`
 }
 
 func LookupPrefixOutput(ctx *pulumi.Context, args LookupPrefixOutputArgs, opts ...pulumi.InvokeOption) LookupPrefixResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupPrefixResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupPrefixResultOutput, error) {
 			args := v.(LookupPrefixArgs)
-			r, err := LookupPrefix(ctx, &args, opts...)
-			var s LookupPrefixResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getPrefix:getPrefix", args, LookupPrefixResultOutput{}, options).(LookupPrefixResultOutput), nil
 		}).(LookupPrefixResultOutput)
 }
 
 // A collection of arguments for invoking getPrefix.
 type LookupPrefixOutputArgs struct {
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `prefix`.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `prefix`.
 	//
 	// Deprecated: The `cidr` parameter is deprecated in favor of the canonical `prefix` attribute.
-	Cidr pulumi.StringPtrInput `pulumi:"cidr"`
-	// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	Cidr         pulumi.StringPtrInput `pulumi:"cidr"`
+	CustomFields pulumi.StringMapInput `pulumi:"customFields"`
+	// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Description pulumi.StringPtrInput `pulumi:"description"`
-	// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Family pulumi.IntPtrInput `pulumi:"family"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `cidr`.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `cidr`.
 	Prefix pulumi.StringPtrInput `pulumi:"prefix"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	RoleId pulumi.IntPtrInput `pulumi:"roleId"`
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	SiteId pulumi.IntPtrInput `pulumi:"siteId"`
-	// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	Status pulumi.StringPtrInput `pulumi:"status"`
+	// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	Tag pulumi.StringPtrInput `pulumi:"tag"`
 	// Tag to exclude from the data source filter (must match the tag's slug).
 	// Refer to [Netbox's documentation](https://demo.netbox.dev/static/docs/rest-api/filtering/#lookup-expressions)
 	// for more information on available lookup expressions.
 	TagN pulumi.StringPtrInput `pulumi:"tagN"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+	TenantId pulumi.IntPtrInput `pulumi:"tenantId"`
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VlanId pulumi.IntPtrInput `pulumi:"vlanId"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VlanVid pulumi.Float64PtrInput `pulumi:"vlanVid"`
-	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+	// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 	VrfId pulumi.IntPtrInput `pulumi:"vrfId"`
 }
 
@@ -141,19 +157,23 @@ func (o LookupPrefixResultOutput) ToLookupPrefixResultOutputWithContext(ctx cont
 	return o
 }
 
-// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `prefix`.
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `prefix`.
 //
 // Deprecated: The `cidr` parameter is deprecated in favor of the canonical `prefix` attribute.
 func (o LookupPrefixResultOutput) Cidr() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupPrefixResult) *string { return v.Cidr }).(pulumi.StringPtrOutput)
 }
 
-// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+func (o LookupPrefixResultOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v LookupPrefixResult) map[string]string { return v.CustomFields }).(pulumi.StringMapOutput)
+}
+
+// Description to include in the data source filter. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 func (o LookupPrefixResultOutput) Description() pulumi.StringOutput {
 	return o.ApplyT(func(v LookupPrefixResult) string { return v.Description }).(pulumi.StringOutput)
 }
 
-// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+// The IP family of the prefix. One of 4 or 6. At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 func (o LookupPrefixResultOutput) Family() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupPrefixResult) int { return v.Family }).(pulumi.IntOutput)
 }
@@ -163,21 +183,27 @@ func (o LookupPrefixResultOutput) Id() pulumi.IntOutput {
 	return o.ApplyT(func(v LookupPrefixResult) int { return v.Id }).(pulumi.IntOutput)
 }
 
-// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given. Conflicts with `cidr`.
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given. Conflicts with `cidr`.
 func (o LookupPrefixResultOutput) Prefix() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupPrefixResult) *string { return v.Prefix }).(pulumi.StringPtrOutput)
 }
 
-// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+func (o LookupPrefixResultOutput) RoleId() pulumi.IntOutput {
+	return o.ApplyT(func(v LookupPrefixResult) int { return v.RoleId }).(pulumi.IntOutput)
+}
+
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 func (o LookupPrefixResultOutput) SiteId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LookupPrefixResult) *int { return v.SiteId }).(pulumi.IntPtrOutput)
 }
 
-func (o LookupPrefixResultOutput) Status() pulumi.StringOutput {
-	return o.ApplyT(func(v LookupPrefixResult) string { return v.Status }).(pulumi.StringOutput)
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+func (o LookupPrefixResultOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v LookupPrefixResult) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
-// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+// Tag to include in the data source filter (must match the tag's slug). At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 func (o LookupPrefixResultOutput) Tag() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v LookupPrefixResult) *string { return v.Tag }).(pulumi.StringPtrOutput)
 }
@@ -193,17 +219,22 @@ func (o LookupPrefixResultOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v LookupPrefixResult) []string { return v.Tags }).(pulumi.StringArrayOutput)
 }
 
-// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
+func (o LookupPrefixResultOutput) TenantId() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v LookupPrefixResult) *int { return v.TenantId }).(pulumi.IntPtrOutput)
+}
+
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 func (o LookupPrefixResultOutput) VlanId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LookupPrefixResult) *int { return v.VlanId }).(pulumi.IntPtrOutput)
 }
 
-// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 func (o LookupPrefixResultOutput) VlanVid() pulumi.Float64PtrOutput {
 	return o.ApplyT(func(v LookupPrefixResult) *float64 { return v.VlanVid }).(pulumi.Float64PtrOutput)
 }
 
-// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `siteId`, `cidr` or `tag` must be given.
+// At least one of `description`, `family`, `prefix`, `vlanVid`, `vrfId`, `vlanId`, `tenantId`, `siteId`, `roleId`, `cidr`, `tag` or `status` must be given.
 func (o LookupPrefixResultOutput) VrfId() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v LookupPrefixResult) *int { return v.VrfId }).(pulumi.IntPtrOutput)
 }

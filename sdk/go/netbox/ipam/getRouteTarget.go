@@ -38,15 +38,11 @@ type LookupRouteTargetResult struct {
 }
 
 func LookupRouteTargetOutput(ctx *pulumi.Context, args LookupRouteTargetOutputArgs, opts ...pulumi.InvokeOption) LookupRouteTargetResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupRouteTargetResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupRouteTargetResultOutput, error) {
 			args := v.(LookupRouteTargetArgs)
-			r, err := LookupRouteTarget(ctx, &args, opts...)
-			var s LookupRouteTargetResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getRouteTarget:getRouteTarget", args, LookupRouteTargetResultOutput{}, options).(LookupRouteTargetResultOutput), nil
 		}).(LookupRouteTargetResultOutput)
 }
 

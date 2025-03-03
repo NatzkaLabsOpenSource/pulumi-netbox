@@ -17,7 +17,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const test = new netbox.dcim.Region("test", {description: "test description"});
+ * const test = new netbox.dcim.Region("test", {
+ *     name: "test",
+ *     description: "test description",
+ * });
  * ```
  */
 export class Region extends pulumi.CustomResource {

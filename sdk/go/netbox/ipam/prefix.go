@@ -32,10 +32,10 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := ipam.NewPrefix(ctx, "myPrefix", &ipam.PrefixArgs{
-//				Description: pulumi.String("test prefix"),
+//			_, err := ipam.NewPrefix(ctx, "my_prefix", &ipam.PrefixArgs{
 //				Prefix:      pulumi.String("10.0.0.0/24"),
 //				Status:      pulumi.String("active"),
+//				Description: pulumi.String("test prefix"),
 //			})
 //			if err != nil {
 //				return err
@@ -48,6 +48,7 @@ import (
 type Prefix struct {
 	pulumi.CustomResourceState
 
+	CustomFields pulumi.StringMapOutput `pulumi:"customFields"`
 	Description  pulumi.StringPtrOutput `pulumi:"description"`
 	IsPool       pulumi.BoolPtrOutput   `pulumi:"isPool"`
 	MarkUtilized pulumi.BoolPtrOutput   `pulumi:"markUtilized"`
@@ -98,12 +99,13 @@ func GetPrefix(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Prefix resources.
 type prefixState struct {
-	Description  *string `pulumi:"description"`
-	IsPool       *bool   `pulumi:"isPool"`
-	MarkUtilized *bool   `pulumi:"markUtilized"`
-	Prefix       *string `pulumi:"prefix"`
-	RoleId       *int    `pulumi:"roleId"`
-	SiteId       *int    `pulumi:"siteId"`
+	CustomFields map[string]string `pulumi:"customFields"`
+	Description  *string           `pulumi:"description"`
+	IsPool       *bool             `pulumi:"isPool"`
+	MarkUtilized *bool             `pulumi:"markUtilized"`
+	Prefix       *string           `pulumi:"prefix"`
+	RoleId       *int              `pulumi:"roleId"`
+	SiteId       *int              `pulumi:"siteId"`
 	// Valid values are `active`, `container`, `reserved` and `deprecated`.
 	Status   *string  `pulumi:"status"`
 	Tags     []string `pulumi:"tags"`
@@ -113,6 +115,7 @@ type prefixState struct {
 }
 
 type PrefixState struct {
+	CustomFields pulumi.StringMapInput
 	Description  pulumi.StringPtrInput
 	IsPool       pulumi.BoolPtrInput
 	MarkUtilized pulumi.BoolPtrInput
@@ -132,12 +135,13 @@ func (PrefixState) ElementType() reflect.Type {
 }
 
 type prefixArgs struct {
-	Description  *string `pulumi:"description"`
-	IsPool       *bool   `pulumi:"isPool"`
-	MarkUtilized *bool   `pulumi:"markUtilized"`
-	Prefix       string  `pulumi:"prefix"`
-	RoleId       *int    `pulumi:"roleId"`
-	SiteId       *int    `pulumi:"siteId"`
+	CustomFields map[string]string `pulumi:"customFields"`
+	Description  *string           `pulumi:"description"`
+	IsPool       *bool             `pulumi:"isPool"`
+	MarkUtilized *bool             `pulumi:"markUtilized"`
+	Prefix       string            `pulumi:"prefix"`
+	RoleId       *int              `pulumi:"roleId"`
+	SiteId       *int              `pulumi:"siteId"`
 	// Valid values are `active`, `container`, `reserved` and `deprecated`.
 	Status   string   `pulumi:"status"`
 	Tags     []string `pulumi:"tags"`
@@ -148,6 +152,7 @@ type prefixArgs struct {
 
 // The set of arguments for constructing a Prefix resource.
 type PrefixArgs struct {
+	CustomFields pulumi.StringMapInput
 	Description  pulumi.StringPtrInput
 	IsPool       pulumi.BoolPtrInput
 	MarkUtilized pulumi.BoolPtrInput
@@ -247,6 +252,10 @@ func (o PrefixOutput) ToPrefixOutput() PrefixOutput {
 
 func (o PrefixOutput) ToPrefixOutputWithContext(ctx context.Context) PrefixOutput {
 	return o
+}
+
+func (o PrefixOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *Prefix) pulumi.StringMapOutput { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o PrefixOutput) Description() pulumi.StringPtrOutput {

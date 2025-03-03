@@ -16,8 +16,9 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const example = new netbox.dcim.VirtualChassis("example", {
- *     description: "virtual chassis",
+ *     name: "chassis",
  *     domain: "domain",
+ *     description: "virtual chassis",
  * });
  * ```
  */

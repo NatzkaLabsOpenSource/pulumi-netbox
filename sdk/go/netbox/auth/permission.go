@@ -33,9 +33,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testUser, err := auth.NewUser(ctx, "testUser", &auth.UserArgs{
+//			test, err := auth.NewUser(ctx, "test", &auth.UserArgs{
 //				Username: pulumi.String("johndoe"),
-//				Password: pulumi.String("abcdefghijkl"),
+//				Password: pulumi.String("Abcdefghijkl1"),
 //				Active:   pulumi.Bool(true),
 //				Staff:    pulumi.Bool(true),
 //			})
@@ -51,7 +51,8 @@ import (
 //				return err
 //			}
 //			json0 := string(tmpJSON0)
-//			_, err = auth.NewPermission(ctx, "testPermission", &auth.PermissionArgs{
+//			_, err = auth.NewPermission(ctx, "test", &auth.PermissionArgs{
+//				Name:        pulumi.String("test"),
 //				Description: pulumi.String("my description"),
 //				Enabled:     pulumi.Bool(true),
 //				ObjectTypes: pulumi.StringArray{
@@ -62,7 +63,7 @@ import (
 //					pulumi.String("change"),
 //				},
 //				Users: pulumi.IntArray{
-//					testUser.ID(),
+//					test.ID(),
 //				},
 //				Constraints: pulumi.String(json0),
 //			})

@@ -29,7 +29,8 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := ipam.NewVrf(ctx, "custAProd", &ipam.VrfArgs{
+//			_, err := ipam.NewVrf(ctx, "cust_a_prod", &ipam.VrfArgs{
+//				Name: pulumi.String("cust-a-prod"),
 //				Tags: pulumi.StringArray{
 //					pulumi.String("customer-a"),
 //					pulumi.String("prod"),
@@ -46,10 +47,13 @@ import (
 type Vrf struct {
 	pulumi.CustomResourceState
 
-	Description pulumi.StringPtrOutput   `pulumi:"description"`
-	Name        pulumi.StringOutput      `pulumi:"name"`
-	Tags        pulumi.StringArrayOutput `pulumi:"tags"`
-	TenantId    pulumi.IntPtrOutput      `pulumi:"tenantId"`
+	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// Defaults to `true`.
+	EnforceUnique pulumi.BoolPtrOutput     `pulumi:"enforceUnique"`
+	Name          pulumi.StringOutput      `pulumi:"name"`
+	Rd            pulumi.StringPtrOutput   `pulumi:"rd"`
+	Tags          pulumi.StringArrayOutput `pulumi:"tags"`
+	TenantId      pulumi.IntPtrOutput      `pulumi:"tenantId"`
 }
 
 // NewVrf registers a new resource with the given unique name, arguments, and options.
@@ -82,17 +86,23 @@ func GetVrf(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering Vrf resources.
 type vrfState struct {
-	Description *string  `pulumi:"description"`
-	Name        *string  `pulumi:"name"`
-	Tags        []string `pulumi:"tags"`
-	TenantId    *int     `pulumi:"tenantId"`
+	Description *string `pulumi:"description"`
+	// Defaults to `true`.
+	EnforceUnique *bool    `pulumi:"enforceUnique"`
+	Name          *string  `pulumi:"name"`
+	Rd            *string  `pulumi:"rd"`
+	Tags          []string `pulumi:"tags"`
+	TenantId      *int     `pulumi:"tenantId"`
 }
 
 type VrfState struct {
 	Description pulumi.StringPtrInput
-	Name        pulumi.StringPtrInput
-	Tags        pulumi.StringArrayInput
-	TenantId    pulumi.IntPtrInput
+	// Defaults to `true`.
+	EnforceUnique pulumi.BoolPtrInput
+	Name          pulumi.StringPtrInput
+	Rd            pulumi.StringPtrInput
+	Tags          pulumi.StringArrayInput
+	TenantId      pulumi.IntPtrInput
 }
 
 func (VrfState) ElementType() reflect.Type {
@@ -100,18 +110,24 @@ func (VrfState) ElementType() reflect.Type {
 }
 
 type vrfArgs struct {
-	Description *string  `pulumi:"description"`
-	Name        *string  `pulumi:"name"`
-	Tags        []string `pulumi:"tags"`
-	TenantId    *int     `pulumi:"tenantId"`
+	Description *string `pulumi:"description"`
+	// Defaults to `true`.
+	EnforceUnique *bool    `pulumi:"enforceUnique"`
+	Name          *string  `pulumi:"name"`
+	Rd            *string  `pulumi:"rd"`
+	Tags          []string `pulumi:"tags"`
+	TenantId      *int     `pulumi:"tenantId"`
 }
 
 // The set of arguments for constructing a Vrf resource.
 type VrfArgs struct {
 	Description pulumi.StringPtrInput
-	Name        pulumi.StringPtrInput
-	Tags        pulumi.StringArrayInput
-	TenantId    pulumi.IntPtrInput
+	// Defaults to `true`.
+	EnforceUnique pulumi.BoolPtrInput
+	Name          pulumi.StringPtrInput
+	Rd            pulumi.StringPtrInput
+	Tags          pulumi.StringArrayInput
+	TenantId      pulumi.IntPtrInput
 }
 
 func (VrfArgs) ElementType() reflect.Type {
@@ -205,8 +221,17 @@ func (o VrfOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Vrf) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
 }
 
+// Defaults to `true`.
+func (o VrfOutput) EnforceUnique() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *Vrf) pulumi.BoolPtrOutput { return v.EnforceUnique }).(pulumi.BoolPtrOutput)
+}
+
 func (o VrfOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v *Vrf) pulumi.StringOutput { return v.Name }).(pulumi.StringOutput)
+}
+
+func (o VrfOutput) Rd() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *Vrf) pulumi.StringPtrOutput { return v.Rd }).(pulumi.StringPtrOutput)
 }
 
 func (o VrfOutput) Tags() pulumi.StringArrayOutput {

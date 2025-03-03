@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getPrefixes(args?: GetPrefixesArgs, opts?: pulumi.InvokeOptions): Promise<GetPrefixesResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getPrefixes:getPrefixes", {
         "filters": args.filters,
@@ -48,8 +47,13 @@ export interface GetPrefixesResult {
     readonly limit?: number;
     readonly prefixes: outputs.ipam.GetPrefixesPrefix[];
 }
-export function getPrefixesOutput(args?: GetPrefixesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetPrefixesResult> {
-    return pulumi.output(args).apply((a: any) => getPrefixes(a, opts))
+export function getPrefixesOutput(args?: GetPrefixesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPrefixesResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getPrefixes:getPrefixes", {
+        "filters": args.filters,
+        "limit": args.limit,
+    }, opts);
 }
 
 /**

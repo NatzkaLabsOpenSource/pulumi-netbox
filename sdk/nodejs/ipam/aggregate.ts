@@ -15,11 +15,11 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testRir = new netbox.ipam.Rir("testRir", {});
- * const testAggregate = new netbox.ipam.Aggregate("testAggregate", {
+ * const test = new netbox.ipam.Rir("test", {name: "testrir"});
+ * const testAggregate = new netbox.ipam.Aggregate("test", {
  *     prefix: "1.1.1.0/25",
  *     description: "my description",
- *     rirId: testRir.id,
+ *     rirId: test.id,
  * });
  * ```
  */

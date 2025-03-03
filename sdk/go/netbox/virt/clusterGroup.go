@@ -29,8 +29,9 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := virt.NewClusterGroup(ctx, "dcWest", &virt.ClusterGroupArgs{
+//			_, err := virt.NewClusterGroup(ctx, "dc_west", &virt.ClusterGroupArgs{
 //				Description: pulumi.String("West Datacenter Cluster"),
+//				Name:        pulumi.String("dc-west"),
 //			})
 //			if err != nil {
 //				return err

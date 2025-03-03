@@ -25,22 +25,25 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
+//			// Get VLAN by name
 //			_, err := ipam.LookupVlan(ctx, &ipam.LookupVlanArgs{
 //				Name: pulumi.StringRef("vlan-1"),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+//			// Get VLAN by VID and IPAM role ID
 //			_, err = ipam.LookupVlan(ctx, &ipam.LookupVlanArgs{
 //				Vid:  pulumi.IntRef(1234),
-//				Role: pulumi.IntRef(netbox_ipam_role.Example.Id),
+//				Role: pulumi.IntRef(example.Id),
 //			}, nil)
 //			if err != nil {
 //				return err
 //			}
+//			// Get VLAN by name and tenant ID
 //			_, err = ipam.LookupVlan(ctx, &ipam.LookupVlanArgs{
 //				Name:   pulumi.StringRef("vlan-3"),
-//				Tenant: pulumi.IntRef(netbox_tenant.Example.Id),
+//				Tenant: pulumi.IntRef(exampleNetboxTenant.Id),
 //			}, nil)
 //			if err != nil {
 //				return err
@@ -84,15 +87,11 @@ type LookupVlanResult struct {
 }
 
 func LookupVlanOutput(ctx *pulumi.Context, args LookupVlanOutputArgs, opts ...pulumi.InvokeOption) LookupVlanResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupVlanResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupVlanResultOutput, error) {
 			args := v.(LookupVlanArgs)
-			r, err := LookupVlan(ctx, &args, opts...)
-			var s LookupVlanResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getVlan:getVlan", args, LookupVlanResultOutput{}, options).(LookupVlanResultOutput), nil
 		}).(LookupVlanResultOutput)
 }
 

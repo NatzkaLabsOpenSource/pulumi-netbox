@@ -11,22 +11,24 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Get VLAN by name
  * const vlan1 = netbox.ipam.getVlan({
  *     name: "vlan-1",
  * });
+ * // Get VLAN by VID and IPAM role ID
  * const vlan2 = netbox.ipam.getVlan({
  *     vid: 1234,
- *     role: netbox_ipam_role.example.id,
+ *     role: example.id,
  * });
+ * // Get VLAN by name and tenant ID
  * const vlan3 = netbox.ipam.getVlan({
  *     name: "vlan-3",
- *     tenant: netbox_tenant.example.id,
+ *     tenant: exampleNetboxTenant.id,
  * });
  * ```
  */
 export function getVlan(args?: GetVlanArgs, opts?: pulumi.InvokeOptions): Promise<GetVlanResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getVlan:getVlan", {
         "groupId": args.groupId,
@@ -72,21 +74,32 @@ export interface GetVlanResult {
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@pulumi/netbox";
  *
+ * // Get VLAN by name
  * const vlan1 = netbox.ipam.getVlan({
  *     name: "vlan-1",
  * });
+ * // Get VLAN by VID and IPAM role ID
  * const vlan2 = netbox.ipam.getVlan({
  *     vid: 1234,
- *     role: netbox_ipam_role.example.id,
+ *     role: example.id,
  * });
+ * // Get VLAN by name and tenant ID
  * const vlan3 = netbox.ipam.getVlan({
  *     name: "vlan-3",
- *     tenant: netbox_tenant.example.id,
+ *     tenant: exampleNetboxTenant.id,
  * });
  * ```
  */
-export function getVlanOutput(args?: GetVlanOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVlanResult> {
-    return pulumi.output(args).apply((a: any) => getVlan(a, opts))
+export function getVlanOutput(args?: GetVlanOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVlanResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getVlan:getVlan", {
+        "groupId": args.groupId,
+        "name": args.name,
+        "role": args.role,
+        "tenant": args.tenant,
+        "vid": args.vid,
+    }, opts);
 }
 
 /**

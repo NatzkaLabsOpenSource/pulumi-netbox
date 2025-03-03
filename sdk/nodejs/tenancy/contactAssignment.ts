@@ -15,13 +15,13 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testContact = new netbox.tenancy.Contact("testContact", {});
- * const testContactRole = new netbox.tenancy.ContactRole("testContactRole", {});
+ * const test = new netbox.tenancy.Contact("test", {name: "test"});
+ * const testContactRole = new netbox.tenancy.ContactRole("test", {name: "test"});
  * // Assumes that a device with id 123 exists
- * const testContactAssignment = new netbox.tenancy.ContactAssignment("testContactAssignment", {
+ * const testContactAssignment = new netbox.tenancy.ContactAssignment("test", {
  *     contentType: "dcim.device",
  *     objectId: 123,
- *     contactId: testContact.id,
+ *     contactId: test.id,
  *     roleId: testContactRole.id,
  *     priority: "primary",
  * });

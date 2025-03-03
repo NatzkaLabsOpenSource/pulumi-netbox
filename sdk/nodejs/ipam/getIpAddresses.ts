@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getIpAddresses(args?: GetIpAddressesArgs, opts?: pulumi.InvokeOptions): Promise<GetIpAddressesResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getIpAddresses:getIpAddresses", {
         "filters": args.filters,
@@ -42,8 +41,13 @@ export interface GetIpAddressesResult {
      */
     readonly limit?: number;
 }
-export function getIpAddressesOutput(args?: GetIpAddressesOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetIpAddressesResult> {
-    return pulumi.output(args).apply((a: any) => getIpAddresses(a, opts))
+export function getIpAddressesOutput(args?: GetIpAddressesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetIpAddressesResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getIpAddresses:getIpAddresses", {
+        "filters": args.filters,
+        "limit": args.limit,
+    }, opts);
 }
 
 /**

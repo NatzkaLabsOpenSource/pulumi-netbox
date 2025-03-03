@@ -17,7 +17,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const test = new netbox.circuit.CircuitProvider("test", {});
+ * const test = new netbox.circuit.CircuitProvider("test", {name: "test"});
  * ```
  */
 export class CircuitProvider extends pulumi.CustomResource {

@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getRacks(args?: GetRacksArgs, opts?: pulumi.InvokeOptions): Promise<GetRacksResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getRacks:getRacks", {
         "filters": args.filters,
@@ -42,8 +41,13 @@ export interface GetRacksResult {
     readonly limit?: number;
     readonly racks: outputs.dcim.GetRacksRack[];
 }
-export function getRacksOutput(args?: GetRacksOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRacksResult> {
-    return pulumi.output(args).apply((a: any) => getRacks(a, opts))
+export function getRacksOutput(args?: GetRacksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRacksResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getRacks:getRacks", {
+        "filters": args.filters,
+        "limit": args.limit,
+    }, opts);
 }
 
 /**

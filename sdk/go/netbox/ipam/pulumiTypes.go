@@ -540,7 +540,7 @@ func (o GetIpAddressesFilterArrayOutput) Index(i pulumi.IntInput) GetIpAddresses
 type GetIpAddressesIpAddress struct {
 	AddressFamily string                          `pulumi:"addressFamily"`
 	Created       string                          `pulumi:"created"`
-	CustomFields  map[string]interface{}          `pulumi:"customFields"`
+	CustomFields  map[string]string               `pulumi:"customFields"`
 	Description   string                          `pulumi:"description"`
 	DnsName       string                          `pulumi:"dnsName"`
 	Id            int                             `pulumi:"id"`
@@ -566,7 +566,7 @@ type GetIpAddressesIpAddressInput interface {
 type GetIpAddressesIpAddressArgs struct {
 	AddressFamily pulumi.StringInput                      `pulumi:"addressFamily"`
 	Created       pulumi.StringInput                      `pulumi:"created"`
-	CustomFields  pulumi.MapInput                         `pulumi:"customFields"`
+	CustomFields  pulumi.StringMapInput                   `pulumi:"customFields"`
 	Description   pulumi.StringInput                      `pulumi:"description"`
 	DnsName       pulumi.StringInput                      `pulumi:"dnsName"`
 	Id            pulumi.IntInput                         `pulumi:"id"`
@@ -637,8 +637,8 @@ func (o GetIpAddressesIpAddressOutput) Created() pulumi.StringOutput {
 	return o.ApplyT(func(v GetIpAddressesIpAddress) string { return v.Created }).(pulumi.StringOutput)
 }
 
-func (o GetIpAddressesIpAddressOutput) CustomFields() pulumi.MapOutput {
-	return o.ApplyT(func(v GetIpAddressesIpAddress) map[string]interface{} { return v.CustomFields }).(pulumi.MapOutput)
+func (o GetIpAddressesIpAddressOutput) CustomFields() pulumi.StringMapOutput {
+	return o.ApplyT(func(v GetIpAddressesIpAddress) map[string]string { return v.CustomFields }).(pulumi.StringMapOutput)
 }
 
 func (o GetIpAddressesIpAddressOutput) Description() pulumi.StringOutput {
@@ -916,7 +916,7 @@ func (o GetIpAddressesIpAddressTenantArrayOutput) Index(i pulumi.IntInput) GetIp
 }
 
 type GetPrefixesFilter struct {
-	// The name of the field to filter on. Supported fields are: `prefix`, `vlanVid`, `vrfId`, `vlanId`, `status`, `siteId`, & `tag`.
+	// The name of the field to filter on. Supported fields are: `prefix`, `contains`, `vlanVid`, `vrfId`, `vlanId`, `status`, `tenantId`, `siteId`, & `tag`.
 	Name string `pulumi:"name"`
 	// The value to pass to the specified filter.
 	Value string `pulumi:"value"`
@@ -934,7 +934,7 @@ type GetPrefixesFilterInput interface {
 }
 
 type GetPrefixesFilterArgs struct {
-	// The name of the field to filter on. Supported fields are: `prefix`, `vlanVid`, `vrfId`, `vlanId`, `status`, `siteId`, & `tag`.
+	// The name of the field to filter on. Supported fields are: `prefix`, `contains`, `vlanVid`, `vrfId`, `vlanId`, `status`, `tenantId`, `siteId`, & `tag`.
 	Name pulumi.StringInput `pulumi:"name"`
 	// The value to pass to the specified filter.
 	Value pulumi.StringInput `pulumi:"value"`
@@ -991,7 +991,7 @@ func (o GetPrefixesFilterOutput) ToGetPrefixesFilterOutputWithContext(ctx contex
 	return o
 }
 
-// The name of the field to filter on. Supported fields are: `prefix`, `vlanVid`, `vrfId`, `vlanId`, `status`, `siteId`, & `tag`.
+// The name of the field to filter on. Supported fields are: `prefix`, `contains`, `vlanVid`, `vrfId`, `vlanId`, `status`, `tenantId`, `siteId`, & `tag`.
 func (o GetPrefixesFilterOutput) Name() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPrefixesFilter) string { return v.Name }).(pulumi.StringOutput)
 }
@@ -1025,8 +1025,10 @@ type GetPrefixesPrefix struct {
 	Description string   `pulumi:"description"`
 	Id          int      `pulumi:"id"`
 	Prefix      string   `pulumi:"prefix"`
+	SiteId      int      `pulumi:"siteId"`
 	Status      string   `pulumi:"status"`
 	Tags        []string `pulumi:"tags"`
+	TenantId    int      `pulumi:"tenantId"`
 	VlanId      int      `pulumi:"vlanId"`
 	VlanVid     float64  `pulumi:"vlanVid"`
 	VrfId       int      `pulumi:"vrfId"`
@@ -1047,8 +1049,10 @@ type GetPrefixesPrefixArgs struct {
 	Description pulumi.StringInput      `pulumi:"description"`
 	Id          pulumi.IntInput         `pulumi:"id"`
 	Prefix      pulumi.StringInput      `pulumi:"prefix"`
+	SiteId      pulumi.IntInput         `pulumi:"siteId"`
 	Status      pulumi.StringInput      `pulumi:"status"`
 	Tags        pulumi.StringArrayInput `pulumi:"tags"`
+	TenantId    pulumi.IntInput         `pulumi:"tenantId"`
 	VlanId      pulumi.IntInput         `pulumi:"vlanId"`
 	VlanVid     pulumi.Float64Input     `pulumi:"vlanVid"`
 	VrfId       pulumi.IntInput         `pulumi:"vrfId"`
@@ -1117,12 +1121,20 @@ func (o GetPrefixesPrefixOutput) Prefix() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPrefixesPrefix) string { return v.Prefix }).(pulumi.StringOutput)
 }
 
+func (o GetPrefixesPrefixOutput) SiteId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPrefixesPrefix) int { return v.SiteId }).(pulumi.IntOutput)
+}
+
 func (o GetPrefixesPrefixOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetPrefixesPrefix) string { return v.Status }).(pulumi.StringOutput)
 }
 
 func (o GetPrefixesPrefixOutput) Tags() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetPrefixesPrefix) []string { return v.Tags }).(pulumi.StringArrayOutput)
+}
+
+func (o GetPrefixesPrefixOutput) TenantId() pulumi.IntOutput {
+	return o.ApplyT(func(v GetPrefixesPrefix) int { return v.TenantId }).(pulumi.IntOutput)
 }
 
 func (o GetPrefixesPrefixOutput) VlanId() pulumi.IntOutput {
@@ -1264,6 +1276,7 @@ type GetVlansVlan struct {
 	Role        int    `pulumi:"role"`
 	Site        int    `pulumi:"site"`
 	Status      string `pulumi:"status"`
+	TagIds      []int  `pulumi:"tagIds"`
 	Tenant      int    `pulumi:"tenant"`
 	Vid         int    `pulumi:"vid"`
 }
@@ -1280,14 +1293,15 @@ type GetVlansVlanInput interface {
 }
 
 type GetVlansVlanArgs struct {
-	Description pulumi.StringInput `pulumi:"description"`
-	GroupId     pulumi.IntInput    `pulumi:"groupId"`
-	Name        pulumi.StringInput `pulumi:"name"`
-	Role        pulumi.IntInput    `pulumi:"role"`
-	Site        pulumi.IntInput    `pulumi:"site"`
-	Status      pulumi.StringInput `pulumi:"status"`
-	Tenant      pulumi.IntInput    `pulumi:"tenant"`
-	Vid         pulumi.IntInput    `pulumi:"vid"`
+	Description pulumi.StringInput   `pulumi:"description"`
+	GroupId     pulumi.IntInput      `pulumi:"groupId"`
+	Name        pulumi.StringInput   `pulumi:"name"`
+	Role        pulumi.IntInput      `pulumi:"role"`
+	Site        pulumi.IntInput      `pulumi:"site"`
+	Status      pulumi.StringInput   `pulumi:"status"`
+	TagIds      pulumi.IntArrayInput `pulumi:"tagIds"`
+	Tenant      pulumi.IntInput      `pulumi:"tenant"`
+	Vid         pulumi.IntInput      `pulumi:"vid"`
 }
 
 func (GetVlansVlanArgs) ElementType() reflect.Type {
@@ -1363,6 +1377,10 @@ func (o GetVlansVlanOutput) Site() pulumi.IntOutput {
 
 func (o GetVlansVlanOutput) Status() pulumi.StringOutput {
 	return o.ApplyT(func(v GetVlansVlan) string { return v.Status }).(pulumi.StringOutput)
+}
+
+func (o GetVlansVlanOutput) TagIds() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v GetVlansVlan) []int { return v.TagIds }).(pulumi.IntArrayOutput)
 }
 
 func (o GetVlansVlanOutput) Tenant() pulumi.IntOutput {

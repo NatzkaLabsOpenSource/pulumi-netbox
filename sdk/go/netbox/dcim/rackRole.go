@@ -31,6 +31,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := dcim.NewRackRole(ctx, "test", &dcim.RackRoleArgs{
+//				Name:     pulumi.String("test"),
 //				ColorHex: pulumi.String("111111"),
 //			})
 //			if err != nil {

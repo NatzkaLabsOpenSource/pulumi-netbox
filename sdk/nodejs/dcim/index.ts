@@ -130,6 +130,11 @@ export const getSiteGroup: typeof import("./getSiteGroup").getSiteGroup = null a
 export const getSiteGroupOutput: typeof import("./getSiteGroup").getSiteGroupOutput = null as any;
 utilities.lazyLoad(exports, ["getSiteGroup","getSiteGroupOutput"], () => require("./getSiteGroup"));
 
+export { InterfaceTemplateArgs, InterfaceTemplateState } from "./interfaceTemplate";
+export type InterfaceTemplate = import("./interfaceTemplate").InterfaceTemplate;
+export const InterfaceTemplate: typeof import("./interfaceTemplate").InterfaceTemplate = null as any;
+utilities.lazyLoad(exports, ["InterfaceTemplate"], () => require("./interfaceTemplate"));
+
 export { InventoryItemArgs, InventoryItemState } from "./inventoryItem";
 export type InventoryItem = import("./inventoryItem").InventoryItem;
 export const InventoryItem: typeof import("./inventoryItem").InventoryItem = null as any;
@@ -190,6 +195,11 @@ export type RackRole = import("./rackRole").RackRole;
 export const RackRole: typeof import("./rackRole").RackRole = null as any;
 utilities.lazyLoad(exports, ["RackRole"], () => require("./rackRole"));
 
+export { RackTypeArgs, RackTypeState } from "./rackType";
+export type RackType = import("./rackType").RackType;
+export const RackType: typeof import("./rackType").RackType = null as any;
+utilities.lazyLoad(exports, ["RackType"], () => require("./rackType"));
+
 export { RegionArgs, RegionState } from "./region";
 export type Region = import("./region").Region;
 export const Region: typeof import("./region").Region = null as any;
@@ -241,6 +251,8 @@ const _module = {
                 return new DeviceRole(name, <any>undefined, { urn })
             case "netbox:dcim/deviceType:DeviceType":
                 return new DeviceType(name, <any>undefined, { urn })
+            case "netbox:dcim/interfaceTemplate:InterfaceTemplate":
+                return new InterfaceTemplate(name, <any>undefined, { urn })
             case "netbox:dcim/inventoryItem:InventoryItem":
                 return new InventoryItem(name, <any>undefined, { urn })
             case "netbox:dcim/inventoryItemRole:InventoryItemRole":
@@ -265,6 +277,8 @@ const _module = {
                 return new RackReservation(name, <any>undefined, { urn })
             case "netbox:dcim/rackRole:RackRole":
                 return new RackRole(name, <any>undefined, { urn })
+            case "netbox:dcim/rackType:RackType":
+                return new RackType(name, <any>undefined, { urn })
             case "netbox:dcim/region:Region":
                 return new Region(name, <any>undefined, { urn })
             case "netbox:dcim/site:Site":
@@ -291,6 +305,7 @@ pulumi.runtime.registerResourceModule("netbox", "dcim/devicePrimaryIp", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/deviceRearPort", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/deviceRole", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/deviceType", _module)
+pulumi.runtime.registerResourceModule("netbox", "dcim/interfaceTemplate", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/inventoryItem", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/inventoryItemRole", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/location", _module)
@@ -303,6 +318,7 @@ pulumi.runtime.registerResourceModule("netbox", "dcim/powerPanel", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/rack", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/rackReservation", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/rackRole", _module)
+pulumi.runtime.registerResourceModule("netbox", "dcim/rackType", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/region", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/site", _module)
 pulumi.runtime.registerResourceModule("netbox", "dcim/siteGroup", _module)

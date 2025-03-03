@@ -17,7 +17,6 @@ import * as utilities from "./utilities";
  * ```
  */
 export function getTag(args: GetTagArgs, opts?: pulumi.InvokeOptions): Promise<GetTagResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:index/getTag:getTag", {
         "description": args.description,
@@ -57,8 +56,12 @@ export interface GetTagResult {
  * });
  * ```
  */
-export function getTagOutput(args: GetTagOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetTagResult> {
-    return pulumi.output(args).apply((a: any) => getTag(a, opts))
+export function getTagOutput(args: GetTagOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTagResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:index/getTag:getTag", {
+        "description": args.description,
+        "name": args.name,
+    }, opts);
 }
 
 /**

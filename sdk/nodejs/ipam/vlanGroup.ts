@@ -15,19 +15,27 @@ import * as utilities from "../utilities";
  *
  * //Basic VLAN Group example
  * const example1 = new netbox.ipam.VlanGroup("example1", {
+ *     name: "example1",
  *     slug: "example1",
- *     minVid: 1,
- *     maxVid: 4094,
  * });
  * //Full VLAN Group example
  * const example2 = new netbox.ipam.VlanGroup("example2", {
+ *     name: "Second Example",
  *     slug: "example2",
- *     minVid: 1,
- *     maxVid: 4094,
  *     scopeType: "dcim.site",
- *     scopeId: netbox_site.example.id,
+ *     scopeId: example.id,
  *     description: "Second Example VLAN Group",
- *     tags: [netbox_tag.example.id],
+ *     tags: [exampleNetboxTag.id],
+ *     vidRanges: [
+ *         [
+ *             1,
+ *             2,
+ *         ],
+ *         [
+ *             3,
+ *             4,
+ *         ],
+ *     ],
  * });
  * ```
  */
@@ -63,19 +71,18 @@ export class VlanGroup extends pulumi.CustomResource {
      * Defaults to `""`.
      */
     public readonly description!: pulumi.Output<string | undefined>;
-    public readonly maxVid!: pulumi.Output<number>;
-    public readonly minVid!: pulumi.Output<number>;
     public readonly name!: pulumi.Output<string>;
     /**
      * Required when `scopeType` is set.
      */
     public readonly scopeId!: pulumi.Output<number | undefined>;
     /**
-     * Valid values are `active`, `container`, `reserved` and `deprecated`.
+     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
      */
     public readonly scopeType!: pulumi.Output<string | undefined>;
     public readonly slug!: pulumi.Output<string>;
     public readonly tags!: pulumi.Output<string[] | undefined>;
+    public readonly vidRanges!: pulumi.Output<number[][]>;
 
     /**
      * Create a VlanGroup resource with the given unique name, arguments, and options.
@@ -91,32 +98,27 @@ export class VlanGroup extends pulumi.CustomResource {
         if (opts.id) {
             const state = argsOrState as VlanGroupState | undefined;
             resourceInputs["description"] = state ? state.description : undefined;
-            resourceInputs["maxVid"] = state ? state.maxVid : undefined;
-            resourceInputs["minVid"] = state ? state.minVid : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["scopeId"] = state ? state.scopeId : undefined;
             resourceInputs["scopeType"] = state ? state.scopeType : undefined;
             resourceInputs["slug"] = state ? state.slug : undefined;
             resourceInputs["tags"] = state ? state.tags : undefined;
+            resourceInputs["vidRanges"] = state ? state.vidRanges : undefined;
         } else {
             const args = argsOrState as VlanGroupArgs | undefined;
-            if ((!args || args.maxVid === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'maxVid'");
-            }
-            if ((!args || args.minVid === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'minVid'");
-            }
             if ((!args || args.slug === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'slug'");
             }
+            if ((!args || args.vidRanges === undefined) && !opts.urn) {
+                throw new Error("Missing required property 'vidRanges'");
+            }
             resourceInputs["description"] = args ? args.description : undefined;
-            resourceInputs["maxVid"] = args ? args.maxVid : undefined;
-            resourceInputs["minVid"] = args ? args.minVid : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["scopeId"] = args ? args.scopeId : undefined;
             resourceInputs["scopeType"] = args ? args.scopeType : undefined;
             resourceInputs["slug"] = args ? args.slug : undefined;
             resourceInputs["tags"] = args ? args.tags : undefined;
+            resourceInputs["vidRanges"] = args ? args.vidRanges : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(VlanGroup.__pulumiType, name, resourceInputs, opts);
@@ -131,19 +133,18 @@ export interface VlanGroupState {
      * Defaults to `""`.
      */
     description?: pulumi.Input<string>;
-    maxVid?: pulumi.Input<number>;
-    minVid?: pulumi.Input<number>;
     name?: pulumi.Input<string>;
     /**
      * Required when `scopeType` is set.
      */
     scopeId?: pulumi.Input<number>;
     /**
-     * Valid values are `active`, `container`, `reserved` and `deprecated`.
+     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
      */
     scopeType?: pulumi.Input<string>;
     slug?: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
+    vidRanges?: pulumi.Input<pulumi.Input<pulumi.Input<number>[]>[]>;
 }
 
 /**
@@ -154,17 +155,16 @@ export interface VlanGroupArgs {
      * Defaults to `""`.
      */
     description?: pulumi.Input<string>;
-    maxVid: pulumi.Input<number>;
-    minVid: pulumi.Input<number>;
     name?: pulumi.Input<string>;
     /**
      * Required when `scopeType` is set.
      */
     scopeId?: pulumi.Input<number>;
     /**
-     * Valid values are `active`, `container`, `reserved` and `deprecated`.
+     * Valid values are `dcim.location`, `dcim.site`, `dcim.sitegroup`, `dcim.region`, `dcim.rack`, `virtualization.cluster` and `virtualization.clustergroup`.
      */
     scopeType?: pulumi.Input<string>;
     slug: pulumi.Input<string>;
     tags?: pulumi.Input<pulumi.Input<string>[]>;
+    vidRanges: pulumi.Input<pulumi.Input<pulumi.Input<number>[]>[]>;
 }

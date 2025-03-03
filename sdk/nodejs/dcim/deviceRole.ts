@@ -15,7 +15,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const coreSw = new netbox.dcim.DeviceRole("coreSw", {colorHex: "FF00FF"});
+ * const coreSw = new netbox.dcim.DeviceRole("core_sw", {
+ *     colorHex: "FF00FF",
+ *     name: "core-sw",
+ * });
  * ```
  */
 export class DeviceRole extends pulumi.CustomResource {

@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getRole(args: GetRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetRoleResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getRole:getRole", {
         "name": args.name,
@@ -32,8 +31,11 @@ export interface GetRoleResult {
     readonly slug: string;
     readonly weight: number;
 }
-export function getRoleOutput(args: GetRoleOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRoleResult> {
-    return pulumi.output(args).apply((a: any) => getRole(a, opts))
+export function getRoleOutput(args: GetRoleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRoleResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getRole:getRole", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

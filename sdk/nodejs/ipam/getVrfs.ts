@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getVrfs(args?: GetVrfsArgs, opts?: pulumi.InvokeOptions): Promise<GetVrfsResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:ipam/getVrfs:getVrfs", {
         "filters": args.filters,
@@ -42,8 +41,13 @@ export interface GetVrfsResult {
     readonly limit?: number;
     readonly vrfs: outputs.ipam.GetVrfsVrf[];
 }
-export function getVrfsOutput(args?: GetVrfsOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetVrfsResult> {
-    return pulumi.output(args).apply((a: any) => getVrfs(a, opts))
+export function getVrfsOutput(args?: GetVrfsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVrfsResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:ipam/getVrfs:getVrfs", {
+        "filters": args.filters,
+        "limit": args.limit,
+    }, opts);
 }
 
 /**

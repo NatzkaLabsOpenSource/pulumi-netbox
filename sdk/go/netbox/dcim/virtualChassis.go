@@ -30,8 +30,9 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := dcim.NewVirtualChassis(ctx, "example", &dcim.VirtualChassisArgs{
-//				Description: pulumi.String("virtual chassis"),
+//				Name:        pulumi.String("chassis"),
 //				Domain:      pulumi.String("domain"),
+//				Description: pulumi.String("virtual chassis"),
 //			})
 //			if err != nil {
 //				return err

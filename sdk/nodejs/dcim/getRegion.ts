@@ -8,7 +8,6 @@ import * as utilities from "../utilities";
 
 export function getRegion(args?: GetRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionResult> {
     args = args || {};
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:dcim/getRegion:getRegion", {
         "filters": args.filters,
@@ -36,8 +35,12 @@ export interface GetRegionResult {
     readonly parentRegionId: number;
     readonly slug: string;
 }
-export function getRegionOutput(args?: GetRegionOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetRegionResult> {
-    return pulumi.output(args).apply((a: any) => getRegion(a, opts))
+export function getRegionOutput(args?: GetRegionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionResult> {
+    args = args || {};
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:dcim/getRegion:getRegion", {
+        "filters": args.filters,
+    }, opts);
 }
 
 /**

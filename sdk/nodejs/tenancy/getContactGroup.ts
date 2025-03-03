@@ -5,7 +5,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 export function getContactGroup(args: GetContactGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetContactGroupResult> {
-
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
     return pulumi.runtime.invoke("netbox:tenancy/getContactGroup:getContactGroup", {
         "name": args.name,
@@ -32,8 +31,11 @@ export interface GetContactGroupResult {
     readonly parentId: number;
     readonly slug: string;
 }
-export function getContactGroupOutput(args: GetContactGroupOutputArgs, opts?: pulumi.InvokeOptions): pulumi.Output<GetContactGroupResult> {
-    return pulumi.output(args).apply((a: any) => getContactGroup(a, opts))
+export function getContactGroupOutput(args: GetContactGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetContactGroupResult> {
+    opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
+    return pulumi.runtime.invokeOutput("netbox:tenancy/getContactGroup:getContactGroup", {
+        "name": args.name,
+    }, opts);
 }
 
 /**

@@ -35,15 +35,11 @@ type LookupAvailablePrefixResult struct {
 }
 
 func LookupAvailablePrefixOutput(ctx *pulumi.Context, args LookupAvailablePrefixOutputArgs, opts ...pulumi.InvokeOption) LookupAvailablePrefixResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupAvailablePrefixResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupAvailablePrefixResultOutput, error) {
 			args := v.(LookupAvailablePrefixArgs)
-			r, err := LookupAvailablePrefix(ctx, &args, opts...)
-			var s LookupAvailablePrefixResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getAvailablePrefix:getAvailablePrefix", args, LookupAvailablePrefixResultOutput{}, options).(LookupAvailablePrefixResultOutput), nil
 		}).(LookupAvailablePrefixResultOutput)
 }
 

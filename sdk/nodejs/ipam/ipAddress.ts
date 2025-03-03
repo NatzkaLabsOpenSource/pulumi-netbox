@@ -14,6 +14,7 @@ import * as utilities from "../utilities";
  * > Like a prefix, an IP address can optionally be assigned to a VRF (otherwise, it will appear in the "global" table). IP addresses are automatically arranged under parent prefixes within their respective VRFs according to the IP hierarchy.
  *
  * ## Example Usage
+ *
  * ### Creating an IP address that is assigned to a virtual machine interface
  *
  * Starting with provider version 3.5.0, you can use the `virtualMachineInterfaceId` attribute to assign an IP address to a virtual machine interface.
@@ -25,11 +26,14 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a virtual machine with the id `123` exists
- * const thisInterface = new netbox.virt.Interface("thisInterface", {virtualMachineId: 123});
- * const thisIpAddress = new netbox.ipam.IpAddress("thisIpAddress", {
+ * const _this = new netbox.virt.Interface("this", {
+ *     name: "eth0",
+ *     virtualMachineId: 123,
+ * });
+ * const thisIpAddress = new netbox.ipam.IpAddress("this", {
  *     ipAddress: "10.0.0.60/24",
  *     status: "active",
- *     virtualMachineInterfaceId: thisInterface.id,
+ *     virtualMachineInterfaceId: _this.id,
  * });
  * ```
  *
@@ -39,14 +43,18 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a virtual machine with the id `123` exists
- * const thisInterface = new netbox.virt.Interface("thisInterface", {virtualMachineId: 123});
- * const thisIpAddress = new netbox.ipam.IpAddress("thisIpAddress", {
+ * const _this = new netbox.virt.Interface("this", {
+ *     name: "eth0",
+ *     virtualMachineId: 123,
+ * });
+ * const thisIpAddress = new netbox.ipam.IpAddress("this", {
  *     ipAddress: "10.0.0.60/24",
  *     status: "active",
- *     interfaceId: thisInterface.id,
+ *     interfaceId: _this.id,
  *     objectType: "virtualization.vminterface",
  * });
  * ```
+ *
  * ### Creating an IP address that is assigned to a device interface
  *
  * Starting with provider version 3.5.0, you can use the `deviceInterfaceId` attribute to assign an IP address to a device interface.
@@ -58,14 +66,15 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a device with the id `123` exists
- * const thisDeviceInterface = new netbox.dcim.DeviceInterface("thisDeviceInterface", {
+ * const _this = new netbox.dcim.DeviceInterface("this", {
+ *     name: "eth0",
  *     deviceId: 123,
  *     type: "1000base-t",
  * });
- * const thisIpAddress = new netbox.ipam.IpAddress("thisIpAddress", {
+ * const thisIpAddress = new netbox.ipam.IpAddress("this", {
  *     ipAddress: "10.0.0.60/24",
  *     status: "active",
- *     deviceInterfaceId: thisDeviceInterface.id,
+ *     deviceInterfaceId: _this.id,
  * });
  * ```
  *
@@ -75,17 +84,19 @@ import * as utilities from "../utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * // Assuming a device with the id `123` exists
- * const thisDeviceInterface = new netbox.dcim.DeviceInterface("thisDeviceInterface", {
+ * const _this = new netbox.dcim.DeviceInterface("this", {
+ *     name: "eth0",
  *     deviceId: 123,
  *     type: "1000base-t",
  * });
- * const thisIpAddress = new netbox.ipam.IpAddress("thisIpAddress", {
+ * const thisIpAddress = new netbox.ipam.IpAddress("this", {
  *     ipAddress: "10.0.0.60/24",
  *     status: "active",
- *     interfaceId: thisDeviceInterface.id,
+ *     interfaceId: _this.id,
  *     objectType: "dcim.interface",
  * });
  * ```
+ *
  * ### Creating an IP address that is not assigned to anything
  *
  * You can create an IP address that is not assigend to anything by omitting the attributes mentioned above.
@@ -128,6 +139,7 @@ export class IpAddress extends pulumi.CustomResource {
         return obj['__pulumiType'] === IpAddress.__pulumiType;
     }
 
+    public readonly customFields!: pulumi.Output<{[key: string]: string} | undefined>;
     public readonly description!: pulumi.Output<string | undefined>;
     /**
      * Conflicts with `interfaceId` and `virtualMachineInterfaceId`.
@@ -174,6 +186,7 @@ export class IpAddress extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as IpAddressState | undefined;
+            resourceInputs["customFields"] = state ? state.customFields : undefined;
             resourceInputs["description"] = state ? state.description : undefined;
             resourceInputs["deviceInterfaceId"] = state ? state.deviceInterfaceId : undefined;
             resourceInputs["dnsName"] = state ? state.dnsName : undefined;
@@ -196,6 +209,7 @@ export class IpAddress extends pulumi.CustomResource {
             if ((!args || args.status === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'status'");
             }
+            resourceInputs["customFields"] = args ? args.customFields : undefined;
             resourceInputs["description"] = args ? args.description : undefined;
             resourceInputs["deviceInterfaceId"] = args ? args.deviceInterfaceId : undefined;
             resourceInputs["dnsName"] = args ? args.dnsName : undefined;
@@ -220,6 +234,7 @@ export class IpAddress extends pulumi.CustomResource {
  * Input properties used for looking up and filtering IpAddress resources.
  */
 export interface IpAddressState {
+    customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     /**
      * Conflicts with `interfaceId` and `virtualMachineInterfaceId`.
@@ -258,6 +273,7 @@ export interface IpAddressState {
  * The set of arguments for constructing a IpAddress resource.
  */
 export interface IpAddressArgs {
+    customFields?: pulumi.Input<{[key: string]: pulumi.Input<string>}>;
     description?: pulumi.Input<string>;
     /**
      * Conflicts with `interfaceId` and `virtualMachineInterfaceId`.

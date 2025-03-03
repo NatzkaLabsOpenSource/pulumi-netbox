@@ -83,15 +83,11 @@ type LookupAsnResult struct {
 }
 
 func LookupAsnOutput(ctx *pulumi.Context, args LookupAsnOutputArgs, opts ...pulumi.InvokeOption) LookupAsnResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupAsnResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupAsnResultOutput, error) {
 			args := v.(LookupAsnArgs)
-			r, err := LookupAsn(ctx, &args, opts...)
-			var s LookupAsnResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:ipam/getAsn:getAsn", args, LookupAsnResultOutput{}, options).(LookupAsnResultOutput), nil
 		}).(LookupAsnResultOutput)
 }
 

@@ -15,14 +15,18 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const testSite = new netbox.dcim.Site("testSite", {status: "active"});
- * const testRack = new netbox.dcim.Rack("testRack", {
- *     siteId: testSite.id,
+ * const test = new netbox.dcim.Site("test", {
+ *     name: "test",
+ *     status: "active",
+ * });
+ * const testRack = new netbox.dcim.Rack("test", {
+ *     name: "test",
+ *     siteId: test.id,
  *     status: "active",
  *     width: 10,
  *     uHeight: 40,
  * });
- * const testRackReservation = new netbox.dcim.RackReservation("testRackReservation", {
+ * const testRackReservation = new netbox.dcim.RackReservation("test", {
  *     rackId: testRack.id,
  *     units: [
  *         1,

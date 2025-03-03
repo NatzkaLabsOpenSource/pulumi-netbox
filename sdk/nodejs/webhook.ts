@@ -16,11 +16,9 @@ import * as utilities from "./utilities";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
  * const test = new netbox.Webhook("test", {
- *     bodytemplate: "Sample body",
- *     contentTypes: ["dcim.site"],
- *     enabled: true,
+ *     name: "test",
  *     payloadUrl: "https://example.com/webhook",
- *     triggerOnCreate: true,
+ *     bodytemplate: "Sample body",
  * });
  * ```
  */
@@ -52,9 +50,8 @@ export class Webhook extends pulumi.CustomResource {
         return obj['__pulumiType'] === Webhook.__pulumiType;
     }
 
+    public readonly additionalHeaders!: pulumi.Output<string | undefined>;
     public readonly bodyTemplate!: pulumi.Output<string | undefined>;
-    public readonly contentTypes!: pulumi.Output<string[]>;
-    public readonly enabled!: pulumi.Output<boolean | undefined>;
     /**
      * The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
      */
@@ -65,9 +62,6 @@ export class Webhook extends pulumi.CustomResource {
     public readonly httpMethod!: pulumi.Output<string | undefined>;
     public readonly name!: pulumi.Output<string>;
     public readonly payloadUrl!: pulumi.Output<string>;
-    public readonly triggerOnCreate!: pulumi.Output<boolean | undefined>;
-    public readonly triggerOnDelete!: pulumi.Output<boolean | undefined>;
-    public readonly triggerOnUpdate!: pulumi.Output<boolean | undefined>;
 
     /**
      * Create a Webhook resource with the given unique name, arguments, and options.
@@ -82,34 +76,23 @@ export class Webhook extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as WebhookState | undefined;
+            resourceInputs["additionalHeaders"] = state ? state.additionalHeaders : undefined;
             resourceInputs["bodyTemplate"] = state ? state.bodyTemplate : undefined;
-            resourceInputs["contentTypes"] = state ? state.contentTypes : undefined;
-            resourceInputs["enabled"] = state ? state.enabled : undefined;
             resourceInputs["httpContentType"] = state ? state.httpContentType : undefined;
             resourceInputs["httpMethod"] = state ? state.httpMethod : undefined;
             resourceInputs["name"] = state ? state.name : undefined;
             resourceInputs["payloadUrl"] = state ? state.payloadUrl : undefined;
-            resourceInputs["triggerOnCreate"] = state ? state.triggerOnCreate : undefined;
-            resourceInputs["triggerOnDelete"] = state ? state.triggerOnDelete : undefined;
-            resourceInputs["triggerOnUpdate"] = state ? state.triggerOnUpdate : undefined;
         } else {
             const args = argsOrState as WebhookArgs | undefined;
-            if ((!args || args.contentTypes === undefined) && !opts.urn) {
-                throw new Error("Missing required property 'contentTypes'");
-            }
             if ((!args || args.payloadUrl === undefined) && !opts.urn) {
                 throw new Error("Missing required property 'payloadUrl'");
             }
+            resourceInputs["additionalHeaders"] = args ? args.additionalHeaders : undefined;
             resourceInputs["bodyTemplate"] = args ? args.bodyTemplate : undefined;
-            resourceInputs["contentTypes"] = args ? args.contentTypes : undefined;
-            resourceInputs["enabled"] = args ? args.enabled : undefined;
             resourceInputs["httpContentType"] = args ? args.httpContentType : undefined;
             resourceInputs["httpMethod"] = args ? args.httpMethod : undefined;
             resourceInputs["name"] = args ? args.name : undefined;
             resourceInputs["payloadUrl"] = args ? args.payloadUrl : undefined;
-            resourceInputs["triggerOnCreate"] = args ? args.triggerOnCreate : undefined;
-            resourceInputs["triggerOnDelete"] = args ? args.triggerOnDelete : undefined;
-            resourceInputs["triggerOnUpdate"] = args ? args.triggerOnUpdate : undefined;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(Webhook.__pulumiType, name, resourceInputs, opts);
@@ -120,9 +103,8 @@ export class Webhook extends pulumi.CustomResource {
  * Input properties used for looking up and filtering Webhook resources.
  */
 export interface WebhookState {
+    additionalHeaders?: pulumi.Input<string>;
     bodyTemplate?: pulumi.Input<string>;
-    contentTypes?: pulumi.Input<pulumi.Input<string>[]>;
-    enabled?: pulumi.Input<boolean>;
     /**
      * The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
      */
@@ -133,18 +115,14 @@ export interface WebhookState {
     httpMethod?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     payloadUrl?: pulumi.Input<string>;
-    triggerOnCreate?: pulumi.Input<boolean>;
-    triggerOnDelete?: pulumi.Input<boolean>;
-    triggerOnUpdate?: pulumi.Input<boolean>;
 }
 
 /**
  * The set of arguments for constructing a Webhook resource.
  */
 export interface WebhookArgs {
+    additionalHeaders?: pulumi.Input<string>;
     bodyTemplate?: pulumi.Input<string>;
-    contentTypes: pulumi.Input<pulumi.Input<string>[]>;
-    enabled?: pulumi.Input<boolean>;
     /**
      * The complete list of official content types is available [here](https://www.iana.org/assignments/media-types/media-types.xhtml). Defaults to `application/json`.
      */
@@ -155,7 +133,4 @@ export interface WebhookArgs {
     httpMethod?: pulumi.Input<string>;
     name?: pulumi.Input<string>;
     payloadUrl: pulumi.Input<string>;
-    triggerOnCreate?: pulumi.Input<boolean>;
-    triggerOnDelete?: pulumi.Input<boolean>;
-    triggerOnUpdate?: pulumi.Input<boolean>;
 }

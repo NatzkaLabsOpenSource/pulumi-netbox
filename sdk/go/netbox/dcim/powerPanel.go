@@ -30,20 +30,23 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			testSite, err := dcim.NewSite(ctx, "testSite", &dcim.SiteArgs{
+//			test, err := dcim.NewSite(ctx, "test", &dcim.SiteArgs{
+//				Name:   pulumi.String("Site 1"),
 //				Status: pulumi.String("active"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			testLocation, err := dcim.NewLocation(ctx, "testLocation", &dcim.LocationArgs{
-//				SiteId: testSite.ID(),
+//			testLocation, err := dcim.NewLocation(ctx, "test", &dcim.LocationArgs{
+//				Name:   pulumi.String("Location 1"),
+//				SiteId: test.ID(),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = dcim.NewPowerPanel(ctx, "testPowerPanel", &dcim.PowerPanelArgs{
-//				SiteId:     testSite.ID(),
+//			_, err = dcim.NewPowerPanel(ctx, "test", &dcim.PowerPanelArgs{
+//				Name:       pulumi.String("Power Panel 1"),
+//				SiteId:     test.ID(),
 //				LocationId: testLocation.ID(),
 //			})
 //			if err != nil {

@@ -17,9 +17,9 @@ import * as utilities from "../utilities";
  *
  * const test = new netbox.auth.User("test", {
  *     username: "johndoe",
- *     password: "abcdefghijkl",
+ *     password: "Abcdefghijkl1",
  * });
- * const testBasic = new netbox.auth.Token("testBasic", {
+ * const testBasic = new netbox.auth.Token("test_basic", {
  *     userId: test.id,
  *     key: "0123456789012345678901234567890123456789",
  *     allowedIps: ["2.4.8.16/32"],

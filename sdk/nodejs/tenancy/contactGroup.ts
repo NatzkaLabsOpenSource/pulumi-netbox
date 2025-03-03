@@ -15,7 +15,7 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as netbox from "@natzka-oss/pulumi-netbox";
  *
- * const test = new netbox.tenancy.ContactGroup("test", {});
+ * const test = new netbox.tenancy.ContactGroup("test", {name: "test"});
  * ```
  */
 export class ContactGroup extends pulumi.CustomResource {

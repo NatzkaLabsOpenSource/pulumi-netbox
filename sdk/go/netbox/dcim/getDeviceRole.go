@@ -62,15 +62,11 @@ type LookupDeviceRoleResult struct {
 }
 
 func LookupDeviceRoleOutput(ctx *pulumi.Context, args LookupDeviceRoleOutputArgs, opts ...pulumi.InvokeOption) LookupDeviceRoleResultOutput {
-	return pulumi.ToOutputWithContext(context.Background(), args).
-		ApplyT(func(v interface{}) (LookupDeviceRoleResult, error) {
+	return pulumi.ToOutputWithContext(ctx.Context(), args).
+		ApplyT(func(v interface{}) (LookupDeviceRoleResultOutput, error) {
 			args := v.(LookupDeviceRoleArgs)
-			r, err := LookupDeviceRole(ctx, &args, opts...)
-			var s LookupDeviceRoleResult
-			if r != nil {
-				s = *r
-			}
-			return s, err
+			options := pulumi.InvokeOutputOptions{InvokeOptions: internal.PkgInvokeDefaultOpts(opts)}
+			return ctx.InvokeOutput("netbox:dcim/getDeviceRole:getDeviceRole", args, LookupDeviceRoleResultOutput{}, options).(LookupDeviceRoleResultOutput), nil
 		}).(LookupDeviceRoleResultOutput)
 }
 
