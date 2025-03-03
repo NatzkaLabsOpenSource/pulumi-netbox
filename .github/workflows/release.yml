@@ -85,7 +85,9 @@ jobs:
           registry-url: ${{ env.NPM_REGISTRY_URL }}
 
       - name: Build SDK
-        run: make build_${{ matrix.language }}
+        run: |
+          export PROVIDER_VERSION=$(echo -n "${{ github.ref_name }}" | cut -c '2-')
+          make build_${{ matrix.language }}
 
       - name: Check worktree clean
         run: |

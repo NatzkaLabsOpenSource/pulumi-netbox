@@ -1,6 +1,8 @@
 archives:
   - id: archive
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
+env:
+  - PROVIDER_VERSION={{ replace .Tag "v" "" }}
 before:
   hooks:
     - make tfgen
