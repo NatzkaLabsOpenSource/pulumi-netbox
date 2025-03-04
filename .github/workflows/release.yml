@@ -101,6 +101,10 @@ jobs:
               # exit 1
           fi
           
+          export VERSION=$(echo -n "${{ github.ref_name }}" | cut -c '2-')
+          sed -i.bak -e "s/\${VERSION}/$VERSION/g" "${{github.workspace}}/sdk/nodejs/bin/package.json"
+          rm "${{github.workspace}}/sdk/nodejs/bin/package.json.bak"
+          
       - if: ${{ matrix.language == 'nodejs' }}
         uses: JS-DevTools/npm-publish@v3
         with:
