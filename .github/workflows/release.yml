@@ -112,3 +112,4 @@ jobs:
           registry: ${{ env.NPM_REGISTRY_URL }}
           access: "public"
           package: ${{github.workspace}}/sdk/nodejs/bin/package.json
+
